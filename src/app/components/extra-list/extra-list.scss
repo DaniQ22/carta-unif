@@ -1,0 +1,120 @@
+.rm-extra {
+  margin-top: 2.5rem;
+}
+
+.rm-extra__head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--rm-gris);
+  }
+}
+
+.rm-extra__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.6rem;
+}
+
+.rm-extra__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--rm-borde);
+  border-radius: 12px;
+  background: var(--rm-carbon);
+  animation: rm-fade-up 0.3s cubic-bezier(0.22, 1, 0.36, 1) both;
+  transition: border-color 0.25s ease, background-color 0.3s ease;
+
+  &.is-active {
+    border-color: var(--rm-naranja);
+  }
+}
+
+@for $i from 1 through 12 {
+  .rm-extra__row:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.025}s;
+  }
+}
+
+.rm-extra__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  min-width: 0;
+}
+
+.rm-extra__name {
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.rm-extra__price {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--rm-naranja-2);
+}
+
+.rm-extra__add {
+  flex-shrink: 0;
+  border: 1px solid var(--rm-borde);
+  background: var(--rm-carbon-2);
+  color: var(--rm-blanco);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  transition: border-color 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    border-color: var(--rm-naranja);
+    color: var(--rm-naranja-2);
+  }
+}
+
+.rm-stepper--sm {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+  border: 1px solid var(--rm-borde);
+  border-radius: 999px;
+  padding: 0.12rem;
+  background: var(--rm-carbon-2);
+
+  button {
+    width: 26px;
+    height: 26px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--rm-blanco);
+    font-size: 1rem;
+    line-height: 1;
+
+    &:hover {
+      background: var(--rm-negro);
+    }
+  }
+
+  span {
+    min-width: 22px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.88rem;
+  }
+}

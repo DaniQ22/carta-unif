@@ -1,0 +1,30 @@
+.rm-dish-section {
+  margin-top: 2.5rem;
+}
+
+.rm-dish-section__head {
+  margin-bottom: 1rem;
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  p {
+    margin: 0.3rem 0 0;
+    color: var(--rm-gris);
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+}
+
+.rm-dish-section__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .rm-dish-section__grid {
+    grid-template-columns: 1fr;
+  }
+}

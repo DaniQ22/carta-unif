@@ -1,0 +1,94 @@
+<div class="rm-drawer" [class.is-open]="abierto()">
+  <button type="button" class="rm-drawer__scrim" (click)="cerrar.emit()" aria-label="Cerrar carrito"></button>
+
+  <aside class="rm-drawer__panel" role="dialog" aria-label="Tu pedido">
+    <header class="rm-drawer__head">
+      <h2>Tu pedido</h2>
+      <button type="button" class="rm-drawer__x" (click)="cerrar.emit()" aria-label="Cerrar">✕</button>
+    </header>
+
+    @if (enviado()) {
+      <div class="rm-drawer__done">
+        <div class="rm-drawer__check">✓</div>
+        <h3>¡Pedido enviado!</h3>
+        <p>Se abrió WhatsApp con el detalle. Confirma el envío del mensaje para que la cocina empiece a preparar tu delivery.</p>
+        <button type="button" class="rm-btn" (click)="nuevoPedido()">Hacer otro pedido</button>
+      </div>
+    } @else if (cart.vacio()) {
+      <div class="rm-drawer__empty">
+        <p>Tu carrito está vacío.</p>
+        <span>Agrega platos desde la carta para armar tu pedido.</span>
+      </div>
+    } @else {
+      <div class="rm-drawer__scroll">
+      <div class="rm-drawer__list">
+        <span class="rm-drawer__tag">🛵 Solo servicio a domicilio</span>
+
+        @for (item of cart.items(); track item.id) {
+          <div class="rm-line">
+            <div class="rm-line__top">
+              <strong>{{ item.nombre }}</strong>
+              <button type="button" class="rm-line__del" (click)="cart.quitar(item.id)" aria-label="Quitar">🗑</button>
+            </div>
+            <div class="rm-line__mid">
+              <div class="rm-stepper">
+                <button type="button" (click)="cart.decrementar(item.id)" aria-label="Quitar uno">−</button>
+                <span>{{ item.cantidad }}</span>
+                <button type="button" (click)="cart.incrementar(item.id)" aria-label="Agregar uno">+</button>
+              </div>
+              <span class="rm-line__sub">{{ item.cantidad * item.precio | precio }}</span>
+            </div>
+            <input
+              class="rm-line__nota"
+              type="text"
+              placeholder="Nota (ej: sin cebolla, sin ají…)"
+              [ngModel]="item.nota ?? ''"
+              (ngModelChange)="cart.setNota(item.id, $event)"
+            />
+          </div>
+        }
+      </div>
+
+      <div class="rm-drawer__form">
+        <p class="rm-drawer__form-title">Datos para el delivery</p>
+
+        <label [class.is-error]="intento() && cliente().trim().length <= 1">
+          <span>Nombre y apellido</span>
+          <input type="text" [ngModel]="cliente()" (ngModelChange)="cliente.set($event)" placeholder="Ej: Ana Ramírez" />
+        </label>
+
+        <label [class.is-error]="intento() && telefono().trim().length < 6">
+          <span>Teléfono / celular</span>
+          <input type="tel" inputmode="tel" [ngModel]="telefono()" (ngModelChange)="telefono.set($event)" placeholder="Ej: 987 654 321" />
+        </label>
+
+        <label [class.is-error]="intento() && direccion().trim().length <= 3">
+          <span>Dirección de entrega</span>
+          <input type="text" [ngModel]="direccion()" (ngModelChange)="direccion.set($event)" placeholder="Calle / Av., número, dpto." />
+        </label>
+
+        <label>
+          <span>Referencia <em>(opcional)</em></span>
+          <input type="text" [ngModel]="referencia()" (ngModelChange)="referencia.set($event)" placeholder="Color de puerta, cerca a…" />
+        </label>
+
+        @if (intento() && !datosOk()) {
+          <p class="rm-drawer__err">Completa tu nombre, teléfono y dirección para enviar el pedido.</p>
+        }
+      </div>
+      </div>
+
+      <footer class="rm-drawer__foot">
+        <div class="rm-drawer__total">
+          <span>Total</span>
+          <strong>{{ cart.totalPrecio() | precio }}</strong>
+        </div>
+        <button type="button" class="rm-btn rm-btn--wa" (click)="enviarPedido()">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2c-5.5 0-9.96 4.46-9.96 9.96 0 1.76.46 3.45 1.34 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.004c5.5 0 9.96-4.46 9.96-9.96S17.54 2 12.04 2Zm5.84 14.06c-.25.7-1.44 1.34-1.98 1.39-.53.05-1.03.24-3.47-.72-2.93-1.15-4.8-4.15-4.95-4.35-.14-.2-1.19-1.58-1.19-3.01 0-1.43.75-2.13 1.02-2.42.27-.29.59-.36.79-.36.2 0 .39 0 .56.01.18.01.42-.07.66.5.25.58.84 2.01.91 2.16.07.14.12.31.02.51-.1.2-.15.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.29-.12.58.17.29.75 1.24 1.61 2 1.11.99 2.05 1.3 2.34 1.44.29.14.46.12.63-.07.17-.2.72-.84.91-1.13.19-.29.39-.24.66-.14.27.1 1.7.8 1.99.95.29.14.48.22.55.34.07.12.07.7-.18 1.4Z"/></svg>
+          Enviar pedido por WhatsApp
+        </button>
+        <p class="rm-drawer__hint">Se abrirá WhatsApp con el pedido listo para enviar a la cocina.</p>
+      </footer>
+    }
+  </aside>
+</div>

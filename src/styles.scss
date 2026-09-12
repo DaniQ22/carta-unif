@@ -1,0 +1,227 @@
+/* ===== Carta unificada: Caribe Wok + RM ===== */
+/*
+ * Tokens --rm-* compartidos por toda la app. El valor por defecto en :root
+ * es neutro (se usa en la pantalla selectora, antes de elegir línea).
+ * `body.tema-arroces` y `body.tema-comidas-rapidas` los sobreescriben según
+ * la línea activa (ver el effect() en App que pone esa clase en <body>).
+ */
+
+:root {
+  --rm-negro: #0b0b10;
+  /** Mismo tono que --rm-negro, en "r, g, b" para usar con rgba(). */
+  --rm-negro-rgb: 11, 11, 16;
+  --rm-carbon: #18181f;
+  --rm-carbon-2: #202028;
+  --rm-borde: #34343f;
+  --rm-blanco: #f4f1ea;
+  --rm-gris: #a5a2a0;
+  --rm-naranja: #ff7a18;
+  --rm-naranja-2: #ff9d3c;
+  /** Mismo tono que --rm-naranja, en "r, g, b" para usar con rgba(). */
+  --rm-naranja-rgb: 255, 122, 24;
+  --rm-rojo: #e23a1e;
+  --rm-rojo-rgb: 226, 58, 30;
+  --rm-verde-wa: #25d366;
+  --rm-fuego: linear-gradient(135deg, #e23a1e 0%, #ff7a18 55%, #ffb703 100%);
+  --rm-radio: 14px;
+  --rm-sombra: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
+  --rm-fuente: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---- Caribe Wok: turquesa del aro/"CARIBE" + fuego rojo-naranja-dorado de "WOK" ---- */
+body.tema-arroces {
+  --rm-negro: #05221f;
+  --rm-negro-rgb: 5, 34, 31;
+  --rm-carbon: #0b332e;
+  --rm-carbon-2: #114039;
+  --rm-borde: #1f6358;
+  --rm-naranja: #1fc2b5;
+  --rm-naranja-2: #4ce6da;
+  --rm-naranja-rgb: 31, 194, 181;
+  --rm-rojo: #ff6b45;
+  --rm-rojo-rgb: 255, 107, 69;
+  --rm-fuego: linear-gradient(135deg, #e2231c 0%, #ff7a18 45%, #ffd23f 100%);
+}
+
+/* ---- RM: negro carbón, blanco hueso y llamas naranja/rojo (paleta original) ---- */
+body.tema-comidas-rapidas {
+  --rm-negro: #0d0d0f;
+  --rm-negro-rgb: 13, 13, 15;
+  --rm-carbon: #17171b;
+  --rm-carbon-2: #1f1f25;
+  --rm-borde: #33333d;
+  --rm-naranja: #ff7a18;
+  --rm-naranja-2: #ff9d3c;
+  --rm-naranja-rgb: 255, 122, 24;
+  --rm-rojo: #e23a1e;
+  --rm-rojo-rgb: 226, 58, 30;
+  --rm-fuego: linear-gradient(135deg, #e23a1e 0%, #ff7a18 55%, #ffb703 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--rm-fuente);
+  color: var(--rm-blanco);
+  background-color: var(--rm-negro);
+  background-image:
+    radial-gradient(900px 500px at 100% -10%, rgba(var(--rm-naranja-rgb), 0.12), transparent 60%),
+    radial-gradient(700px 500px at -10% 110%, rgba(var(--rm-rojo-rgb), 0.1), transparent 60%);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/*
+ * Transiciones base para que toda la app se sienta fluida.
+ * ------------------------------------------------------------------
+ * Cualquier componente puede sobreescribir esto con su propia regla más
+ * específica (mayor especificidad por los atributos de Angular).
+ */
+a,
+button {
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.25s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease,
+    transform 0.15s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+button:active,
+.rm-tap:active {
+  transform: scale(0.96);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Entrada suave del contenido principal de cada página al navegar. */
+@keyframes rm-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rm-page-in {
+  animation: rm-page-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Entrada suave de tarjetas/filas al aparecer en una lista o grilla. */
+@keyframes rm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.rm-container {
+  width: min(1120px, 92vw);
+  margin-inline: auto;
+}
+
+@media (max-width: 600px) {
+  .rm-container {
+    width: 90vw;
+  }
+}
+
+.rm-eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--rm-naranja-2);
+}
+
+/* Botón principal con degradado de fuego */
+.rm-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 0;
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #1a0d05;
+  background-image: var(--rm-fuego);
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.rm-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+}
+
+.rm-btn--ghost {
+  color: var(--rm-blanco);
+  background: transparent;
+  border: 1px solid var(--rm-borde);
+}
+
+.rm-btn--wa {
+  color: #04331a;
+  background-image: linear-gradient(135deg, #25d366, #12b257);
+}
+
+.rm-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Scrollbar sutil */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rm-borde);
+  border-radius: 999px;
+}

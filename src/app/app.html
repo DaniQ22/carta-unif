@@ -1,0 +1,38 @@
+@if (linea(); as l) {
+  <app-site-header [marca]="l" (abrirCarrito)="abrirCarrito()" />
+}
+
+<main>
+  <router-outlet />
+</main>
+
+@if (linea(); as l) {
+  <footer class="rm-footer" [class.rm-footer--con-fab]="mostrarFab()">
+    <div class="rm-container rm-footer__inner">
+      <div class="rm-footer__brand">
+        <img [src]="l.logo" [alt]="l.nombre" />
+        <div>
+          <strong>{{ l.nombre }}</strong>
+          <span>{{ l.eslogan }}</span>
+        </div>
+      </div>
+      <div class="rm-footer__meta">
+        @if (empresa.coberturaDelivery) {
+          <p class="rm-footer__delivery">🛵 {{ empresa.coberturaDelivery }}</p>
+        }
+        <p class="rm-footer__legal">© {{ anio }} {{ l.nombre }}. Solo servicio a domicilio.</p>
+      </div>
+    </div>
+  </footer>
+}
+
+@if (mostrarFab()) {
+  <button type="button" class="rm-fab" (click)="abrirCarrito()">
+    <span class="rm-fab__count">{{ cart.totalUnidades() }}</span>
+    <span>Ver pedido</span>
+    <strong>{{ cart.totalPrecio() | precio }}</strong>
+  </button>
+}
+
+<app-cart-drawer [abierto]="carritoAbierto()" (cerrar)="cerrarCarrito()" />
+<app-dish-detail />

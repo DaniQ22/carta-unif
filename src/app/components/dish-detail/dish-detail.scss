@@ -1,0 +1,210 @@
+.rm-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Reparte el espacio arriba/abajo en vez de pegar la tarjeta a un borde. */
+  padding: max(4vh, 1rem) 1rem;
+}
+
+.rm-sheet__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  touch-action: none;
+  transition: opacity 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Tarjeta centrada en la pantalla, con el mismo espacio arriba y abajo. */
+.rm-sheet__panel {
+  position: relative;
+  width: min(480px, 100%);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--rm-carbon);
+  border: 1px solid var(--rm-borde);
+  border-radius: 20px;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+}
+
+.rm-sheet.is-open {
+  pointer-events: auto;
+
+  .rm-sheet__scrim {
+    opacity: 1;
+  }
+
+  .rm-sheet__panel {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.rm-sheet__x {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  z-index: 1;
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--rm-borde);
+  background: rgba(var(--rm-negro-rgb), 0.7);
+  backdrop-filter: blur(4px);
+  color: var(--rm-blanco);
+}
+
+.rm-sheet__scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 20px 20px 0 0;
+}
+
+.rm-sheet__media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background:
+    radial-gradient(160px 110px at 30% 20%, rgba(var(--rm-naranja-rgb), 0.28), transparent 70%),
+    linear-gradient(160deg, var(--rm-carbon-2), var(--rm-negro));
+
+  img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.rm-sheet__mono {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: rgba(244, 241, 234, 0.28);
+}
+
+.rm-sheet__flag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  color: #1a0d05;
+  background-image: var(--rm-fuego);
+}
+
+.rm-sheet__body {
+  padding: 1.25rem 1.25rem 1.5rem;
+
+  h2 {
+    font-size: 1.3rem;
+  }
+}
+
+.rm-sheet__desc {
+  margin: 0.5rem 0 0;
+  color: var(--rm-gris);
+  line-height: 1.55;
+}
+
+.rm-sheet__ingredientes {
+  margin-top: 1.1rem;
+
+  h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rm-naranja-2);
+    margin-bottom: 0.5rem;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  li {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 0.92rem;
+    color: var(--rm-blanco);
+
+    &::before {
+      content: '•';
+      color: var(--rm-naranja-2);
+    }
+  }
+}
+
+.rm-sheet__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--rm-borde);
+}
+
+.rm-sheet__price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--rm-naranja-2);
+}
+
+.rm-stepper {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  border: 1px solid var(--rm-borde);
+  border-radius: 999px;
+  padding: 0.15rem;
+  background: var(--rm-carbon-2);
+
+  button {
+    width: 34px;
+    height: 34px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--rm-blanco);
+    font-size: 1.15rem;
+    line-height: 1;
+
+    &:hover {
+      background: var(--rm-negro);
+    }
+  }
+
+  span {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 700;
+  }
+}

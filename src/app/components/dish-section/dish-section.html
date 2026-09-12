@@ -1,0 +1,16 @@
+@if (dishes().length) {
+  <section class="rm-dish-section">
+    <header class="rm-dish-section__head">
+      <h2>{{ titulo() }}</h2>
+      @if (descripcion()) {
+        <p>{{ descripcion() }}</p>
+      }
+    </header>
+
+    <div class="rm-dish-section__grid">
+      @for (dish of dishes(); track dish.id) {
+        <app-dish-card [dish]="dish" />
+      }
+    </div>
+  </section>
+}

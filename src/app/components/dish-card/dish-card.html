@@ -1,0 +1,38 @@
+<article class="rm-dish" [class.is-active]="cantidad() > 0">
+  <button type="button" class="rm-dish__media rm-dish__trigger" (click)="verDetalle()" [attr.aria-label]="'Ver detalle de ' + dish().nombre">
+    @if (dish().imagen) {
+      <img [src]="dish().imagen" [alt]="dish().nombre" loading="lazy" />
+    } @else {
+      <span class="rm-dish__mono">{{ iniciales() }}</span>
+    }
+    @if (dish().destacado) {
+      <span class="rm-dish__flag">★ Recomendado</span>
+    }
+  </button>
+
+  <div class="rm-dish__body">
+    <button type="button" class="rm-dish__info rm-dish__trigger" (click)="verDetalle()">
+      <h3 class="rm-dish__name">{{ dish().nombre }}</h3>
+      @if (dish().descripcion) {
+        <p class="rm-dish__desc">{{ dish().descripcion }}</p>
+      }
+      @if (dish().ingredientes?.length) {
+        <span class="rm-dish__ver-mas">Ver ingredientes</span>
+      }
+    </button>
+
+    <div class="rm-dish__foot">
+      <span class="rm-dish__price">{{ dish().precio | precio }}</span>
+
+      @if (cantidad() === 0) {
+        <button type="button" class="rm-btn rm-dish__add" (click)="agregar()">Agregar</button>
+      } @else {
+        <div class="rm-stepper">
+          <button type="button" (click)="cart.decrementar(dish().id)" aria-label="Quitar uno">−</button>
+          <span>{{ cantidad() }}</span>
+          <button type="button" (click)="cart.incrementar(dish().id)" aria-label="Agregar uno">+</button>
+        </div>
+      }
+    </div>
+  </div>
+</article>

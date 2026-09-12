@@ -1,0 +1,55 @@
+<div class="rm-sheet" [class.is-open]="abierto()">
+  <button type="button" class="rm-sheet__scrim" (click)="cerrar()" aria-label="Cerrar detalle"></button>
+
+  @if (dish(); as d) {
+    <aside class="rm-sheet__panel" role="dialog" aria-label="Detalle del plato">
+      <button type="button" class="rm-sheet__x" (click)="cerrar()" aria-label="Cerrar">✕</button>
+
+      <div class="rm-sheet__scroll">
+        <div class="rm-sheet__media">
+          @if (d.imagen) {
+            <img [src]="d.imagen" [alt]="d.nombre" />
+          } @else {
+            <span class="rm-sheet__mono">{{ iniciales(d.nombre) }}</span>
+          }
+          @if (d.destacado) {
+            <span class="rm-sheet__flag">★ Recomendado</span>
+          }
+        </div>
+
+        <div class="rm-sheet__body">
+          <h2>{{ d.nombre }}</h2>
+
+          @if (d.descripcion) {
+            <p class="rm-sheet__desc">{{ d.descripcion }}</p>
+          }
+
+          @if (d.ingredientes?.length) {
+            <div class="rm-sheet__ingredientes">
+              <h3>Ingredientes</h3>
+              <ul>
+                @for (ing of d.ingredientes; track ing) {
+                  <li>{{ ing }}</li>
+                }
+              </ul>
+            </div>
+          }
+        </div>
+      </div>
+
+      <footer class="rm-sheet__foot">
+        <span class="rm-sheet__price">{{ d.precio | precio }}</span>
+
+        @if (cantidad() === 0) {
+          <button type="button" class="rm-btn" (click)="agregar()">Agregar</button>
+        } @else {
+          <div class="rm-stepper">
+            <button type="button" (click)="cart.decrementar(d.id)" aria-label="Quitar uno">−</button>
+            <span>{{ cantidad() }}</span>
+            <button type="button" (click)="cart.incrementar(d.id)" aria-label="Agregar uno">+</button>
+          </div>
+        }
+      </footer>
+    </aside>
+  }
+</div>
