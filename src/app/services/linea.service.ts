@@ -3,7 +3,7 @@ import { LINEAS } from '../data/lineas.config';
 import { LineaConfig, LineaId } from '../models/linea';
 
 /**
- * Línea de marca activa (Caribe Wok / RM). `null` = sin elegir todavía
+ * Línea de marca activa (Caribe Wok / Pamer). `null` = sin elegir todavía
  * (pantalla selectora). El resto de la app se retematiza vía la clase
  * `body.tema-<id>` que pone `App` en un `effect()`.
  */

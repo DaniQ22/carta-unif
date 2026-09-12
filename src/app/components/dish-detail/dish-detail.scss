@@ -163,6 +163,34 @@
   }
 }
 
+.rm-sheet__tamanos {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.1rem;
+}
+
+.rm-sheet__tamano {
+  flex: 1;
+  border: 1px solid var(--rm-borde);
+  border-radius: 999px;
+  background: var(--rm-carbon-2);
+  color: var(--rm-gris);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.55rem 0.6rem;
+  text-align: center;
+
+  &:hover {
+    color: var(--rm-blanco);
+  }
+
+  &.is-active {
+    color: #1a0d05;
+    border-color: transparent;
+    background-image: var(--rm-fuego);
+  }
+}
+
 .rm-sheet__foot {
   display: flex;
   align-items: center;

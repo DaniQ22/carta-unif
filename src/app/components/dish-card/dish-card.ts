@@ -1,5 +1,5 @@
-import { Component, computed, inject, input } from '@angular/core';
-import { Dish } from '../../models/dish';
+import { Component, computed, inject, input, signal } from '@angular/core';
+import { Dish, DishVariante } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
 import { DishDetailService } from '../../services/dish-detail.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
@@ -16,12 +16,42 @@ export class DishCard {
 
   private readonly detail = inject(DishDetailService);
 
-  protected readonly cantidad = computed(() => this.cart.cantidadDe(this.dish().id));
+  /** Id de la variante elegida (Familiar/Mediano); por defecto, la primera. */
+  protected readonly tamano = signal<string | null>(null);
+
+  protected readonly varianteActiva = computed<DishVariante | null>(() => {
+    const variantes = this.dish().variantes;
+    if (!variantes?.length) return null;
+    const elegida = this.tamano();
+    const encontrada = elegida ? variantes.find((v) => v.id === elegida) : undefined;
+    // Sin selección: arranca en la variante más barata (coincide con `dish.precio`).
+    return encontrada ?? variantes.find((v) => v.precio === this.dish().precio) ?? variantes[0];
+  });
+
+  /** Id efectivo para el carrito: distingue el mismo plato en distintos tamaños. */
+  protected readonly idCarrito = computed(() => {
+    const variante = this.varianteActiva();
+    return variante ? `${this.dish().id}__${variante.id}` : this.dish().id;
+  });
+
+  protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish().precio);
+
+  protected readonly cantidad = computed(() => this.cart.cantidadDe(this.idCarrito()));
 
   constructor(protected cart: CartService) {}
 
+  elegirTamano(id: string): void {
+    this.tamano.set(id);
+  }
+
   agregar(): void {
-    this.cart.agregar(this.dish());
+    const dish = this.dish();
+    const variante = this.varianteActiva();
+    this.cart.agregar({
+      id: this.idCarrito(),
+      nombre: variante ? `${dish.nombre} (${variante.nombre})` : dish.nombre,
+      precio: this.precioMostrado(),
+    });
   }
 
   verDetalle(): void {

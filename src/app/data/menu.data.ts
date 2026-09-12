@@ -4,7 +4,7 @@ import { Category, Dish, ExtraItem } from '../models/dish';
  * Datos del menú combinado (precios en pesos colombianos).
  * ------------------------------------------------------------------
  * - PLATOS: cada plato pertenece a una línea (`categoria: 'arroces'` para
- *   Caribe Wok, `'comidas-rapidas'` para RM) o al grupo transversal
+ *   Caribe Wok, `'comidas-rapidas'` para Pamer) o al grupo transversal
  *   `'asados'` (con `lineas` opcional para restringirlo a una línea).
  * - ADICIONES: distintas por línea (usa el campo `linea`).
  * - BEBIDAS: transversales — se muestran igual en ambas líneas.
@@ -15,6 +15,15 @@ import { Category, Dish, ExtraItem } from '../models/dish';
  * Las fotos están en `public/img/`. Reemplaza el archivo con el mismo
  * nombre para cambiar una foto. Si dejas `imagen` vacío, la tarjeta
  * muestra las iniciales del plato.
+ * - `variantes`: tamaños seleccionables (Familiar/Entero/Medio) con su
+ *   propio precio; `precio` queda como el de la variante más barata (Medio),
+ *   la que se selecciona por defecto en la tarjeta.
+ *
+ * TODO: los 6 arroces de la casa/chinos tienen precios de Familiar/Entero/
+ * Medio PROVISIONALES (escalados a partir del precio único que había antes,
+ * tratado como "Entero", usando la proporción de gramaje del PDF: familiar
+ * ≈ 1.625x el entero, medio = 0.5x el entero). Ajústalos con los precios
+ * reales del negocio.
  */
 
 export const CATEGORIAS: Category[] = [
@@ -41,9 +50,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-caribe',
     categoria: 'arroces',
     nombre: 'Arroz Caribe',
-    descripcion:
-      'Arroz salteado con pollo, chorizo, lomito, plátano maduro y queso. Tamaños: familiar, entero o medio.',
-    precio: 32000,
+    descripcion: 'Arroz salteado con pollo, chorizo, lomito, plátano maduro y queso.',
+    precio: 16000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 52000 },
+      { id: 'entero', nombre: 'Entero', precio: 32000 },
+      { id: 'medio', nombre: 'Medio', precio: 16000 },
+    ],
     imagen: 'img/arroz-tapado.jpg',
     destacado: true,
     etiquetas: ['De la casa'],
@@ -53,9 +66,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-montanero',
     categoria: 'arroces',
     nombre: 'Arroz Montañero',
-    descripcion:
-      'Arroz con pollo, chorizo, lomito, chicharrón y maíz tierno. Tamaños: familiar, entero o medio.',
-    precio: 32000,
+    descripcion: 'Arroz con pollo, chorizo, lomito, chicharrón y maíz tierno.',
+    precio: 16000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 52000 },
+      { id: 'entero', nombre: 'Entero', precio: 32000 },
+      { id: 'medio', nombre: 'Medio', precio: 16000 },
+    ],
     imagen: 'img/arroz-con-pollo.jpg',
     destacado: true,
     etiquetas: ['De la casa'],
@@ -65,9 +82,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-mixto',
     categoria: 'arroces',
     nombre: 'Arroz Mixto',
-    descripcion:
-      'Arroz salteado con pollo y lomito, cebollín y vegetales. Tamaños: familiar, entero o medio.',
-    precio: 30000,
+    descripcion: 'Arroz salteado con pollo y lomito, cebollín y vegetales.',
+    precio: 15000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 49000 },
+      { id: 'entero', nombre: 'Entero', precio: 30000 },
+      { id: 'medio', nombre: 'Medio', precio: 15000 },
+    ],
     imagen: 'img/arroz-chaufa-mixto.jpg',
     etiquetas: ['De la casa'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
@@ -78,9 +99,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-especial',
     categoria: 'arroces',
     nombre: 'Arroz Chino Especial',
-    descripcion:
-      'Al wok con pollo, cerdo, salchichón, camarón, raíz china y huevo. Tamaños: familiar, entero o medio.',
-    precio: 36000,
+    descripcion: 'Al wok con pollo, cerdo, salchichón, camarón, raíz china y huevo.',
+    precio: 18000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 58000 },
+      { id: 'entero', nombre: 'Entero', precio: 36000 },
+      { id: 'medio', nombre: 'Medio', precio: 18000 },
+    ],
     imagen: 'img/aeropuerto.jpg',
     destacado: true,
     etiquetas: ['Chinos', 'Con camarón'],
@@ -90,9 +115,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-pollo-camaron',
     categoria: 'arroces',
     nombre: 'Arroz Chino de Pollo y Camarón',
-    descripcion:
-      'Al wok con pollo, camarón, salchichón, raíz china y huevo. Tamaños: familiar, entero o medio.',
-    precio: 36000,
+    descripcion: 'Al wok con pollo, camarón, salchichón, raíz china y huevo.',
+    precio: 18000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 58000 },
+      { id: 'entero', nombre: 'Entero', precio: 36000 },
+      { id: 'medio', nombre: 'Medio', precio: 18000 },
+    ],
     imagen: 'img/chaufa-camaron.jpg',
     etiquetas: ['Chinos', 'Con camarón'],
     ingredientes: ['Arroz', 'Pollo', 'Camarón', 'Salchichón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
@@ -101,9 +130,13 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-mixto',
     categoria: 'arroces',
     nombre: 'Arroz Chino Mixto',
-    descripcion:
-      'Al wok con pollo, lomito, salchichón, raíz china y huevo. Tamaños: familiar, entero o medio.',
-    precio: 34000,
+    descripcion: 'Al wok con pollo, lomito, salchichón, raíz china y huevo.',
+    precio: 17000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 55000 },
+      { id: 'entero', nombre: 'Entero', precio: 34000 },
+      { id: 'medio', nombre: 'Medio', precio: 17000 },
+    ],
     imagen: 'img/arroz-chaufa-pollo.jpg',
     etiquetas: ['Chinos'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Salchichón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
@@ -157,7 +190,7 @@ export const PLATOS: Dish[] = [
   },
 
   // ======================================================
-  // COMIDAS RÁPIDAS (RM)
+  // COMIDAS RÁPIDAS (Pamer)
   // ======================================================
   {
     id: 'cr-hamburguesa-clasica',
@@ -173,7 +206,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-hamburguesa-pm',
     categoria: 'comidas-rapidas',
-    nombre: 'Hamburguesa RM Especial',
+    nombre: 'Hamburguesa Pamer Especial',
     descripcion: 'Doble carne, doble queso, tocineta, huevo, cebolla crocante y BBQ.',
     precio: 22000,
     imagen: 'img/hamburguesa-royal.jpg',
@@ -202,7 +235,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-salchipapa-pm',
     categoria: 'comidas-rapidas',
-    nombre: 'Salchipapa RM',
+    nombre: 'Salchipapa Pamer',
     descripcion: 'Papa, salchicha, pollo desmechado, chorizo, queso y huevo de codorniz.',
     precio: 19000,
     imagen: 'img/salchipapa-especial.jpg',
@@ -220,7 +253,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-perro-pm',
     categoria: 'comidas-rapidas',
-    nombre: 'Perro Caliente RM',
+    nombre: 'Perro Caliente Pamer',
     descripcion: 'Pan artesanal, salchicha jumbo, tocineta, papitas, queso y salsas.',
     precio: 11000,
     imagen: 'img/hot-dog.jpg',
@@ -231,7 +264,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-desgranado',
     categoria: 'comidas-rapidas',
-    nombre: 'Desgranado RM',
+    nombre: 'Desgranado Pamer',
     descripcion: 'Maíz tierno, papa, chicharrón, pollo, chorizo, queso y salsas. En vaso.',
     precio: 16000,
     etiquetas: ['Desgranados'],
@@ -249,7 +282,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-shawarma',
     categoria: 'comidas-rapidas',
-    nombre: 'Shawarma RM',
+    nombre: 'Shawarma Pamer',
     descripcion: 'Carne al carbón, pan pita, vegetales frescos y salsa blanca de la casa.',
     precio: 17000,
     imagen: 'img/shawarma.jpg',
@@ -259,7 +292,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-picada',
     categoria: 'comidas-rapidas',
-    nombre: 'Picada RM (para compartir)',
+    nombre: 'Picada Pamer (para compartir)',
     descripcion: 'Carne, pollo, chorizo, costilla, chicharrón, papa y maduro. 2–3 personas.',
     precio: 45000,
     imagen: 'img/picada.jpg',
@@ -288,7 +321,7 @@ export const PLATOS: Dish[] = [
   },
 
   // ======================================================
-  // ASADOS (transversal — hoy solo activo en RM, ver `lineas`)
+  // ASADOS (transversal — hoy solo activo en Pamer, ver `lineas`)
   // ======================================================
   {
     id: 'asa-churrasco',

@@ -34,5 +34,20 @@
   </button>
 }
 
+@if (mostrarVolverArriba()) {
+  <button
+    type="button"
+    class="rm-to-top"
+    [class.rm-to-top--con-fab]="mostrarFab()"
+    (click)="volverArriba()"
+    aria-label="Volver arriba"
+    title="Volver arriba"
+  >
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M18 15l-6-6-6 6" />
+    </svg>
+  </button>
+}
+
 <app-cart-drawer [abierto]="carritoAbierto()" (cerrar)="cerrarCarrito()" />
 <app-dish-detail />

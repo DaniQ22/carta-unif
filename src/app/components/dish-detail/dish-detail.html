@@ -34,19 +34,34 @@
               </ul>
             </div>
           }
+
+          @if (d.variantes; as variantes) {
+            <div class="rm-sheet__tamanos">
+              @for (v of variantes; track v.id) {
+                <button
+                  type="button"
+                  class="rm-sheet__tamano"
+                  [class.is-active]="varianteActiva()?.id === v.id"
+                  (click)="elegirTamano(v.id)"
+                >
+                  {{ v.nombre }}
+                </button>
+              }
+            </div>
+          }
         </div>
       </div>
 
       <footer class="rm-sheet__foot">
-        <span class="rm-sheet__price">{{ d.precio | precio }}</span>
+        <span class="rm-sheet__price">{{ precioMostrado() | precio }}</span>
 
         @if (cantidad() === 0) {
           <button type="button" class="rm-btn" (click)="agregar()">Agregar</button>
         } @else {
           <div class="rm-stepper">
-            <button type="button" (click)="cart.decrementar(d.id)" aria-label="Quitar uno">−</button>
+            <button type="button" (click)="cart.decrementar(idCarrito())" aria-label="Quitar uno">−</button>
             <span>{{ cantidad() }}</span>
-            <button type="button" (click)="cart.incrementar(d.id)" aria-label="Agregar uno">+</button>
+            <button type="button" (click)="cart.incrementar(idCarrito())" aria-label="Agregar uno">+</button>
           </div>
         }
       </footer>

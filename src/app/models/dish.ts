@@ -11,11 +11,19 @@ export interface Category {
   descripcion: string;
 }
 
+/** Una opción de tamaño de un plato (ej: Familiar / Mediano), con su propio precio. */
+export interface DishVariante {
+  id: string;
+  nombre: string;
+  precio: number;
+}
+
 export interface Dish {
   id: string;
   categoria: MenuGroupId;
   nombre: string;
   descripcion?: string;
+  /** Precio a mostrar cuando no hay `variantes`, o precio por defecto (la primera variante) si las hay. */
   precio: number;
   imagen?: string;
   destacado?: boolean;
@@ -28,6 +36,8 @@ export interface Dish {
    * pertenece este plato. Si se omite, se muestra en todas las líneas.
    */
   lineas?: LineaId[];
+  /** Tamaños seleccionables (ej: Familiar/Mediano), cada uno con su precio. */
+  variantes?: DishVariante[];
 }
 
 /** Ítem simple sin foto (adiciones y bebidas). */

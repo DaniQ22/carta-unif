@@ -125,6 +125,37 @@
   color: var(--rm-naranja-2);
 }
 
+.rm-dish__tamanos {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.rm-dish__tamano {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid var(--rm-borde);
+  border-radius: 999px;
+  background: var(--rm-carbon-2);
+  color: var(--rm-gris);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.4rem 0.3rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+
+  &:hover {
+    color: var(--rm-blanco);
+  }
+
+  &.is-active {
+    color: #1a0d05;
+    border-color: transparent;
+    background-image: var(--rm-fuego);
+  }
+}
+
 .rm-dish__foot {
   display: flex;
   align-items: center;

@@ -41,9 +41,9 @@ export const LINEAS: Record<LineaId, LineaConfig> = {
   'comidas-rapidas': {
     id: 'comidas-rapidas',
     ruta: 'comidas-rapidas',
-    nombre: 'RM',
+    nombre: 'Pamer',
     eslogan: 'El arte del sabor al instante',
-    logo: 'img/logo-rm.png',
+    logo: 'img/logo-pamer.jpg',
     colorAcento: '#ff7a18',
     whatsappCocinero: '573024533735',
     horario: {

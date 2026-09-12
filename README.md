@@ -1,7 +1,7 @@
-# Carta unificada — Caribe Wok & RM
+# Carta unificada — Caribe Wok & Pamer
 
 Una sola app Angular 20 con **selector de línea de marca**: el cliente elige
-entre **Caribe Wok** (arroces al wok) y **RM** (comidas rápidas + asados)
+entre **Caribe Wok** (arroces al wok) y **Pamer** (comidas rápidas + asados)
 al entrar, y desde ahí navega su carta con carrito propio y envío directo
 al WhatsApp del cocinero de esa línea.
 

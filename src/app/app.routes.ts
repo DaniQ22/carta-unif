@@ -17,7 +17,7 @@ export const routes: Routes = [
     path: 'comidas-rapidas',
     loadComponent: () => import('./pages/menu-page/menu-page').then((m) => m.MenuPage),
     data: { lineaId: 'comidas-rapidas' },
-    title: 'RM — Carta',
+    title: 'Pamer — Carta',
   },
   { path: '**', redirectTo: '' },
 ];

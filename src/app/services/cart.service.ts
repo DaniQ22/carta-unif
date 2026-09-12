@@ -18,7 +18,7 @@ type Carritos = Partial<Record<LineaId, CartItem[]>>;
 
 /**
  * Carrito de pedido a domicilio. Hay UN carrito por línea de marca (Caribe
- * Wok / RM), indexado por `LineaService.activaId()`. Arma el mensaje de
+ * Wok / Pamer), indexado por `LineaService.activaId()`. Arma el mensaje de
  * WhatsApp con el detalle del pedido y lo envía al número del cocinero de
  * la línea activa (ver `LineaConfig.whatsappCocinero`).
  */

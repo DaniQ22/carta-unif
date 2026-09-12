@@ -15,6 +15,23 @@
   min-height: 64px;
 }
 
+.rm-header__back {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--rm-borde);
+  background: var(--rm-carbon-2);
+  color: var(--rm-blanco);
+  flex-shrink: 0;
+  transition: border-color 0.15s ease;
+
+  &:hover {
+    border-color: var(--rm-naranja);
+  }
+}
+
 .rm-header__brand {
   display: flex;
   align-items: center;
