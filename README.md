@@ -92,6 +92,35 @@ En resumen: dejar `imagen` vacío (como está ahora) es la opción más rápida
 posible porque no descarga nada; comprimir a WebP/AVIF chico es la mejor
 alternativa si prefieres mostrar fotos igual.
 
+#### Alojar las fotos fuera del proyecto (Cloudinary, gratis)
+
+En vez de guardar los archivos en `public/img/` (lo que infla el repo y el
+build), puedes subirlos a **Cloudinary** (plan free: 25 GB) y solo guardar
+la URL en `menu.data.ts`. Cloudinary además optimiza cada foto a WebP/AVIF
+y la redimensiona automáticamente — no necesitas Squoosh ni TinyPNG.
+
+1. Crea una cuenta gratis en https://cloudinary.com y copia tu **Cloud
+   name** (aparece en el dashboard, arriba a la izquierda).
+2. Pégalo en `EMPRESA.cloudinaryCloudName` (`src/app/data/empresa.config.ts`).
+3. Sube cada foto desde el dashboard de Cloudinary (Media Library → Upload).
+   El "Public ID" que le pongas (por defecto, el nombre del archivo sin
+   extensión) es lo que usarás en el código.
+4. En `menu.data.ts`, importa el helper y úsalo en vez de la ruta local:
+
+   ```ts
+   import { cloudinaryUrl } from '../utils/cloudinary';
+   // ...
+   imagen: cloudinaryUrl('hamburguesa-clasica'),
+   ```
+
+   Eso arma `https://res.cloudinary.com/<cloud-name>/image/upload/w_700,f_auto,q_auto/hamburguesa-clasica`,
+   ya con ancho fijo (700px) y formato/calidad automáticos.
+
+Si prefieres no depender de una cuenta externa, la alternativa 100% gratis
+y sin límites reales es subir las fotos a un repo público de GitHub y
+servirlas por jsDelivr: `https://cdn.jsdelivr.net/gh/usuario/repo@main/ruta.jpg`
+(en ese caso comprime tú mismo antes, como se explica arriba).
+
 ## Cómo funciona el pedido
 
 1. El cliente arma un único carrito con platos, adiciones y bebidas de

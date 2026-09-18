@@ -1,4 +1,5 @@
 import { Category, Dish, ExtraItem } from '../models/dish';
+import { cloudinaryUrl } from '../utils/cloudinary';
 
 /**
  * Datos del menú unificado (precios en pesos colombianos). Un solo menú,
@@ -264,6 +265,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Desgranado Pamer',
     descripcion: 'Maíz tierno, papa, chicharrón, pollo, chorizo, queso y salsas. En vaso.',
     precio: 16000,
+    imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_06_10_10_PM'),
     etiquetas: ['Desgranados'],
     ingredientes: ['Maíz tierno desgranado', 'Papa', 'Chicharrón', 'Pollo desmechado', 'Chorizo', 'Queso', 'Salsas'],
   },
@@ -302,7 +304,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Alitas BBQ (x8)',
     descripcion: 'Ocho alitas glaseadas en BBQ o picante, con papas a la francesa.',
     precio: 23000,
-    imagen: 'img/alitas.jpg',
+    imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_05_34_38_PM'),
     etiquetas: ['Pollo', 'Para compartir'],
     ingredientes: ['Alitas de pollo (x8)', 'Salsa BBQ o picante', 'Papa a la francesa'],
   },

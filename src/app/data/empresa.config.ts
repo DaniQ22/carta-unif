@@ -9,9 +9,17 @@ import { CocinaConfig, CocinaId, HorarioSemana } from '../models/cocina';
  * en `excepciones` (0=domingo … 6=sábado, `null` = cerrado).
  */
 export const EMPRESA = {
-  nombre: 'Caribe Wok & Pamer',
+  nombre: 'Cocina Oculta',
   eslogan: 'Arroces, comidas rápidas y asados a domicilio',
   logo: 'img/logo-pamer.jpg',
+
+  /**
+   * "Cloud name" de tu cuenta Cloudinary (plan free), para servir fotos de
+   * platos sin subirlas al repo — ver `utils/cloudinary.ts` y el README,
+   * sección "Fotos de los platos". Déjalo vacío ('') si sigues usando
+   * `public/img/`.
+   */
+  cloudinaryCloudName: 'voidkkxe',
 
   /** Símbolo de moneda que se antepone a los precios. */
   moneda: '$',

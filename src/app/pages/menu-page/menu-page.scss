@@ -1,14 +1,28 @@
 .rm-menu-hero {
   position: relative;
   overflow: hidden;
-  padding: 2.5rem 0 1.5rem;
+  padding: 3rem 0 1.75rem;
   border-bottom: 1px solid var(--rm-borde);
+  background-image: var(--rm-fuego);
+
+  /* Tinte oscuro sobre el degradado para que el panel de vidrio tenga
+     contraste parejo y no compita con el color de marca. */
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(var(--rm-negro-rgb), 0.35) 0%,
+      rgba(var(--rm-negro-rgb), 0.65) 100%
+    );
+  }
 
   h1 {
     font-size: clamp(1.9rem, 4vw, 2.8rem);
     font-weight: 800;
     margin-top: 0.3rem;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
   }
 
   p {
@@ -16,18 +30,27 @@
     max-width: 56ch;
     color: var(--rm-gris);
     line-height: 1.6;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.6);
-  }
-
-  .rm-eyebrow {
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
   }
 }
 
 .rm-menu-hero__texto {
   position: relative;
   z-index: 1;
+  max-width: 620px;
+  margin-inline: auto;
+  padding: 1.5rem 1.25rem;
   text-align: center;
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+
+  + .rm-menu-hero__texto {
+    margin-top: 1rem;
+    padding: 0.9rem 1.1rem;
+  }
 
   p {
     margin-inline: auto;
