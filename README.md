@@ -1,9 +1,9 @@
 # Carta unificada — Caribe Wok & Pamer
 
-Una sola app Angular 20 con **selector de línea de marca**: el cliente elige
-entre **Caribe Wok** (arroces al wok) y **Pamer** (comidas rápidas + asados)
-al entrar, y desde ahí navega su carta con carrito propio y envío directo
-al WhatsApp del cocinero de esa línea.
+Una sola app Angular 20 con **un único menú**: arroces al wok, comidas
+rápidas, asados y bebidas, todo en una sola página, con un solo carrito y
+un solo horario de atención. El pedido se arma en WhatsApp y se envía a la
+cocina responsable (ver "Cómo funciona el pedido" más abajo).
 
 > Este proyecto es independiente de `carta-caribe-wok` y `carta-rm` (los dos
 > repos de una sola línea cada uno). No los reemplaza ni los modifica.
@@ -18,8 +18,7 @@ npm install
 npm start
 ```
 
-Abre http://localhost:4200 — verás la pantalla selectora (`/`). Elegir una
-tarjeta navega a `/wok` o `/comidas-rapidas`.
+Abre http://localhost:4200 — verás la carta completa directamente en `/`.
 
 ## Compilar para producción
 
@@ -32,68 +31,93 @@ puede subir a Netlify, Vercel, GitHub Pages, Firebase Hosting, etc.
 
 ## Configuración
 
-### 1. Líneas de marca — `src/app/data/lineas.config.ts`
+### 1. Negocio y horario — `src/app/data/empresa.config.ts`
 
-`EMPRESA` tiene los datos compartidos (moneda, saludo de WhatsApp, cobertura
-de delivery). `LINEAS` tiene la config de cada línea:
+`EMPRESA` tiene los datos del negocio (nombre, logo, moneda, saludo de
+WhatsApp, cobertura de delivery) y el horario único de atención:
 
 ```ts
-arroces: {
-  id: 'arroces',
-  ruta: 'wok',                 // segmento de URL: /wok
-  nombre: 'Caribe Wok',
-  eslogan: 'Arroces al wok con sabor caribeño',
-  logo: 'img/logo-caribe-wok.png',
-  colorAcento: '#1fc2b5',       // color de la tarjeta en el selector
-  whatsappCocinero: '573024533723',
-  horario: { defecto: { abre: '11:00', cierra: '22:00' } },
+horario: {
+  defecto: { abre: '11:00', cierra: '23:00' },
 },
 ```
 
 `horario.excepciones` acepta días concretos (`0`=domingo … `6`=sábado;
 `null` = cerrado).
 
+`COCINAS` define las dos cocinas que preparan el pedido y su WhatsApp — ver
+la sección "Cómo funciona el pedido".
+
 ### 2. El menú — `src/app/data/menu.data.ts`
 
-- **`PLATOS`**: cada plato tiene `categoria: 'arroces' | 'comidas-rapidas'`
-  (a qué línea pertenece) o `categoria: 'asados'` (grupo transversal). Los
-  platos de `asados` pueden restringirse a una línea con `lineas: ['comidas-rapidas']`
-  — si se omite, se muestran en ambas.
-- **`ADICIONES`**: llevan `linea: 'arroces' | 'comidas-rapidas'` (son
-  distintas por línea). Si se omite `linea`, es transversal.
-- **`BEBIDAS`**: sin campo `linea` → se muestran igual en ambas cartas.
+- **`PLATOS`**: cada plato tiene `categoria: 'arroces'`, `'comidas-rapidas'`
+  o `'asados'` (asados se preparan en la cocina de Pamer).
+- **`ADICIONES`** y **`BEBIDAS`**: se muestran igual para todo el menú.
 
 Los campos de cada plato (`precio`, `imagen`, `etiquetas`, `ingredientes`,
-etc.) funcionan igual que en los proyectos de una sola línea — ver sus
-README para el detalle de cada campo.
+`variantes`, etc.) funcionan igual que en los proyectos de una sola línea —
+ver sus README para el detalle de cada campo.
 
 ### 3. Logos e imágenes
 
-Van en `public/img/`. Incluye los logos y fotos de ambas líneas. Cambia una
-foto reemplazando el archivo con el mismo nombre.
+Van en `public/img/`. Cambia una foto reemplazando el archivo con el mismo
+nombre.
+
+#### Fotos de los arroces
+
+Los arroces se dejaron **sin `imagen`** a propósito: en producción, las
+fotos son lo que más tarda en cargar (peso del archivo + una petición de
+red por plato), y es la sección con más platos de la carta. Sin `imagen`,
+la tarjeta muestra automáticamente las iniciales del plato sobre un fondo
+degradado — cero peso, carga instantánea, sin "salto" de layout mientras
+carga.
+
+Si más adelante quieres traer las fotos de vuelta sin repetir el problema
+de velocidad:
+
+1. **Comprime y redimensiona antes de subir**: ~600–800px de ancho (no hace
+   falta más para una tarjeta de carta) y formato **WebP** o **AVIF**, que
+   pesan una fracción de un JPG al mismo tamaño visual. Herramientas como
+   Squoosh (squoosh.app) o TinyPNG hacen esto en segundos, gratis.
+2. Sirve las imágenes con **CDN + caché fuerte** (Netlify/Vercel/Cloudflare
+   ya lo hacen solas para todo lo que esté en `public/`), para que solo
+   pesen la primera vez que cada cliente entra.
+3. El código ya usa `loading="lazy"` en las fotos de las tarjetas, así que
+   solo se descargan las que el cliente realmente llega a ver al hacer
+   scroll — no hace falta tocar nada ahí.
+4. Si igual notas demora, agrega las fotos de a poco (por ejemplo, solo a
+   los 2-3 arroces `destacado: true`) en vez de a los 12 platos de una vez.
+
+En resumen: dejar `imagen` vacío (como está ahora) es la opción más rápida
+posible porque no descarga nada; comprimir a WebP/AVIF chico es la mejor
+alternativa si prefieres mostrar fotos igual.
 
 ## Cómo funciona el pedido
 
-1. El cliente elige su línea en la pantalla inicial (`/`).
-2. Arma el carrito con platos, adiciones y bebidas de esa línea — **cada
-   línea tiene su propio carrito**, independiente de la otra.
-3. Escribe una nota por ítem y sus datos de domicilio: nombre, teléfono y
+1. El cliente arma un único carrito con platos, adiciones y bebidas de
+   cualquier sección del menú.
+2. Escribe una nota por ítem y sus datos de domicilio: nombre, teléfono y
    dirección (obligatorios) + referencia opcional.
-4. Al enviar el pedido se abre WhatsApp con el mensaje ya redactado,
-   dirigido al número del cocinero de esa línea.
-5. Los carritos se guardan en el navegador (`localStorage`, clave
-   `carta-unificada-carritos`, un carrito por línea).
+3. Al enviar el pedido se abre WhatsApp con un solo mensaje, ya redactado,
+   con todo el detalle del pedido.
+4. Ese mensaje se dirige a la cocina responsable, según `COCINAS` en
+   `empresa.config.ts`:
+   - Si el pedido incluye **algún arroz**, va al WhatsApp de **Caribe Wok**.
+   - Si no (solo comidas rápidas, asados, adiciones y/o bebidas), va al
+     WhatsApp de **Pamer**.
+5. El carrito se guarda en el navegador (`localStorage`, clave
+   `carta-unificada-carrito`).
 
 ## Estructura
 
 ```
 src/app/
-  data/            lineas.config.ts (líneas + negocio) y menu.data.ts (menú)
-  models/          tipos TypeScript (Dish, ExtraItem, CartItem, LineaConfig)
-  services/        LineaService (línea activa), MenuService y CartService
+  data/            empresa.config.ts (negocio + cocinas) y menu.data.ts (menú)
+  models/          tipos TypeScript (Dish, ExtraItem, CartItem, CocinaConfig)
+  services/        MenuService y CartService
   pipes/           precio (formato $ 00.000)
   components/      site-header, dish-card, dish-section, extra-list, cart-drawer, dish-detail
-  pages/           selector-page (elegir línea) y menu-page (la carta)
-  utils/           horario (abierto/cerrado) y moneda (formato de precio)
-  app.routes.ts    '/' selector, '/wok' y '/comidas-rapidas' las cartas
+  pages/           menu-page (la carta completa)
+  utils/           horario (abierto/cerrado), moneda (formato de precio) y cocina (a qué cocina va cada plato)
+  app.routes.ts    '/' — el menú unificado
 ```

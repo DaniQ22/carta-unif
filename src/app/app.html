@@ -1,30 +1,26 @@
-@if (linea(); as l) {
-  <app-site-header [marca]="l" (abrirCarrito)="abrirCarrito()" />
-}
+<app-site-header (abrirCarrito)="abrirCarrito()" />
 
 <main>
   <router-outlet />
 </main>
 
-@if (linea(); as l) {
-  <footer class="rm-footer" [class.rm-footer--con-fab]="mostrarFab()">
-    <div class="rm-container rm-footer__inner">
-      <div class="rm-footer__brand">
-        <img [src]="l.logo" [alt]="l.nombre" />
-        <div>
-          <strong>{{ l.nombre }}</strong>
-          <span>{{ l.eslogan }}</span>
-        </div>
-      </div>
-      <div class="rm-footer__meta">
-        @if (empresa.coberturaDelivery) {
-          <p class="rm-footer__delivery">🛵 {{ empresa.coberturaDelivery }}</p>
-        }
-        <p class="rm-footer__legal">© {{ anio }} {{ l.nombre }}. Solo servicio a domicilio.</p>
+<footer class="rm-footer" [class.rm-footer--con-fab]="mostrarFab()">
+  <div class="rm-container rm-footer__inner">
+    <div class="rm-footer__brand">
+      <img [src]="empresa.logo" [alt]="empresa.nombre" />
+      <div>
+        <strong>{{ empresa.nombre }}</strong>
+        <span>{{ empresa.eslogan }}</span>
       </div>
     </div>
-  </footer>
-}
+    <div class="rm-footer__meta">
+      @if (empresa.coberturaDelivery) {
+        <p class="rm-footer__delivery">🛵 {{ empresa.coberturaDelivery }}</p>
+      }
+      <p class="rm-footer__legal">© {{ anio }} {{ empresa.nombre }}. Solo servicio a domicilio.</p>
+    </div>
+  </div>
+</footer>
 
 @if (mostrarFab()) {
   <button type="button" class="rm-fab" (click)="abrirCarrito()">

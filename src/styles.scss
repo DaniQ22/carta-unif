@@ -1,10 +1,5 @@
-/* ===== Carta unificada: Caribe Wok + RM ===== */
-/*
- * Tokens --rm-* compartidos por toda la app. El valor por defecto en :root
- * es neutro (se usa en la pantalla selectora, antes de elegir línea).
- * `body.tema-arroces` y `body.tema-comidas-rapidas` los sobreescriben según
- * la línea activa (ver el effect() en App que pone esa clase en <body>).
- */
+/* ===== Carta unificada: Caribe Wok + Pamer ===== */
+/* Tokens --rm-* compartidos por toda la app (un solo tema para todo el menú). */
 
 :root {
   --rm-negro: #0b0b10;
@@ -26,36 +21,6 @@
   --rm-radio: 14px;
   --rm-sombra: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
   --rm-fuente: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-}
-
-/* ---- Caribe Wok: turquesa del aro/"CARIBE" + fuego rojo-naranja-dorado de "WOK" ---- */
-body.tema-arroces {
-  --rm-negro: #05221f;
-  --rm-negro-rgb: 5, 34, 31;
-  --rm-carbon: #0b332e;
-  --rm-carbon-2: #114039;
-  --rm-borde: #1f6358;
-  --rm-naranja: #1fc2b5;
-  --rm-naranja-2: #4ce6da;
-  --rm-naranja-rgb: 31, 194, 181;
-  --rm-rojo: #ff6b45;
-  --rm-rojo-rgb: 255, 107, 69;
-  --rm-fuego: linear-gradient(135deg, #e2231c 0%, #ff7a18 45%, #ffd23f 100%);
-}
-
-/* ---- RM: negro carbón, blanco hueso y llamas naranja/rojo (paleta original) ---- */
-body.tema-comidas-rapidas {
-  --rm-negro: #0d0d0f;
-  --rm-negro-rgb: 13, 13, 15;
-  --rm-carbon: #17171b;
-  --rm-carbon-2: #1f1f25;
-  --rm-borde: #33333d;
-  --rm-naranja: #ff7a18;
-  --rm-naranja-2: #ff9d3c;
-  --rm-naranja-rgb: 255, 122, 24;
-  --rm-rojo: #e23a1e;
-  --rm-rojo-rgb: 226, 58, 30;
-  --rm-fuego: linear-gradient(135deg, #e23a1e 0%, #ff7a18 55%, #ffb703 100%);
 }
 
 * {

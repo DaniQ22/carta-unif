@@ -1,38 +1,35 @@
-import { computed, inject, Injectable, signal } from '@angular/core';
-import { EMPRESA } from '../data/lineas.config';
+import { computed, Injectable, signal } from '@angular/core';
+import { COCINAS, EMPRESA } from '../data/empresa.config';
 import { CartItem } from '../models/dish';
-import { LineaId } from '../models/linea';
+import { CocinaId } from '../models/cocina';
 import { formatoPrecio } from '../utils/moneda';
-import { LineaService } from './linea.service';
 
-const STORAGE_KEY = 'carta-unificada-carritos';
+const STORAGE_KEY = 'carta-unificada-carrito';
 
 /** Cualquier cosa que se pueda agregar al carrito (plato, adición o bebida). */
 export interface Agregable {
   id: string;
   nombre: string;
   precio: number;
+  /**
+   * Cocina que prepara el ítem (solo platos la llevan). Adiciones y bebidas
+   * se omiten: no cambian a qué cocina se envía el pedido.
+   */
+  cocina?: CocinaId;
 }
 
-type Carritos = Partial<Record<LineaId, CartItem[]>>;
-
 /**
- * Carrito de pedido a domicilio. Hay UN carrito por línea de marca (Caribe
- * Wok / Pamer), indexado por `LineaService.activaId()`. Arma el mensaje de
- * WhatsApp con el detalle del pedido y lo envía al número del cocinero de
- * la línea activa (ver `LineaConfig.whatsappCocinero`).
+ * Carrito de pedido a domicilio. Es un único carrito para todo el menú
+ * (arroces, comidas rápidas, asados, adiciones y bebidas). Arma un solo
+ * mensaje de WhatsApp con el detalle completo del pedido y lo envía al
+ * número de la cocina responsable: si hay algún plato de `arroces`, va a
+ * Caribe Wok; si no, va a Pamer (ver `construirLinkWhatsApp`).
  */
 @Injectable({ providedIn: 'root' })
 export class CartService {
-  private readonly lineaSvc = inject(LineaService);
+  private readonly _items = signal<CartItem[]>(this.restore());
 
-  private readonly _carritos = signal<Carritos>(this.restore());
-
-  /** Ítems del carrito de la línea actualmente activa. */
-  readonly items = computed<CartItem[]>(() => {
-    const id = this.lineaSvc.activaId();
-    return id ? (this._carritos()[id] ?? []) : [];
-  });
+  readonly items = this._items.asReadonly();
 
   /** Cantidad total de unidades (para el badge). */
   readonly totalUnidades = computed(() => this.items().reduce((acc, it) => acc + it.cantidad, 0));
@@ -52,7 +49,10 @@ export class CartService {
           it.id === item.id ? { ...it, cantidad: it.cantidad + cantidad } : it,
         );
       }
-      return [...items, { id: item.id, nombre: item.nombre, precio: item.precio, cantidad }];
+      return [
+        ...items,
+        { id: item.id, nombre: item.nombre, precio: item.precio, cantidad, cocina: item.cocina },
+      ];
     });
   }
 
@@ -88,9 +88,15 @@ export class CartService {
     return this.items().find((it) => it.id === id)?.cantidad ?? 0;
   }
 
+  /** Cocina a la que se enruta el pedido actual, según lo que haya en el carrito. */
+  cocinaDestino(): CocinaId {
+    const tieneArroces = this.items().some((it) => it.cocina === 'arroces');
+    return tieneArroces ? 'arroces' : 'comidas-rapidas';
+  }
+
   /**
    * Construye el enlace de WhatsApp con el detalle del pedido a domicilio,
-   * dirigido al cocinero de la línea activa.
+   * dirigido a la cocina responsable del pedido.
    */
   construirLinkWhatsApp(datos?: {
     cliente?: string;
@@ -98,13 +104,12 @@ export class CartService {
     direccion?: string;
     referencia?: string;
   }): string {
-    const linea = this.lineaSvc.activa();
-    if (!linea) return '';
+    const cocina = COCINAS[this.cocinaDestino()];
 
     const lineas: string[] = [];
 
     lineas.push(EMPRESA.saludoPedido);
-    lineas.push(`*Pedido — ${linea.nombre}*`);
+    lineas.push(`*Pedido — ${cocina.nombre}*`);
     lineas.push('');
 
     for (const it of this.items()) {
@@ -124,42 +129,34 @@ export class CartService {
     if (datos?.referencia?.trim()) lineas.push(`Referencia: ${datos.referencia.trim()}`);
 
     const texto = encodeURIComponent(lineas.join('\n'));
-    return `https://wa.me/${linea.whatsappCocinero}?text=${texto}`;
+    return `https://wa.me/${cocina.whatsapp}?text=${texto}`;
   }
 
-  /** Aplica `fn` sobre el carrito de la línea activa y persiste el resultado. */
+  /** Aplica `fn` sobre el carrito y persiste el resultado. */
   private actualizar(fn: (items: CartItem[]) => CartItem[]): void {
-    const id = this.lineaSvc.activaId();
-    if (!id) return;
-    this._carritos.update((carritos) => ({ ...carritos, [id]: fn(carritos[id] ?? []) }));
+    this._items.update(fn);
     this.persist();
   }
 
   private persist(): void {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(this._carritos()));
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this._items()));
     } catch {
       /* almacenamiento no disponible: se ignora */
     }
   }
 
-  private restore(): Carritos {
+  private restore(): CartItem[] {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (!raw) return {};
+      if (!raw) return [];
       const parsed = JSON.parse(raw);
-      if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
-
-      const carritos: Carritos = {};
-      for (const [lineaId, items] of Object.entries(parsed)) {
-        if (!Array.isArray(items)) continue;
-        carritos[lineaId as LineaId] = items.filter(
-          (it) => it && typeof it.id === 'string' && typeof it.precio === 'number',
-        );
-      }
-      return carritos;
+      if (!Array.isArray(parsed)) return [];
+      return parsed.filter(
+        (it) => it && typeof it.id === 'string' && typeof it.precio === 'number',
+      );
     } catch {
-      return {};
+      return [];
     }
   }
 }

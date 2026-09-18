@@ -1,20 +1,23 @@
 import { Category, Dish, ExtraItem } from '../models/dish';
 
 /**
- * Datos del menú combinado (precios en pesos colombianos).
+ * Datos del menú unificado (precios en pesos colombianos). Un solo menú,
+ * un solo horario — ver `EMPRESA.horario` en `empresa.config.ts`.
  * ------------------------------------------------------------------
- * - PLATOS: cada plato pertenece a una línea (`categoria: 'arroces'` para
- *   Caribe Wok, `'comidas-rapidas'` para Pamer) o al grupo transversal
- *   `'asados'` (con `lineas` opcional para restringirlo a una línea).
- * - ADICIONES: distintas por línea (usa el campo `linea`).
- * - BEBIDAS: transversales — se muestran igual en ambas líneas.
+ * - PLATOS: cada plato tiene `categoria: 'arroces'`, `'comidas-rapidas'` o
+ *   el grupo transversal `'asados'`. Esa categoría también decide a qué
+ *   cocina/WhatsApp se enruta el pedido (ver `utils/cocina.ts`): arroces va
+ *   a Caribe Wok, el resto va a Pamer.
+ * - ADICIONES y BEBIDAS: se muestran igual para todo el menú.
  * - `etiquetas`: alimentan los chips de filtro de la carta. Usa los
  *   mismos textos entre platos para que se agrupen (ej: 'Hamburguesas').
  * - `ingredientes`: se muestran en el detalle del producto (al tocar la
  *   tarjeta). Edítalos para reflejar la receta real de cada plato.
  * Las fotos están en `public/img/`. Reemplaza el archivo con el mismo
  * nombre para cambiar una foto. Si dejas `imagen` vacío, la tarjeta
- * muestra las iniciales del plato.
+ * muestra las iniciales del plato en vez de una foto — sin descargar nada,
+ * así que carga instantáneo. Los arroces se dejaron así a propósito (ver
+ * el README, sección "Fotos de los arroces").
  * - `variantes`: tamaños seleccionables (Familiar/Entero/Medio) con su
  *   propio precio; `precio` queda como el de la variante más barata (Medio),
  *   la que se selecciona por defecto en la tarjeta.
@@ -57,7 +60,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 32000 },
       { id: 'medio', nombre: 'Medio', precio: 16000 },
     ],
-    imagen: 'img/arroz-tapado.jpg',
     destacado: true,
     etiquetas: ['De la casa'],
     ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Plátano maduro', 'Queso', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
@@ -73,7 +75,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 32000 },
       { id: 'medio', nombre: 'Medio', precio: 16000 },
     ],
-    imagen: 'img/arroz-con-pollo.jpg',
     destacado: true,
     etiquetas: ['De la casa'],
     ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Chicharrón', 'Maíz', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
@@ -89,7 +90,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 30000 },
       { id: 'medio', nombre: 'Medio', precio: 15000 },
     ],
-    imagen: 'img/arroz-chaufa-mixto.jpg',
     etiquetas: ['De la casa'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
   },
@@ -106,7 +106,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 36000 },
       { id: 'medio', nombre: 'Medio', precio: 18000 },
     ],
-    imagen: 'img/aeropuerto.jpg',
     destacado: true,
     etiquetas: ['Chinos', 'Con camarón'],
     ingredientes: ['Arroz', 'Pollo', 'Salchichón', 'Lomito', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
@@ -122,7 +121,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 36000 },
       { id: 'medio', nombre: 'Medio', precio: 18000 },
     ],
-    imagen: 'img/chaufa-camaron.jpg',
     etiquetas: ['Chinos', 'Con camarón'],
     ingredientes: ['Arroz', 'Pollo', 'Camarón', 'Salchichón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
@@ -137,7 +135,6 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 34000 },
       { id: 'medio', nombre: 'Medio', precio: 17000 },
     ],
-    imagen: 'img/arroz-chaufa-pollo.jpg',
     etiquetas: ['Chinos'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Salchichón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
@@ -321,12 +318,11 @@ export const PLATOS: Dish[] = [
   },
 
   // ======================================================
-  // ASADOS (transversal — hoy solo activo en Pamer, ver `lineas`)
+  // ASADOS (van a la cocina de Pamer — ver `utils/cocina.ts`)
   // ======================================================
   {
     id: 'asa-churrasco',
     categoria: 'asados',
-    lineas: ['comidas-rapidas'],
     nombre: 'Churrasco a la Parrilla',
     descripcion: 'Corte de res asado al carbón, con papa criolla, ensalada y chimichurri.',
     precio: 32000,
@@ -336,7 +332,6 @@ export const PLATOS: Dish[] = [
   {
     id: 'asa-pechuga',
     categoria: 'asados',
-    lineas: ['comidas-rapidas'],
     nombre: 'Pechuga a la Plancha',
     descripcion: 'Pechuga de pollo marinada y asada, con arroz y ensalada.',
     precio: 19000,
@@ -346,7 +341,6 @@ export const PLATOS: Dish[] = [
   {
     id: 'asa-costillas',
     categoria: 'asados',
-    lineas: ['comidas-rapidas'],
     nombre: 'Costillas BBQ',
     descripcion: 'Costillas de cerdo ahumadas, bañadas en salsa BBQ, con papa criolla.',
     precio: 28000,
@@ -356,7 +350,6 @@ export const PLATOS: Dish[] = [
   {
     id: 'asa-chuleta',
     categoria: 'asados',
-    lineas: ['comidas-rapidas'],
     nombre: 'Chuleta Ahumada',
     descripcion: 'Chuleta de cerdo a la parrilla, con papa a la francesa y ensalada.',
     precio: 24000,
@@ -366,7 +359,6 @@ export const PLATOS: Dish[] = [
   {
     id: 'asa-mixto',
     categoria: 'asados',
-    lineas: ['comidas-rapidas'],
     nombre: 'Mixto de Asados (para compartir)',
     descripcion: 'Churrasco, pechuga, chorizo y costilla a la parrilla. 2–3 personas.',
     precio: 48000,
@@ -376,7 +368,7 @@ export const PLATOS: Dish[] = [
   },
 ];
 
-/** Adiciones — transversales: mismas proteínas/papas para ambas líneas. */
+/** Adiciones — mismas proteínas/papas para todo el menú. */
 export const ADICIONES: ExtraItem[] = [
   { id: 'ad-pollo-naranja', grupo: 'adiciones', nombre: 'Pollo a la naranja', precio: 8000 },
   { id: 'ad-alitas', grupo: 'adiciones', nombre: 'Alitas', precio: 8000 },
@@ -389,7 +381,7 @@ export const ADICIONES: ExtraItem[] = [
 ];
 
 /**
- * Bebidas — transversales: mismas para ambas líneas.
+ * Bebidas — mismas para todo el menú.
  * TODO: faltan los precios reales de "Agua saborizada (manzana)" y
  * "Gaseosa personal (400 ml)" — dejé precios provisionales (el mismo de la
  * Coca-Cola 1.5 L, y el que tenía antes la gaseosa personal). Ajústalos

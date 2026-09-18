@@ -4,6 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { DishDetailService } from '../../services/dish-detail.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
 import { iniciales } from '../../utils/texto';
+import { cocinaDeCategoria } from '../../utils/cocina';
 
 @Component({
   selector: 'app-dish-card',
@@ -51,6 +52,7 @@ export class DishCard {
       id: this.idCarrito(),
       nombre: variante ? `${dish.nombre} (${variante.nombre})` : dish.nombre,
       precio: this.precioMostrado(),
+      cocina: cocinaDeCategoria(dish.categoria),
     });
   }
 

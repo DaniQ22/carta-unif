@@ -1,16 +1,15 @@
-import { Component, input, output } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, output } from '@angular/core';
 import { CartService } from '../../services/cart.service';
-import { LineaConfig } from '../../models/linea';
+import { EMPRESA } from '../../data/empresa.config';
 
 @Component({
   selector: 'app-site-header',
-  imports: [RouterLink],
+  imports: [],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
 })
 export class SiteHeader {
-  readonly marca = input.required<LineaConfig>();
+  protected readonly empresa = EMPRESA;
   readonly abrirCarrito = output<void>();
 
   constructor(protected cart: CartService) {}

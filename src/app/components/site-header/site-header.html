@@ -1,18 +1,12 @@
 <header class="rm-header">
   <div class="rm-container rm-header__inner">
-    <a routerLink="/" class="rm-header__back" aria-label="Volver al selector de cartas" title="Volver al selector de cartas">
-      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 18l-6-6 6-6" />
-      </svg>
-    </a>
-
-    <a routerLink="/" class="rm-header__brand" [attr.aria-label]="marca().nombre">
-      <img class="rm-brandmark" [src]="marca().logo" [alt]="marca().nombre" />
+    <div class="rm-header__brand">
+      <img class="rm-brandmark" [src]="empresa.logo" [alt]="empresa.nombre" />
       <span class="rm-header__name">
-        <strong>{{ marca().nombre }}</strong>
-        <small>{{ marca().eslogan }}</small>
+        <strong>{{ empresa.nombre }}</strong>
+        <small>{{ empresa.eslogan }}</small>
       </span>
-    </a>
+    </div>
 
     <div class="rm-header__actions">
       <button type="button" class="rm-cart-btn" (click)="abrirCarrito.emit()" aria-label="Ver carrito">

@@ -3,21 +3,11 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () =>
-      import('./pages/selector-page/selector-page').then((m) => m.SelectorPage),
-    title: 'Elige tu carta',
-  },
-  {
-    path: 'wok',
     loadComponent: () => import('./pages/menu-page/menu-page').then((m) => m.MenuPage),
-    data: { lineaId: 'arroces' },
-    title: 'Caribe Wok — Carta',
+    title: 'Carta — Caribe Wok & Pamer',
   },
-  {
-    path: 'comidas-rapidas',
-    loadComponent: () => import('./pages/menu-page/menu-page').then((m) => m.MenuPage),
-    data: { lineaId: 'comidas-rapidas' },
-    title: 'Pamer — Carta',
-  },
+  // Compatibilidad con enlaces/QR antiguos del selector de cartas.
+  { path: 'wok', redirectTo: '' },
+  { path: 'comidas-rapidas', redirectTo: '' },
   { path: '**', redirectTo: '' },
 ];

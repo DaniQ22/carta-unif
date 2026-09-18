@@ -1,34 +1,28 @@
 import { Injectable } from '@angular/core';
 import { ADICIONES, BEBIDAS, CATEGORIAS, PLATOS } from '../data/menu.data';
-import { Category, Dish, ExtraItem } from '../models/dish';
-import { LineaId } from '../models/linea';
+import { Category, CocinaId, Dish, ExtraItem, MenuGroupId } from '../models/dish';
 
 @Injectable({ providedIn: 'root' })
 export class MenuService {
-  /** Categoría principal de una línea. */
-  getCategoria(lineaId: LineaId): Category {
-    return CATEGORIAS.find((c) => c.id === lineaId)!;
+  /** Título y descripción de la sección de arroces o comidas rápidas. */
+  getCategoria(id: CocinaId): Category {
+    return CATEGORIAS.find((c) => c.id === id)!;
   }
 
-  /** Platos de la carta principal de una línea. */
-  getPrincipales(lineaId: LineaId): Dish[] {
-    return PLATOS.filter((p) => p.categoria === lineaId);
+  /** Platos de un grupo del menú ('arroces', 'comidas-rapidas' o 'asados'). */
+  getPorCategoria(categoria: MenuGroupId): Dish[] {
+    return PLATOS.filter((p) => p.categoria === categoria);
   }
 
-  /** Asados: grupo transversal, filtrado a las líneas donde aplica. */
-  getAsados(lineaId: LineaId): Dish[] {
-    return PLATOS.filter((p) => p.categoria === 'asados' && (!p.lineas || p.lineas.includes(lineaId)));
+  getDestacados(): Dish[] {
+    return PLATOS.filter((p) => p.destacado);
   }
 
-  getDestacados(lineaId: LineaId): Dish[] {
-    return this.getPrincipales(lineaId).filter((p) => p.destacado);
+  getAdiciones(): ExtraItem[] {
+    return ADICIONES;
   }
 
-  getAdiciones(lineaId: LineaId): ExtraItem[] {
-    return ADICIONES.filter((it) => !it.linea || it.linea === lineaId);
-  }
-
-  getBebidas(lineaId: LineaId): ExtraItem[] {
-    return BEBIDAS.filter((it) => !it.linea || it.linea === lineaId);
+  getBebidas(): ExtraItem[] {
+    return BEBIDAS;
   }
 }

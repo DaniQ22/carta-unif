@@ -5,6 +5,7 @@ import { DishDetailService } from '../../services/dish-detail.service';
 import { ScrollLockService } from '../../services/scroll-lock.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
 import { iniciales } from '../../utils/texto';
+import { cocinaDeCategoria } from '../../utils/cocina';
 
 @Component({
   selector: 'app-dish-detail',
@@ -65,6 +66,7 @@ export class DishDetail {
       id: this.idCarrito(),
       nombre: variante ? `${d.nombre} (${variante.nombre})` : d.nombre,
       precio: this.precioMostrado(),
+      cocina: cocinaDeCategoria(d.categoria),
     });
   }
 

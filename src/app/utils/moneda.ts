@@ -1,4 +1,4 @@
-import { EMPRESA } from '../data/lineas.config';
+import { EMPRESA } from '../data/empresa.config';
 
 /** Formatea un valor en pesos: 18000 -> "$18.000". */
 export function formatoPrecio(valor: number): string {

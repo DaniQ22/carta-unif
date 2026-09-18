@@ -1,4 +1,4 @@
-import { HorarioSemana, RangoHorario } from '../models/linea';
+import { HorarioSemana, RangoHorario } from '../models/cocina';
 
 function minutosDelDia(hora: string): number {
   const [h, m] = hora.split(':').map(Number);

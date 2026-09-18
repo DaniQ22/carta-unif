@@ -1,12 +1,12 @@
-import { LineaId } from './linea';
+import { CocinaId } from './cocina';
 
-export type { LineaId };
+export type { CocinaId };
 
-/** Agrupación de un plato: su línea principal, o el grupo transversal 'asados'. */
-export type MenuGroupId = LineaId | 'asados';
+/** Agrupación de un plato: su cocina principal, o el grupo transversal 'asados'. */
+export type MenuGroupId = CocinaId | 'asados';
 
 export interface Category {
-  id: LineaId;
+  id: CocinaId;
   nombre: string;
   descripcion: string;
 }
@@ -31,11 +31,6 @@ export interface Dish {
   etiquetas?: string[];
   /** Ingredientes/composición, para el detalle del producto. */
   ingredientes?: string[];
-  /**
-   * Solo aplica a `categoria: 'asados'` (grupo transversal): a qué líneas
-   * pertenece este plato. Si se omite, se muestra en todas las líneas.
-   */
-  lineas?: LineaId[];
   /** Tamaños seleccionables (ej: Familiar/Mediano), cada uno con su precio. */
   variantes?: DishVariante[];
 }
@@ -46,8 +41,6 @@ export interface ExtraItem {
   grupo: 'adiciones' | 'bebidas';
   nombre: string;
   precio: number;
-  /** Línea a la que pertenece. Si se omite, es transversal (visible en todas). */
-  linea?: LineaId;
 }
 
 export interface CartItem {
@@ -56,4 +49,11 @@ export interface CartItem {
   precio: number;
   cantidad: number;
   nota?: string;
+  /**
+   * Cocina que prepara este ítem. Define a qué WhatsApp se envía el pedido:
+   * si el carrito tiene algún ítem de `'arroces'`, el pedido va a Caribe Wok;
+   * si no, va a Pamer. Las adiciones y bebidas no la llevan (no cambian el
+   * destino del pedido).
+   */
+  cocina?: CocinaId;
 }
