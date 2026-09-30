@@ -622,14 +622,19 @@ export const ADICIONES: ExtraItem[] = [
 ];
 
 /**
- * Bebidas — mismas para todo el menú.
- * TODO: faltan los precios reales de "Agua saborizada (manzana)" y
- * "Gaseosa personal (400 ml)" — dejé precios provisionales (el mismo de la
- * Coca-Cola 1.5 L, y el que tenía antes la gaseosa personal). Ajústalos
- * cuando me pases el precio real de cada una.
+ * Bebidas — mismas para todo el menú. Precios actualizados el 2026-09-30
+ * desde la foto de la lista de precios en `precios/` (raíz del repo).
  */
 export const BEBIDAS: ExtraItem[] = [
-  { id: 'be-coca-cola-15', grupo: 'bebidas', nombre: 'Coca-Cola 1.5 L', precio: 11000 },
-  { id: 'be-agua-saborizada-manzana', grupo: 'bebidas', nombre: 'Agua saborizada (manzana) 1.5 L', precio: 11000 },
-  { id: 'be-gaseosa-p400', grupo: 'bebidas', nombre: 'Gaseosa personal (400 ml)', precio: 4000 },
+  { id: 'be-coca-cola-15', grupo: 'bebidas', nombre: 'Coca-Cola 1.5 L', precio: 12000 },
+  { id: 'be-coca-cola-p400', grupo: 'bebidas', nombre: 'Coca-Cola personal (400 ml)', precio: 5000 },
+  { id: 'be-quatro-15', grupo: 'bebidas', nombre: 'Quatro 1.5 L', precio: 12000 },
+  { id: 'be-quatro-p400', grupo: 'bebidas', nombre: 'Quatro personal (400 ml)', precio: 5000 },
+  { id: 'be-uva-postobon-15', grupo: 'bebidas', nombre: 'Uva Postobón 1.5 L', precio: 12000 },
+  { id: 'be-colombiana-15', grupo: 'bebidas', nombre: 'Colombiana 1.5 L', precio: 12000 },
+  { id: 'be-manzana-15', grupo: 'bebidas', nombre: 'Manzana Postobón 1.5 L', precio: 12000 },
+  { id: 'be-agua-manzana-15', grupo: 'bebidas', nombre: 'Agua saborizada (manzana) 1.5 L', precio: 12000 },
+  { id: 'be-te-durazno', grupo: 'bebidas', nombre: 'Té de durazno', precio: 5000 },
+  { id: 'be-te-limon', grupo: 'bebidas', nombre: 'Té de limón', precio: 5000 },
+  { id: 'be-agua-cristal', grupo: 'bebidas', nombre: 'Agua Cristal', precio: 3000 },
 ];
