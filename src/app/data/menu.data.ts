@@ -69,6 +69,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz Montañero',
     descripcion: 'Arroz con pollo, chorizo, lomito, chicharrón y maíz tierno.',
     precio: 30000,
+    imagen: cloudinaryUrl('Gemini_Generated_Image_yeppjiyeppjiyepp.jpg'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 45000 },
@@ -84,6 +85,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz de la Casa',
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
+    imagen: cloudinaryUrl('Gemini_Generated_Image_yeppjiyeppjiyepp.jpg'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 50000 },
