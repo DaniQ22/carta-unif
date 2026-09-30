@@ -163,6 +163,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Pollo a la Naranja',
     descripcion: 'Pechuga apanada en panko, bañada en salsa de naranja y ajonjolí.',
     precio: 30000,
+    imagen: cloudinaryUrl('Gemini_Generated_Image_eekzpdeekzpdeekz.jpg'),
     variantes: [
       { id: 'entero', nombre: 'Entero', precio: 48000 },
       { id: 'medio', nombre: 'Medio', precio: 30000 },
