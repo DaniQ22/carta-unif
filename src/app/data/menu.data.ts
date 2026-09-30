@@ -129,6 +129,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz Chino de Pollo y Camarón',
     descripcion: 'Al wok con pollo, camarón, raíz china y huevo.',
     precio: 30000,
+    imagen: cloudinaryUrl('Gemini_Generated_Image_yeppjiyeppjiyepp.jpg'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 45000 },
