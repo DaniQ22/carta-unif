@@ -52,12 +52,9 @@ const OPCIONES_COMBO: DishOpcionGrupo[] = [
     id: 'proteina',
     nombre: 'Proteína',
     opciones: [
-      { id: 'pollo-plancha', nombre: 'Pollo a la plancha' },
-      { id: 'pollo-apanado', nombre: 'Pollo apanado' },
-      { id: 'pollo-naranja', nombre: 'Pollo a la naranja' },
-      { id: 'cerdo-plancha', nombre: 'Cerdo a la plancha' },
-      { id: 'costilla-bbq', nombre: 'Costilla BBQ' },
-      { id: 'alitas', nombre: 'Alitas BBQ' },
+      { id: 'costilla-bbq', nombre: 'Costilla en salsa BBQ' },
+      { id: 'alitas', nombre: 'Alitas' },
+      { id: 'pollo-miel', nombre: 'Pollo a la miel' },
     ],
   },
   {
@@ -66,10 +63,11 @@ const OPCIONES_COMBO: DishOpcionGrupo[] = [
     nombre: 'Bebida',
     opciones: [
       { id: 'coca-cola', nombre: 'Coca-Cola personal' },
-      { id: 'quatro', nombre: 'Quatro personal' },
-      { id: 'te-durazno', nombre: 'Té de durazno' },
-      { id: 'te-limon', nombre: 'Té de limón' },
-      { id: 'agua', nombre: 'Agua Cristal' },
+      { id: 'colombiana', nombre: 'Bebida Colombiana 250ml' },
+      { id: 'gaseosa-manzana', nombre: 'Gaseosa de manzana 250ml' },
+      { id: 'gaseosa-uva', nombre: 'Gaseosa de uva 250ml' },
+      { id: 'agua', nombre: 'Agua normal' },
+      { id: 'agua-manzana', nombre: 'Agua saborizada a manzana' },
     ],
   },
 ];
@@ -512,53 +510,7 @@ export const PLATOS: Dish[] = [
 
   // ---------- NO ESTÁN EN precios/precios.txt ----------
   // TODO: confirmar si siguen en la carta; conservan su precio anterior.
-  {
-    id: 'cr-hamburguesa-pm',
-    categoria: 'comidas-rapidas',
-    nombre: 'Hamburguesa Pamer Especial',
-    descripcion: 'Doble carne, doble queso, tocineta, huevo, cebolla crocante y BBQ.',
-    precio: 22000,
-    imagen: 'img/hamburguesa-royal.jpg',
-    destacado: true,
-    etiquetas: ['Hamburguesas'],
-    ingredientes: [
-      'Pan de hamburguesa',
-      'Doble carne de res',
-      'Doble queso',
-      'Tocineta',
-      'Huevo',
-      'Cebolla crocante',
-      'Salsa BBQ',
-    ],
-  },
-  {
-    id: 'cr-salchipapa-pm',
-    categoria: 'comidas-rapidas',
-    nombre: 'Salchipapa Pamer',
-    descripcion: 'Papa, salchicha, pollo desmechado, chorizo, queso y huevo de codorniz.',
-    precio: 19000,
-    imagen: 'img/salchipapa-especial.jpg',
-    etiquetas: ['Salchipapas'],
-    ingredientes: [
-      'Papa a la francesa',
-      'Salchicha',
-      'Pollo desmechado',
-      'Chorizo',
-      'Queso fundido',
-      'Huevo de codorniz',
-      'Salsas de la casa',
-    ],
-  },
-  {
-    id: 'cr-shawarma',
-    categoria: 'comidas-rapidas',
-    nombre: 'Shawarma Pamer',
-    descripcion: 'Carne al carbón, pan pita, vegetales frescos y salsa blanca de la casa.',
-    precio: 17000,
-    imagen: 'img/shawarma.jpg',
-    etiquetas: ['Shawarma'],
-    ingredientes: ['Pan pita', 'Carne al carbón', 'Lechuga', 'Tomate', 'Cebolla', 'Salsa blanca de la casa'],
-  },
+
   {
     id: 'cr-picada',
     categoria: 'comidas-rapidas',
@@ -568,16 +520,6 @@ export const PLATOS: Dish[] = [
     imagen: 'img/picada.jpg',
     etiquetas: ['Para compartir'],
     ingredientes: ['Carne de res', 'Pollo', 'Chorizo', 'Costilla de cerdo', 'Chicharrón', 'Papa criolla', 'Maduro frito'],
-  },
-  {
-    id: 'cr-broaster',
-    categoria: 'comidas-rapidas',
-    nombre: 'Broaster (¼ de pollo)',
-    descripcion: 'Presa de pollo apanada y crocante con papas fritas y ensalada.',
-    precio: 15000,
-    imagen: 'img/broaster.jpg',
-    etiquetas: ['Pollo'],
-    ingredientes: ['Presa de pollo', 'Apanado crocante', 'Papa a la francesa', 'Ensalada fresca'],
   },
 
   // ======================================================
