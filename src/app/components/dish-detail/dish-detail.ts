@@ -1,5 +1,5 @@
-import { Component, computed, effect, inject, signal } from '@angular/core';
-import { DishVariante } from '../../models/dish';
+import { Component, computed, effect, inject, linkedSignal, signal } from '@angular/core';
+import { DishOpcion, DishVariante } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
 import { DishDetailService } from '../../services/dish-detail.service';
 import { ScrollLockService } from '../../services/scroll-lock.service';
@@ -32,11 +32,32 @@ export class DishDetail {
     return encontrada ?? variantes.find((v) => v.precio === d.precio) ?? variantes[0];
   });
 
+  /** Opción elegida por grupo (id de grupo → id de opción); se reinicia al cambiar de plato. */
+  protected readonly elecciones = linkedSignal<Record<string, string>>(() => {
+    this.dish();
+    return {};
+  });
+
+  /** Opciones elegidas, en el orden de los grupos del plato. */
+  private readonly opcionesElegidas = computed<DishOpcion[]>(() => {
+    const elegidas = this.elecciones();
+    return (this.dish()?.opciones ?? [])
+      .map((g) => g.opciones.find((o) => o.id === elegidas[g.id]))
+      .filter((o): o is DishOpcion => !!o);
+  });
+
+  /** Si falta elegir alguna opción obligatoria (proteína, bebida...). */
+  protected readonly faltaElegir = computed(
+    () => this.opcionesElegidas().length < (this.dish()?.opciones?.length ?? 0),
+  );
+
+  /** Id efectivo para el carrito: distingue el mismo plato por tamaño y opciones. */
   protected readonly idCarrito = computed(() => {
     const d = this.dish();
-    const variante = this.varianteActiva();
     if (!d) return '';
-    return variante ? `${d.id}__${variante.id}` : d.id;
+    const variante = this.varianteActiva();
+    const partes = [d.id, variante?.id, ...this.opcionesElegidas().map((o) => o.id)];
+    return partes.filter(Boolean).join('__');
   });
 
   protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish()?.precio ?? 0);
@@ -58,13 +79,18 @@ export class DishDetail {
     this.tamano.set(id);
   }
 
+  elegirOpcion(grupoId: string, opcionId: string): void {
+    this.elecciones.update((e) => ({ ...e, [grupoId]: opcionId }));
+  }
+
   agregar(): void {
     const d = this.dish();
-    if (!d) return;
-    const variante = this.varianteActiva();
+    if (!d || this.faltaElegir()) return;
+    const detalles = [this.varianteActiva()?.nombre, this.opcionesElegidas().map((o) => o.nombre).join(' + ')];
+    const detalle = detalles.filter(Boolean).join(', ');
     this.cart.agregar({
       id: this.idCarrito(),
-      nombre: variante ? `${d.nombre} (${variante.nombre})` : d.nombre,
+      nombre: detalle ? `${d.nombre} (${detalle})` : d.nombre,
       precio: this.precioMostrado(),
       cocina: cocinaDeCategoria(d.categoria),
     });

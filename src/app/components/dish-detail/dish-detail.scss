@@ -191,6 +191,33 @@
   }
 }
 
+.rm-sheet__opciones {
+  margin-top: 1.1rem;
+
+  h3 {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--rm-naranja-2);
+    margin-bottom: 0.5rem;
+  }
+}
+
+.rm-sheet__opciones-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  .rm-sheet__tamano {
+    flex: 0 1 auto;
+  }
+}
+
+.rm-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .rm-sheet__foot {
   display: flex;
   align-items: center;

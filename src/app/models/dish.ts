@@ -18,6 +18,22 @@ export interface DishVariante {
   precio: number;
 }
 
+/** Una opción dentro de un grupo de elección (ej: 'Pollo' dentro de 'Proteína'). */
+export interface DishOpcion {
+  id: string;
+  nombre: string;
+}
+
+/**
+ * Grupo de elección obligatoria de un plato (ej: 'Proteína', 'Bebida'). El
+ * cliente escoge exactamente una opción de cada grupo; no cambia el precio.
+ */
+export interface DishOpcionGrupo {
+  id: string;
+  nombre: string;
+  opciones: DishOpcion[];
+}
+
 export interface Dish {
   id: string;
   categoria: MenuGroupId;
@@ -33,6 +49,8 @@ export interface Dish {
   ingredientes?: string[];
   /** Tamaños seleccionables (ej: Familiar/Mediano), cada uno con su precio. */
   variantes?: DishVariante[];
+  /** Elecciones obligatorias (ej: proteína y bebida de un combo). */
+  opciones?: DishOpcionGrupo[];
 }
 
 /** Ítem simple sin foto (adiciones y bebidas). */

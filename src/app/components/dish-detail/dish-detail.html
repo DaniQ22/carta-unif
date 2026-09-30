@@ -49,6 +49,24 @@
               }
             </div>
           }
+
+          @for (grupo of d.opciones ?? []; track grupo.id) {
+            <div class="rm-sheet__opciones">
+              <h3>Elige tu {{ grupo.nombre.toLowerCase() }}</h3>
+              <div class="rm-sheet__opciones-lista">
+                @for (o of grupo.opciones; track o.id) {
+                  <button
+                    type="button"
+                    class="rm-sheet__tamano"
+                    [class.is-active]="elecciones()[grupo.id] === o.id"
+                    (click)="elegirOpcion(grupo.id, o.id)"
+                  >
+                    {{ o.nombre }}
+                  </button>
+                }
+              </div>
+            </div>
+          }
         </div>
       </div>
 
@@ -56,7 +74,9 @@
         <span class="rm-sheet__price">{{ precioMostrado() | precio }}</span>
 
         @if (cantidad() === 0) {
-          <button type="button" class="rm-btn" (click)="agregar()">Agregar</button>
+          <button type="button" class="rm-btn" [disabled]="faltaElegir()" (click)="agregar()">
+            {{ faltaElegir() ? 'Elige tus opciones' : 'Agregar' }}
+          </button>
         } @else {
           <div class="rm-stepper">
             <button type="button" (click)="cart.decrementar(idCarrito())" aria-label="Quitar uno">−</button>

@@ -1,4 +1,4 @@
-import { Category, Dish, ExtraItem } from '../models/dish';
+import { Category, Dish, DishOpcionGrupo, ExtraItem } from '../models/dish';
 import { cloudinaryUrl } from '../utils/cloudinary';
 
 /**
@@ -42,27 +42,44 @@ export const CATEGORIAS: Category[] = [
   },
 ];
 
+/**
+ * Opciones de los combos: el cliente elige una proteína y una bebida
+ * personal. No cambian el precio del combo.
+ * TODO: lista de proteínas provisional — ajustarla a la real.
+ */
+const OPCIONES_COMBO: DishOpcionGrupo[] = [
+  {
+    id: 'proteina',
+    nombre: 'Proteína',
+    opciones: [
+      { id: 'pollo-plancha', nombre: 'Pollo a la plancha' },
+      { id: 'pollo-apanado', nombre: 'Pollo apanado' },
+      { id: 'pollo-naranja', nombre: 'Pollo a la naranja' },
+      { id: 'cerdo-plancha', nombre: 'Cerdo a la plancha' },
+      { id: 'costilla-bbq', nombre: 'Costilla BBQ' },
+      { id: 'alitas', nombre: 'Alitas BBQ' },
+    ],
+  },
+  {
+    // Las bebidas personales de `BEBIDAS` (al final del archivo).
+    id: 'bebida',
+    nombre: 'Bebida',
+    opciones: [
+      { id: 'coca-cola', nombre: 'Coca-Cola personal' },
+      { id: 'quatro', nombre: 'Quatro personal' },
+      { id: 'te-durazno', nombre: 'Té de durazno' },
+      { id: 'te-limon', nombre: 'Té de limón' },
+      { id: 'agua', nombre: 'Agua Cristal' },
+    ],
+  },
+];
+
 export const PLATOS: Dish[] = [
   // ======================================================
   // ARROCES (Caribe Wok)
   // ======================================================
 
   // ---------- ARROCES DE LA CASA ----------
-  {
-    id: 'arr-caribe',
-    categoria: 'arroces',
-    nombre: 'Arroz Caribe',
-    descripcion: 'Arroz salteado con pollo, chorizo, lomito, plátano maduro y queso.',
-    precio: 30000,
-    variantes: [
-      { id: 'familiar', nombre: 'Familiar', precio: 85000 },
-      { id: 'entero', nombre: 'Entero', precio: 45000 },
-      { id: 'medio', nombre: 'Medio', precio: 30000 },
-    ],
-    destacado: true,
-    etiquetas: ['De la casa'],
-    ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Plátano maduro', 'Queso', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
-  },
   {
     id: 'arr-montanero',
     categoria: 'arroces',
@@ -194,51 +211,56 @@ export const PLATOS: Dish[] = [
     ingredientes: ['Costilla (500 g)', 'Salsa BBQ', 'Ajonjolí', 'Papa a la francesa', 'Ensalada'],
   },
 
-  // ---------- COMBOS (arroz individual + proteína a elección) ----------
+  // ---------- COMBOS (arroz individual + proteína y bebida a elección) ----------
   {
     id: 'combo-caribe',
     categoria: 'arroces',
     nombre: 'Combo Arroz Caribe',
-    descripcion: 'Porción individual de arroz caribe + proteína del día a elección.',
-    precio: 19000,
+    descripcion: 'Porción individual de arroz caribe + proteína y bebida personal a elección.',
+    precio: 23000,
     etiquetas: ['Combos'],
-    ingredientes: ['Arroz caribe', 'Chorizo', 'Lomito', 'Pollo', 'Plátano maduro', 'Queso', 'Vegetales', 'Proteína a elección'],
+    opciones: OPCIONES_COMBO,
+    ingredientes: ['Arroz caribe', 'Chorizo', 'Lomito', 'Pollo', 'Plátano maduro', 'Queso', 'Vegetales'],
   },
   {
     id: 'combo-montanero',
     categoria: 'arroces',
     nombre: 'Combo Arroz Montañero',
-    descripcion: 'Porción individual de arroz montañero + proteína del día a elección.',
-    precio: 19000,
+    descripcion: 'Porción individual de arroz montañero + proteína y bebida personal a elección.',
+    precio: 23000,
     etiquetas: ['Combos'],
-    ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Vegetales', 'Proteína a elección'],
+    opciones: OPCIONES_COMBO,
+    ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Vegetales'],
   },
   {
     id: 'combo-mixto',
     categoria: 'arroces',
     nombre: 'Combo Arroz Mixto',
-    descripcion: 'Porción individual de arroz mixto + proteína del día a elección.',
-    precio: 18000,
+    descripcion: 'Porción individual de arroz mixto + proteína y bebida personal a elección.',
+    precio: 23000,
     etiquetas: ['Combos'],
-    ingredientes: ['Arroz mixto', 'Lomito', 'Pollo', 'Vegetales', 'Proteína a elección'],
+    opciones: OPCIONES_COMBO,
+    ingredientes: ['Arroz mixto', 'Lomito', 'Pollo', 'Vegetales'],
   },
   {
     id: 'combo-chino-especial',
     categoria: 'arroces',
     nombre: 'Combo Arroz Chino Especial',
-    descripcion: 'Porción individual de arroz chino especial + proteína del día a elección.',
-    precio: 21000,
+    descripcion: 'Porción individual de arroz chino especial + proteína y bebida personal a elección.',
+    precio: 23000,
     etiquetas: ['Combos', 'Con camarón'],
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Salchichón', 'Raíz china', 'Cebollín', 'Proteína a elección'],
+    opciones: OPCIONES_COMBO,
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Salchichón', 'Raíz china', 'Cebollín'],
   },
   {
     id: 'combo-chino-mixto',
     categoria: 'arroces',
     nombre: 'Combo Arroz Chino Mixto',
-    descripcion: 'Porción individual de arroz chino mixto + proteína del día a elección.',
-    precio: 20000,
+    descripcion: 'Porción individual de arroz chino mixto + proteína y bebida personal a elección.',
+    precio: 23000,
     etiquetas: ['Combos'],
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Salchichón', 'Raíz china', 'Cebollín', 'Proteína a elección'],
+    opciones: OPCIONES_COMBO,
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Salchichón', 'Raíz china', 'Cebollín'],
   },
 
   // ======================================================
@@ -561,6 +583,24 @@ export const PLATOS: Dish[] = [
   // ======================================================
   // ASADOS (van a la cocina de Pamer — ver `utils/cocina.ts`)
   // ======================================================
+  {
+    id: 'asa-punta-anca-cerdo',
+    categoria: 'asados',
+    nombre: 'Punta de Anca de Cerdo',
+    descripcion: 'Punta de anca de cerdo (360 g) a la parrilla, con ensalada y patacones o papas a la francesa.',
+    precio: 31000,
+    etiquetas: ['A la parrilla', 'Con carne'],
+    ingredientes: ['Punta de anca de cerdo (360 g)', 'Ensalada', 'Patacones o papas a la francesa'],
+  },
+  {
+    id: 'asa-pechuga-pollo',
+    categoria: 'asados',
+    nombre: 'Pechuga de Pollo a la Parrilla',
+    descripcion: 'Pechuga de pollo (350 g) a la parrilla, con ensalada, chimichurri y patacones o papas a la francesa.',
+    precio: 29500,
+    etiquetas: ['A la parrilla', 'Con pollo'],
+    ingredientes: ['Pechuga de pollo (350 g)', 'Ensalada', 'Chimichurri', 'Patacones o papas a la francesa'],
+  },
   {
     id: 'asa-churrasco',
     categoria: 'asados',

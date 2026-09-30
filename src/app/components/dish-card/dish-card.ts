@@ -37,7 +37,18 @@ export class DishCard {
 
   protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish().precio);
 
-  protected readonly cantidad = computed(() => this.cart.cantidadDe(this.idCarrito()));
+  /** Platos con elecciones obligatorias (combos): se agregan desde el detalle. */
+  protected readonly tieneOpciones = computed(() => !!this.dish().opciones?.length);
+
+  protected readonly cantidad = computed(() => {
+    if (!this.tieneOpciones()) return this.cart.cantidadDe(this.idCarrito());
+    // Suma todas las combinaciones de opciones de este plato que haya en el carrito.
+    const prefijo = `${this.dish().id}__`;
+    return this.cart
+      .items()
+      .filter((it) => it.id.startsWith(prefijo))
+      .reduce((acc, it) => acc + it.cantidad, 0);
+  });
 
   constructor(protected cart: CartService) {}
 

@@ -39,7 +39,11 @@
     <div class="rm-dish__foot">
       <span class="rm-dish__price">{{ precioMostrado() | precio }}</span>
 
-      @if (cantidad() === 0) {
+      @if (tieneOpciones()) {
+        <button type="button" class="rm-btn rm-dish__add" (click)="verDetalle()">
+          {{ cantidad() > 0 ? 'Elegir otro (' + cantidad() + ')' : 'Elegir' }}
+        </button>
+      } @else if (cantidad() === 0) {
         <button type="button" class="rm-btn rm-dish__add" (click)="agregar()">Agregar</button>
       } @else {
         <div class="rm-stepper">
