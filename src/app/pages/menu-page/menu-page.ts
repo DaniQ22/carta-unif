@@ -1,6 +1,18 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import {
+  afterNextRender,
+  Component,
+  computed,
+  DestroyRef,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
+import { NgTemplateOutlet } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MenuService } from '../../services/menu.service';
+import { CartService } from '../../services/cart.service';
+import { ScrollLockService } from '../../services/scroll-lock.service';
 import { EMPRESA } from '../../data/empresa.config';
 import { Dish, ExtraItem } from '../../models/dish';
 import { estaAbierto, textoHorarioHoy } from '../../utils/horario';
@@ -9,6 +21,8 @@ import { ExtraList } from '../../components/extra-list/extra-list';
 
 type Orden = 'reco' | 'precio-asc' | 'precio-desc' | 'nombre';
 const CHIP_RECO = '__reco__';
+/** Alto del header fijo (`.rm-header__inner`), para calcular cuándo la barra de filtros queda tapada. */
+const ALTO_HEADER = 64;
 
 /** Quita tildes y pasa a minúsculas para comparar. */
 function normalizar(texto: string): string {
@@ -20,12 +34,14 @@ function normalizar(texto: string): string {
 
 @Component({
   selector: 'app-menu-page',
-  imports: [FormsModule, DishSection, ExtraList],
+  imports: [FormsModule, NgTemplateOutlet, DishSection, ExtraList],
   templateUrl: './menu-page.html',
   styleUrl: './menu-page.scss',
 })
 export class MenuPage {
   private readonly menu = inject(MenuService);
+  private readonly scrollLock = inject(ScrollLockService);
+  protected readonly cart = inject(CartService);
 
   protected readonly CHIP_RECO = CHIP_RECO;
   protected readonly empresa = EMPRESA;
@@ -113,6 +129,48 @@ export class MenuPage {
         ? this.adicionesFiltradas().length + this.bebidasFiltradas().length
         : 0),
   );
+
+  // ---- Botón flotante + hoja de filtros (móvil) ----
+  private readonly barraFiltros = viewChild.required<ElementRef<HTMLElement>>('barraFiltros');
+
+  /** La barra de filtros ya quedó arriba, fuera de la vista. */
+  private readonly barraOculta = signal(false);
+  protected readonly filtrosAbiertos = signal(false);
+  protected readonly mostrarFabFiltros = computed(() => this.barraOculta() && !this.filtrosAbiertos());
+
+  constructor() {
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      const observer = new IntersectionObserver(
+        ([entry]) => this.barraOculta.set(!entry.isIntersecting && entry.boundingClientRect.top < ALTO_HEADER),
+        { rootMargin: `-${ALTO_HEADER}px 0px 0px 0px` },
+      );
+      observer.observe(this.barraFiltros().nativeElement);
+      destroyRef.onDestroy(() => {
+        observer.disconnect();
+        if (this.filtrosAbiertos()) this.scrollLock.unlock();
+      });
+    });
+  }
+
+  abrirFiltros(): void {
+    if (this.filtrosAbiertos()) return;
+    this.filtrosAbiertos.set(true);
+    this.scrollLock.lock();
+  }
+
+  cerrarFiltros(): void {
+    if (!this.filtrosAbiertos()) return;
+    this.filtrosAbiertos.set(false);
+    this.scrollLock.unlock();
+  }
+
+  /** Cierra la hoja y lleva al inicio de los resultados (justo debajo de la barra de filtros). */
+  verResultados(): void {
+    this.cerrarFiltros();
+    const finBarra = this.barraFiltros().nativeElement.getBoundingClientRect().bottom + window.scrollY;
+    window.scrollTo({ top: finBarra - ALTO_HEADER + 1, behavior: 'smooth' });
+  }
 
   seleccionarChip(etiqueta: string, ev: Event): void {
     this.chip.set(etiqueta);

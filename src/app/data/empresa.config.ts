@@ -11,7 +11,7 @@ import { CocinaConfig, CocinaId, HorarioSemana } from '../models/cocina';
 export const EMPRESA = {
   nombre: 'Cocina Oculta',
   eslogan: 'Arroces, comidas rápidas y asados a domicilio',
-  logo: 'img/logo-pamer.jpg',
+  logo: 'img/logo-nuevo.jpg',
 
   /**
    * "Cloud name" de tu cuenta Cloudinary (plan free), para servir fotos de

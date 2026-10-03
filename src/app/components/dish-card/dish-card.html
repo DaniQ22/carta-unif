@@ -8,6 +8,16 @@
     @if (dish().destacado) {
       <span class="rm-dish__flag">★ Recomendado</span>
     }
+    @if (dish().imagen && dish().imagenes?.length) {
+      <span class="rm-dish__fotos" [attr.aria-label]="(dish().imagenes!.length + 1) + ' fotos'">
+        <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2" />
+          <circle cx="8.5" cy="8.5" r="1.5" />
+          <path d="m21 15-5-5L5 21" />
+        </svg>
+        {{ dish().imagenes!.length + 1 }}
+      </span>
+    }
   </button>
 
   <div class="rm-dish__body">

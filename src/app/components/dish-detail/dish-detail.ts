@@ -20,6 +20,19 @@ export class DishDetail {
   protected readonly dish = this.detail.dish;
   protected readonly abierto = computed(() => this.dish() !== null);
 
+  /** Foto principal + fotos adicionales (otros ángulos), sin repetidas. */
+  protected readonly fotos = computed(() => {
+    const d = this.dish();
+    if (!d) return [];
+    return [...new Set([d.imagen, ...(d.imagenes ?? [])].filter((f): f is string => !!f))];
+  });
+
+  /** Índice de la foto visible en la galería; vuelve a la primera al cambiar de plato. */
+  protected readonly fotoActiva = linkedSignal(() => {
+    this.dish();
+    return 0;
+  });
+
   /** Id de la variante elegida (Familiar/Mediano); por defecto, la más barata. */
   protected readonly tamano = signal<string | null>(null);
 
@@ -94,6 +107,16 @@ export class DishDetail {
       precio: this.precioMostrado(),
       cocina: cocinaDeCategoria(d.categoria),
     });
+  }
+
+  alDeslizarGaleria(galeria: HTMLElement): void {
+    this.fotoActiva.set(Math.round(galeria.scrollLeft / galeria.clientWidth));
+  }
+
+  irAFoto(galeria: HTMLElement, indice: number): void {
+    const i = Math.max(0, Math.min(indice, this.fotos().length - 1));
+    galeria.scrollTo({ left: i * galeria.clientWidth, behavior: 'smooth' });
+    this.fotoActiva.set(i);
   }
 
   iniciales(nombre: string): string {

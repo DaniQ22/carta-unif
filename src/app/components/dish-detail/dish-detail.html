@@ -7,8 +7,43 @@
 
       <div class="rm-sheet__scroll">
         <div class="rm-sheet__media">
-          @if (d.imagen) {
-            <img [src]="d.imagen" [alt]="d.nombre" />
+          @if (fotos().length) {
+            <div class="rm-sheet__galeria" #galeria (scroll)="alDeslizarGaleria(galeria)">
+              @for (foto of fotos(); track foto; let i = $index) {
+                <img
+                  [src]="foto"
+                  [alt]="d.nombre + (fotos().length > 1 ? ' — foto ' + (i + 1) : '')"
+                  [attr.loading]="i === 0 ? null : 'lazy'"
+                />
+              }
+            </div>
+
+            @if (fotos().length > 1) {
+              <button
+                type="button"
+                class="rm-sheet__flecha rm-sheet__flecha--prev"
+                [disabled]="fotoActiva() === 0"
+                (click)="irAFoto(galeria, fotoActiva() - 1)"
+                aria-label="Foto anterior"
+              >‹</button>
+              <button
+                type="button"
+                class="rm-sheet__flecha rm-sheet__flecha--next"
+                [disabled]="fotoActiva() === fotos().length - 1"
+                (click)="irAFoto(galeria, fotoActiva() + 1)"
+                aria-label="Foto siguiente"
+              >›</button>
+              <div class="rm-sheet__puntos">
+                @for (foto of fotos(); track foto; let i = $index) {
+                  <button
+                    type="button"
+                    [class.is-active]="fotoActiva() === i"
+                    (click)="irAFoto(galeria, i)"
+                    [attr.aria-label]="'Ver foto ' + (i + 1)"
+                  ></button>
+                }
+              </div>
+            }
           } @else {
             <span class="rm-sheet__mono">{{ iniciales(d.nombre) }}</span>
           }

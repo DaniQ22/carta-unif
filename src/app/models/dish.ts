@@ -41,7 +41,10 @@ export interface Dish {
   descripcion?: string;
   /** Precio a mostrar cuando no hay `variantes`, o precio por defecto (la primera variante) si las hay. */
   precio: number;
+  /** Foto principal: la que se ve en la tarjeta y abre la galería del detalle. */
   imagen?: string;
+  /** Fotos adicionales (otros ángulos) que se suman a `imagen` en la galería del detalle. */
+  imagenes?: string[];
   destacado?: boolean;
   /** Etiquetas para los filtros de la carta (ej: 'Hamburguesas', 'Al wok'). */
   etiquetas?: string[];

@@ -5,18 +5,28 @@
   border-bottom: 1px solid var(--rm-borde);
   background-image: var(--rm-fuego);
 
-  /* Tinte oscuro sobre el degradado para que el panel de vidrio tenga
-     contraste parejo y no compita con el color de marca. */
+  /* Vidrio esmerilado que cubre todo el hero: desenfoca el logo de fondo,
+     le da un tinte blanco con reflejo diagonal y oscurece la base para
+     que el texto se lea. */
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    z-index: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(var(--rm-negro-rgb), 0.35) 0%,
-      rgba(var(--rm-negro-rgb), 0.65) 100%
-    );
+    z-index: 1;
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.02) 45%,
+        rgba(255, 255, 255, 0.06) 100%
+      ),
+      linear-gradient(180deg, rgba(var(--rm-negro-rgb), 0.35) 0%, rgba(var(--rm-negro-rgb), 0.7) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.35),
+      inset 0 0 80px rgba(255, 255, 255, 0.06);
+    /* Blur moderado: el logo de fondo se intuye (formas y colores) sin competir. */
+    backdrop-filter: blur(10px) saturate(150%) brightness(0.7);
+    -webkit-backdrop-filter: blur(10px) saturate(150%) brightness(0.7);
   }
 
   h1 {
@@ -33,27 +43,96 @@
   }
 }
 
+/* El logo ocupa todo el hero como fondo; el vidrio (::before) lo desenfoca. */
+.rm-menu-hero__fondo {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
 .rm-menu-hero__texto {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   max-width: 620px;
   margin-inline: auto;
   padding: 1.5rem 1.25rem;
   text-align: center;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 20px 45px -20px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(16px) saturate(150%);
-  -webkit-backdrop-filter: blur(16px) saturate(150%);
 
   + .rm-menu-hero__texto {
-    margin-top: 1rem;
-    padding: 0.9rem 1.1rem;
+    padding-top: 0;
   }
 
   p {
     margin-inline: auto;
+  }
+}
+
+/* Logo dentro de una placa de vidrio. El fondo negro del logo se "funde"
+   con `mix-blend-mode: screen`, así solo quedan las letras y el fuego
+   flotando sobre el vidrio; el brillo diagonal da el reflejo. */
+.rm-menu-hero__logo {
+  position: relative;
+  overflow: hidden;
+  width: min(420px, 100%);
+  margin: 0.6rem auto 0;
+  padding: 0.6rem 0.9rem;
+  border-radius: 18px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.22) 0%,
+    rgba(255, 255, 255, 0.06) 55%,
+    rgba(255, 255, 255, 0.16) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow:
+    0 20px 45px -18px rgba(var(--rm-naranja-rgb), 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2 / 1;
+    mix-blend-mode: screen;
+    filter: drop-shadow(0 6px 18px rgba(var(--rm-naranja-rgb), 0.35));
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      115deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.28) 45%,
+      transparent 60%
+    );
+    transform: translateX(-100%);
+    animation: rm-glass-brillo 6s ease-in-out 1s infinite;
+  }
+}
+
+@keyframes rm-glass-brillo {
+  0%,
+  70% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rm-menu-hero__logo::after {
+    animation: none;
   }
 }
 
@@ -263,4 +342,149 @@
   .rm-menu-hero {
     padding: 1.5rem 0 1.25rem;
   }
+}
+
+/* ===== Filtros en móvil: botón flotante + hoja inferior =====
+   En pantallas chicas la barra de filtros (buscador + chips) ocupa mucho
+   alto, así que deja de ser sticky: al pasarla aparece el botón flotante
+   "Filtros", que abre los mismos filtros en una hoja desde abajo. */
+@media (max-width: 767px) {
+  .rm-filtros {
+    position: static;
+  }
+}
+
+.rm-fab-filtros {
+  position: fixed;
+  left: 1rem;
+  bottom: calc(1.1rem + env(safe-area-inset-bottom));
+  z-index: 79;
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+  height: 44px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(var(--rm-negro-rgb), 0.75);
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  color: var(--rm-blanco);
+  font-size: 0.88rem;
+  font-weight: 700;
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.7);
+  animation: rm-fab-filtros-in 0.2s ease;
+  transition: bottom 0.2s ease;
+
+  svg {
+    color: var(--rm-naranja-2);
+  }
+}
+
+/* Encima del botón "Ver pedido" cuando hay productos en el carrito. */
+.rm-fab-filtros--con-fab {
+  bottom: calc(4.6rem + env(safe-area-inset-bottom));
+}
+
+.rm-fab-filtros__punto {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-image: var(--rm-fuego);
+}
+
+@keyframes rm-fab-filtros-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 767px) {
+  .rm-fab-filtros {
+    display: inline-flex;
+  }
+}
+
+.rm-hoja-filtros {
+  position: fixed;
+  inset: 0;
+  z-index: 105;
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+}
+
+.rm-hoja-filtros__scrim {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  touch-action: none;
+  transition: opacity 0.25s ease;
+}
+
+.rm-hoja-filtros__panel {
+  position: relative;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 1rem 1.1rem calc(1.1rem + env(safe-area-inset-bottom));
+  border-radius: 20px 20px 0 0;
+  border: 1px solid var(--rm-borde);
+  border-bottom: 0;
+  background: var(--rm-carbon);
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Dentro de la hoja los chips se acomodan en varias filas, sin scroll lateral. */
+  .rm-chips {
+    flex-wrap: wrap;
+    overflow: visible;
+  }
+}
+
+.rm-hoja-filtros.is-open {
+  pointer-events: auto;
+
+  .rm-hoja-filtros__scrim {
+    opacity: 1;
+  }
+
+  .rm-hoja-filtros__panel {
+    transform: translateY(0);
+  }
+}
+
+.rm-hoja-filtros__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+
+  strong {
+    font-size: 1.05rem;
+  }
+}
+
+.rm-hoja-filtros__x {
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  border: 1px solid var(--rm-borde);
+  background: var(--rm-carbon-2);
+  color: var(--rm-blanco);
+}
+
+.rm-hoja-filtros__ver {
+  width: 100%;
+  margin-top: 1rem;
+  justify-content: center;
 }

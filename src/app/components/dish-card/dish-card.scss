@@ -93,6 +93,22 @@
   background-image: var(--rm-fuego);
 }
 
+.rm-dish__fotos {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(var(--rm-negro-rgb), 0.65);
+  backdrop-filter: blur(4px);
+  color: var(--rm-blanco);
+  font-size: 0.68rem;
+  font-weight: 700;
+}
+
 .rm-dish__body {
   display: flex;
   flex-direction: column;
@@ -204,5 +220,86 @@
     min-width: 26px;
     text-align: center;
     font-weight: 700;
+  }
+}
+
+/* ===== Móvil: tarjeta compacta para la grilla de 2 columnas ===== */
+@media (max-width: 480px) {
+  .rm-dish:hover {
+    transform: none;
+  }
+
+  .rm-dish__media {
+    aspect-ratio: 1 / 1;
+  }
+
+  .rm-dish__mono {
+    font-size: 1.8rem;
+  }
+
+  .rm-dish__flag {
+    top: 6px;
+    left: 6px;
+    font-size: 0.6rem;
+    padding: 0.22rem 0.45rem;
+  }
+
+  .rm-dish__body {
+    gap: 0.4rem;
+    padding: 0.65rem 0.65rem 0.75rem;
+  }
+
+  .rm-dish__info {
+    gap: 0.25rem;
+  }
+
+  .rm-dish__name {
+    font-size: 0.9rem;
+    line-height: 1.25;
+  }
+
+  .rm-dish__desc {
+    font-size: 0.75rem;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .rm-dish__ver-mas {
+    font-size: 0.68rem;
+  }
+
+  .rm-dish__tamanos {
+    gap: 0.25rem;
+  }
+
+  .rm-dish__tamano {
+    font-size: 0.62rem;
+    padding: 0.35rem 0.15rem;
+  }
+
+  /* Precio arriba y botón a todo el ancho: no caben lado a lado. */
+  .rm-dish__foot {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.45rem;
+    padding-top: 0.2rem;
+  }
+
+  .rm-dish__price {
+    font-size: 1rem;
+  }
+
+  .rm-dish__add {
+    width: 100%;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .rm-stepper {
+    justify-content: space-between;
   }
 }

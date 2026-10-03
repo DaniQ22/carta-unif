@@ -19,6 +19,9 @@ import { cloudinaryUrl } from '../utils/cloudinary';
  * muestra las iniciales del plato en vez de una foto — sin descargar nada,
  * así que carga instantáneo. Los arroces se dejaron así a propósito (ver
  * el README, sección "Fotos de los arroces").
+ * - `imagenes`: fotos extra del plato (otros ángulos). Se suman a `imagen`
+ *   en la galería del detalle, que se desliza con el dedo. Ej:
+ *   `imagenes: [cloudinaryUrl('arroz-montanero-2'), cloudinaryUrl('arroz-montanero-3')]`
  * - `variantes`: tamaños seleccionables (Familiar/Entero/Medio) con su
  *   propio precio; `precio` queda como el de la variante más barata (Medio),
  *   la que se selecciona por defecto en la tarjeta.

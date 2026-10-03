@@ -37,9 +37,10 @@ main {
   gap: 0.9rem;
 
   img {
-    width: 54px;
+    width: 108px;
     height: 54px;
-    object-fit: cover;
+    object-fit: contain;
+    background: #000;
     border-radius: 10px;
     border: 1px solid var(--rm-borde);
   }
