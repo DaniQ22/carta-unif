@@ -23,3 +23,23 @@ export function cloudinarySrcset(url: string, anchos = [400, 700]): string | nul
   if (!/^https:\/\/res\.cloudinary\.com\/.+\/w_\d+,/.test(url)) return null;
   return anchos.map((w) => `${url.replace(/\/w_\d+,/, `/w_${w},`)} ${w}w`).join(', ');
 }
+
+/** Quita la extensión de video si el Public ID la trae (ej: 'wok.mp4' → 'wok'). */
+function sinExtensionVideo(publicId: string): string {
+  return publicId.replace(/\.(mp4|mov|webm|m4v)$/i, '');
+}
+
+/**
+ * URL de un video de Cloudinary: formato según el navegador (`f_auto`),
+ * calidad automática y ancho fijo, para no servir el archivo original del celular.
+ */
+export function cloudinaryVideoUrl(publicId: string, anchoPx = 720): string {
+  const cloudName = EMPRESA.cloudinaryCloudName;
+  return `https://res.cloudinary.com/${cloudName}/video/upload/w_${anchoPx},f_auto,q_auto/${sinExtensionVideo(publicId)}`;
+}
+
+/** Portada del video: el primer fotograma como imagen (`so_0`), la genera Cloudinary. */
+export function cloudinaryVideoPoster(publicId: string, anchoPx = 720): string {
+  const cloudName = EMPRESA.cloudinaryCloudName;
+  return `https://res.cloudinary.com/${cloudName}/video/upload/so_0,w_${anchoPx},q_auto/${sinExtensionVideo(publicId)}.jpg`;
+}

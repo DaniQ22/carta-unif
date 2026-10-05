@@ -7,18 +7,32 @@
 
       <div class="rm-sheet__scroll">
         <div class="rm-sheet__media">
-          @if (fotos().length) {
+          @if (medios().length) {
             <div class="rm-sheet__galeria" #galeria (scroll)="alDeslizarGaleria(galeria)">
-              @for (foto of fotos(); track foto; let i = $index) {
-                <img
-                  [src]="foto"
-                  [alt]="d.nombre + (fotos().length > 1 ? ' — foto ' + (i + 1) : '')"
-                  [attr.loading]="i === 0 ? null : 'lazy'"
-                />
+              @for (m of medios(); track m.src; let i = $index) {
+                @if (m.tipo === 'video') {
+                  <video
+                    #clip
+                    [src]="m.src"
+                    [poster]="m.poster"
+                    [muted]="true"
+                    muted
+                    loop
+                    playsinline
+                    preload="none"
+                    [attr.aria-label]="'Video de ' + d.nombre"
+                  ></video>
+                } @else {
+                  <img
+                    [src]="m.src"
+                    [alt]="d.nombre + (medios().length > 1 ? ' — foto ' + (i + 1) : '')"
+                    [attr.loading]="i === 0 ? null : 'lazy'"
+                  />
+                }
               }
             </div>
 
-            @if (fotos().length > 1) {
+            @if (medios().length > 1) {
               <button
                 type="button"
                 class="rm-sheet__flecha rm-sheet__flecha--prev"
@@ -29,17 +43,17 @@
               <button
                 type="button"
                 class="rm-sheet__flecha rm-sheet__flecha--next"
-                [disabled]="fotoActiva() === fotos().length - 1"
+                [disabled]="fotoActiva() === medios().length - 1"
                 (click)="irAFoto(galeria, fotoActiva() + 1)"
                 aria-label="Foto siguiente"
               >›</button>
               <div class="rm-sheet__puntos">
-                @for (foto of fotos(); track foto; let i = $index) {
+                @for (m of medios(); track m.src; let i = $index) {
                   <button
                     type="button"
                     [class.is-active]="fotoActiva() === i"
                     (click)="irAFoto(galeria, i)"
-                    [attr.aria-label]="'Ver foto ' + (i + 1)"
+                    [attr.aria-label]="m.tipo === 'video' ? 'Ver video' : 'Ver foto ' + (i + 1)"
                   ></button>
                 }
               </div>

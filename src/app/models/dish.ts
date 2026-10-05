@@ -45,6 +45,12 @@ export interface Dish {
   imagen?: string;
   /** Fotos adicionales (otros ángulos) que se suman a `imagen` en la galería del detalle. */
   imagenes?: string[];
+  /**
+   * Public ID de un video corto (5–10 s) en Cloudinary. Se muestra al final de
+   * la galería del detalle, en silencio y en bucle; no se descarga hasta que
+   * el cliente llega a esa diapositiva.
+   */
+  video?: string;
   destacado?: boolean;
   /** Etiquetas para los filtros de la carta (ej: 'Hamburguesas', 'Al wok'). */
   etiquetas?: string[];

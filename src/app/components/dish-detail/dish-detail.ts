@@ -3,9 +3,11 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   inject,
   linkedSignal,
   signal,
+  viewChild,
 } from '@angular/core';
 import { DishOpcion, DishVariante } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
@@ -14,6 +16,10 @@ import { ScrollLockService } from '../../services/scroll-lock.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
 import { iniciales } from '../../utils/texto';
 import { cocinaDeCategoria } from '../../utils/cocina';
+import { cloudinaryVideoPoster, cloudinaryVideoUrl } from '../../utils/cloudinary';
+
+/** Diapositiva de la galería del detalle: una foto o el video del plato. */
+type Medio = { tipo: 'foto'; src: string } | { tipo: 'video'; src: string; poster: string };
 
 @Component({
   selector: 'app-dish-detail',
@@ -29,14 +35,21 @@ export class DishDetail {
   protected readonly dish = this.detail.dish;
   protected readonly abierto = computed(() => this.dish() !== null);
 
-  /** Foto principal + fotos adicionales (otros ángulos), sin repetidas. */
-  protected readonly fotos = computed(() => {
+  /** Foto principal + fotos adicionales (otros ángulos), sin repetidas, y el video al final. */
+  protected readonly medios = computed<Medio[]>(() => {
     const d = this.dish();
     if (!d) return [];
-    return [...new Set([d.imagen, ...(d.imagenes ?? [])].filter((f): f is string => !!f))];
+    const fotos = [...new Set([d.imagen, ...(d.imagenes ?? [])].filter((f): f is string => !!f))];
+    const medios: Medio[] = fotos.map((src) => ({ tipo: 'foto', src }));
+    if (d.video) {
+      medios.push({ tipo: 'video', src: cloudinaryVideoUrl(d.video), poster: cloudinaryVideoPoster(d.video) });
+    }
+    return medios;
   });
 
-  /** Índice de la foto visible en la galería; vuelve a la primera al cambiar de plato. */
+  private readonly clip = viewChild<ElementRef<HTMLVideoElement>>('clip');
+
+  /** Índice de la diapositiva visible en la galería; vuelve a la primera al cambiar de plato. */
   protected readonly fotoActiva = linkedSignal(() => {
     this.dish();
     return 0;
@@ -91,6 +104,21 @@ export class DishDetail {
       if (this.abierto()) this.scrollLock.lock();
       else this.scrollLock.unlock();
     });
+
+    // El video solo corre mientras su diapositiva está a la vista. Con
+    // preload="none", hasta el primer play() no se descarga nada.
+    effect(() => {
+      const video = this.clip()?.nativeElement;
+      if (!video) return;
+      const indiceVideo = this.medios().findIndex((m) => m.tipo === 'video');
+      if (this.fotoActiva() === indiceVideo) {
+        video.play().catch(() => {
+          /* el navegador bloqueó el autoplay: queda la portada */
+        });
+      } else {
+        video.pause();
+      }
+    });
   }
 
   cerrar(): void {
@@ -123,7 +151,7 @@ export class DishDetail {
   }
 
   irAFoto(galeria: HTMLElement, indice: number): void {
-    const i = Math.max(0, Math.min(indice, this.fotos().length - 1));
+    const i = Math.max(0, Math.min(indice, this.medios().length - 1));
     galeria.scrollTo({ left: i * galeria.clientWidth, behavior: 'smooth' });
     this.fotoActiva.set(i);
   }

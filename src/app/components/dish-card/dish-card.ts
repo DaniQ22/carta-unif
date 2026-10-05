@@ -78,6 +78,12 @@ export class DishCard {
     this.detail.abrir(this.dish());
   }
 
+  /** Texto accesible del indicador de la foto: "3 fotos", "2 fotos y video"... */
+  protected readonly resumenMedios = computed(() => {
+    const fotos = 1 + (this.dish().imagenes?.length ?? 0);
+    return `${fotos} ${fotos === 1 ? 'foto' : 'fotos'}${this.dish().video ? ' y video' : ''}`;
+  });
+
   iniciales(): string {
     return iniciales(this.dish().nombre);
   }
