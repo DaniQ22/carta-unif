@@ -136,7 +136,7 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-especial',
     categoria: 'arroces',
     nombre: 'Arroz Chino Especial',
-    descripcion: 'Al wok con pollo, cerdo, salchichón, camarón, raíz china y huevo.',
+    descripcion: 'Al wok con pollo, cerdo, jamón, camarón, raíz china y huevo.',
     precio: 30000,
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 90000 },
@@ -145,7 +145,7 @@ export const PLATOS: Dish[] = [
     ],
     destacado: true,
     etiquetas: ['Chinos', 'Con camarón'],
-    ingredientes: ['Arroz', 'Pollo', 'Salchichón', 'Lomito', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
+    ingredientes: ['Arroz', 'Pollo', 'Jamón', 'Lomito', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
   {
     id: 'arr-chino-pollo-camaron',
@@ -166,7 +166,7 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-mixto',
     categoria: 'arroces',
     nombre: 'Arroz Chino Mixto',
-    descripcion: 'Al wok con pollo, lomito, salchichón, raíz china y huevo.',
+    descripcion: 'Al wok con pollo, lomito, jamón, raíz china y huevo.',
     precio: 30000,
     imagen: cloudinaryUrl('ChatGPT_Image_28_sept_2026_10_28_29.png'),
     variantes: [
@@ -175,7 +175,7 @@ export const PLATOS: Dish[] = [
       { id: 'medio', nombre: 'Medio', precio: 30000 },
     ],
     etiquetas: ['Chinos'],
-    ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Salchichón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
+    ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
 
   // ---------- ESPECIALIDADES DEL WOK ----------
@@ -255,7 +255,7 @@ export const PLATOS: Dish[] = [
     precio: 23000,
     etiquetas: ['Combos', 'Con camarón'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Salchichón', 'Raíz china', 'Cebollín'],
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Jamón', 'Raíz china', 'Cebollín'],
   },
   {
     id: 'combo-chino-mixto',
@@ -265,7 +265,7 @@ export const PLATOS: Dish[] = [
     precio: 23000,
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Salchichón', 'Raíz china', 'Cebollín'],
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Jamón', 'Raíz china', 'Cebollín'],
   },
 
   // ======================================================
