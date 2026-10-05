@@ -22,6 +22,9 @@ import { cloudinaryUrl } from '../utils/cloudinary';
  * - `imagenes`: fotos extra del plato (otros ángulos). Se suman a `imagen`
  *   en la galería del detalle, que se desliza con el dedo. Ej:
  *   `imagenes: [cloudinaryUrl('arroz-montanero-2'), cloudinaryUrl('arroz-montanero-3')]`
+ * - `video`: Public ID de un video corto (5–10 s) subido a Cloudinary. Va al
+ *   final de la galería del detalle, en silencio y en bucle. Ej:
+ *   `video: 'arroz-de-la-casa-wok'` (sin `cloudinaryUrl`, solo el ID).
  * - `variantes`: tamaños seleccionables (Familiar/Entero/Medio) con su
  *   propio precio; `precio` queda como el de la variante más barata (Medio),
  *   la que se selecciona por defecto en la tarjeta.
@@ -103,7 +106,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz de la Casa',
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
-    imagen: cloudinaryUrl('WhatsApp_Image_2026-09-18_at_5.49.57_PM.jpg'),
+    imagen: cloudinaryUrl('Crispy_Golden_Bites_with_Scallions.png'),
     imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
