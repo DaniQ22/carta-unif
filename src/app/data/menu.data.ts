@@ -104,6 +104,7 @@ export const PLATOS: Dish[] = [
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
     imagen: cloudinaryUrl('WhatsApp_Image_2026-09-18_at_5.49.57_PM.jpg'),
+    imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 50000 },
