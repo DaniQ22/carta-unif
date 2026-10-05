@@ -1,10 +1,12 @@
 import { Routes } from '@angular/router';
+import { MenuPage } from './pages/menu-page/menu-page';
 
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/menu-page/menu-page').then((m) => m.MenuPage),
-    title: 'Carta — Caribe Wok & Pamer',
+    // Carga directa (no lazy): es la única página, lazy solo agregaba una descarga extra antes de pintar.
+    component: MenuPage,
+    title: 'Carta — Pamer Wook',
   },
   // Compatibilidad con enlaces/QR antiguos del selector de cartas.
   { path: 'wok', redirectTo: '' },

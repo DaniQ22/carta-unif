@@ -1,5 +1,6 @@
 import {
   afterNextRender,
+  ChangeDetectionStrategy,
   Component,
   computed,
   DestroyRef,
@@ -37,6 +38,7 @@ function normalizar(texto: string): string {
   imports: [FormsModule, NgTemplateOutlet, DishSection, ExtraList],
   templateUrl: './menu-page.html',
   styleUrl: './menu-page.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuPage {
   private readonly menu = inject(MenuService);

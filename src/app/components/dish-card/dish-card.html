@@ -1,7 +1,16 @@
 <article class="rm-dish" [class.is-active]="cantidad() > 0">
   <button type="button" class="rm-dish__media rm-dish__trigger" (click)="verDetalle()" [attr.aria-label]="'Ver detalle de ' + dish().nombre">
     @if (dish().imagen) {
-      <img [src]="dish().imagen" [alt]="dish().nombre" loading="lazy" />
+      <img
+        [src]="dish().imagen"
+        [attr.srcset]="srcset()"
+        sizes="(max-width: 480px) 45vw, 360px"
+        [alt]="dish().nombre"
+        width="700"
+        height="467"
+        loading="lazy"
+        decoding="async"
+      />
     } @else {
       <span class="rm-dish__mono">{{ iniciales() }}</span>
     }

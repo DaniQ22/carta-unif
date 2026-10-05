@@ -1,4 +1,4 @@
-# Carta unificada — Caribe Wok & Pamer
+# Carta unificada — Pamer Wook
 
 Una sola app Angular 20 con **un único menú**: arroces al wok, comidas
 rápidas, asados y bebidas, todo en una sola página, con un solo carrito y
@@ -60,8 +60,10 @@ ver sus README para el detalle de cada campo.
 
 ### 3. Logos e imágenes
 
-Van en `public/img/`. Cambia una foto reemplazando el archivo con el mismo
-nombre.
+En `public/img/` solo va el logo (`logo-nuevo.jpg`). **Todas las fotos de
+los platos se alojan en Cloudinary** (ver más abajo): en `menu.data.ts` se
+referencian con `cloudinaryUrl('<public-id>')`. Para cambiar una foto, súbela
+de nuevo a Cloudinary con el mismo Public ID.
 
 #### Fotos de los arroces
 
@@ -131,7 +133,7 @@ servirlas por jsDelivr: `https://cdn.jsdelivr.net/gh/usuario/repo@main/ruta.jpg`
    con todo el detalle del pedido.
 4. Ese mensaje se dirige a la cocina responsable, según `COCINAS` en
    `empresa.config.ts`:
-   - Si el pedido incluye **algún arroz**, va al WhatsApp de **Caribe Wok**.
+   - Si el pedido incluye **algún arroz**, va al WhatsApp de **Pamer Wook**.
    - Si no (solo comidas rápidas, asados, adiciones y/o bebidas), va al
      WhatsApp de **Pamer**.
 5. El carrito se guarda en el navegador (`localStorage`, clave

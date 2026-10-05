@@ -23,7 +23,7 @@ export interface Agregable {
  * (arroces, comidas rápidas, asados, adiciones y bebidas). Arma un solo
  * mensaje de WhatsApp con el detalle completo del pedido y lo envía al
  * número de la cocina responsable: si hay algún plato de `arroces`, va a
- * Caribe Wok; si no, va a Pamer (ver `construirLinkWhatsApp`).
+ * Pamer Wook; si no, va a Pamer (ver `construirLinkWhatsApp`).
  */
 @Injectable({ providedIn: 'root' })
 export class CartService {

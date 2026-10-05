@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { Dish } from '../../models/dish';
 import { DishCard } from '../dish-card/dish-card';
 
@@ -8,6 +8,7 @@ import { DishCard } from '../dish-card/dish-card';
   imports: [DishCard],
   templateUrl: './dish-section.html',
   styleUrl: './dish-section.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishSection {
   readonly titulo = input.required<string>();

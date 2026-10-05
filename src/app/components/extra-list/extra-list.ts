@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { ExtraItem } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
@@ -8,6 +8,7 @@ import { PrecioPipe } from '../../pipes/precio-pipe';
   imports: [PrecioPipe],
   templateUrl: './extra-list.html',
   styleUrl: './extra-list.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExtraList {
   readonly titulo = input.required<string>();

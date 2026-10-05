@@ -8,14 +8,14 @@ import { cloudinaryUrl } from '../utils/cloudinary';
  * - PLATOS: cada plato tiene `categoria: 'arroces'`, `'comidas-rapidas'` o
  *   el grupo transversal `'asados'`. Esa categoría también decide a qué
  *   cocina/WhatsApp se enruta el pedido (ver `utils/cocina.ts`): arroces va
- *   a Caribe Wok, el resto va a Pamer.
+ *   a Pamer Wook, el resto va a Pamer.
  * - ADICIONES y BEBIDAS: se muestran igual para todo el menú.
  * - `etiquetas`: alimentan los chips de filtro de la carta. Usa los
  *   mismos textos entre platos para que se agrupen (ej: 'Hamburguesas').
  * - `ingredientes`: se muestran en el detalle del producto (al tocar la
  *   tarjeta). Edítalos para reflejar la receta real de cada plato.
- * Las fotos están en `public/img/`. Reemplaza el archivo con el mismo
- * nombre para cambiar una foto. Si dejas `imagen` vacío, la tarjeta
+ * Todas las fotos están en Cloudinary: `cloudinaryUrl('<public-id>')`.
+ * Sube la nueva foto con el mismo Public ID para cambiarla. Si dejas `imagen` vacío, la tarjeta
  * muestra las iniciales del plato en vez de una foto — sin descargar nada,
  * así que carga instantáneo. Los arroces se dejaron así a propósito (ver
  * el README, sección "Fotos de los arroces").
@@ -77,7 +77,7 @@ const OPCIONES_COMBO: DishOpcionGrupo[] = [
 
 export const PLATOS: Dish[] = [
   // ======================================================
-  // ARROCES (Caribe Wok)
+  // ARROCES (Pamer Wook)
   // ======================================================
 
   // ---------- ARROCES DE LA CASA ----------
@@ -326,7 +326,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Salchipapa',
     descripcion: 'Papa a la francesa, salchicha, lechuga, queso costeño, papa ripio y salsas.',
     precio: 18000,
-    imagen: 'img/salchipapa.jpg',
+    imagen: cloudinaryUrl('salchipapa'),
     etiquetas: ['Salchipapas'],
     ingredientes: ['Salchicha', 'Papa a la francesa', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
@@ -347,7 +347,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Hamburguesa Clásica',
     descripcion: 'Carne de res 130 g en pan brioche, queso cheddar, tocineta crujiente y vegetales.',
     precio: 18500,
-    imagen: 'img/hamburguesa-clasica.jpg',
+    imagen: cloudinaryUrl('hamburguesa-clasica'),
     destacado: true,
     etiquetas: ['Hamburguesas'],
     ingredientes: ['Pan brioche', 'Carne de res (130 g)', 'Queso cheddar', 'Tocineta crujiente', 'Vegetales', 'Salsa'],
@@ -358,7 +358,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Hamburguesa Doble Carne',
     descripcion: 'Doble carne de res (200 g), cheddar, mozzarella, tocineta y cebolla grillé.',
     precio: 26500,
-    imagen: 'img/hamburguesa-royal.jpg',
+    imagen: cloudinaryUrl('hamburguesa-royal'),
     destacado: true,
     etiquetas: ['Hamburguesas'],
     ingredientes: [
@@ -455,7 +455,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Perro de la Casa',
     descripcion: 'Pan artesanal, salchicha long, jamón, tocineta, mozzarella y papa ripio.',
     precio: 22000,
-    imagen: 'img/hot-dog.jpg',
+    imagen: cloudinaryUrl('hot-dog'),
     destacado: true,
     etiquetas: ['Perros'],
     ingredientes: ['Pan artesanal', 'Salchicha long', 'Jamón', 'Tocineta', 'Queso mozzarella', 'Lechuga', 'Papa ripio', 'Salsa'],
@@ -520,7 +520,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Picada Pamer (para compartir)',
     descripcion: 'Carne, pollo, chorizo, costilla, chicharrón, papa y maduro. 2–3 personas.',
     precio: 45000,
-    imagen: 'img/picada.jpg',
+    imagen: cloudinaryUrl('picada'),
     etiquetas: ['Para compartir'],
     ingredientes: ['Carne de res', 'Pollo', 'Chorizo', 'Costilla de cerdo', 'Chicharrón', 'Papa criolla', 'Maduro frito'],
   },

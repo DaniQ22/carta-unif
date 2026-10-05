@@ -1,4 +1,14 @@
-import { Component, computed, HostListener, signal } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  DestroyRef,
+  ElementRef,
+  inject,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SiteHeader } from './components/site-header/site-header';
 import { CartDrawer } from './components/cart-drawer/cart-drawer';
@@ -14,6 +24,7 @@ const THEME_COLOR = '#0d0d0f';
   imports: [RouterOutlet, SiteHeader, CartDrawer, DishDetail, PrecioPipe],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App {
   protected readonly empresa = EMPRESA;
@@ -28,18 +39,26 @@ export class App {
   /** "Volver arriba": aparece solo cuando el scroll llega cerca del final de la página. */
   protected readonly mostrarVolverArriba = signal(false);
 
-  @HostListener('window:scroll')
-  @HostListener('window:resize')
-  protected actualizarVolverArriba(): void {
-    const doc = document.documentElement;
-    const hayScroll = doc.scrollHeight > window.innerHeight + 200;
-    const cercaDelFinal = doc.scrollHeight - (window.scrollY + window.innerHeight) < 200;
-    this.mostrarVolverArriba.set(hayScroll && cercaDelFinal);
-  }
+  /** Marca vacía al final de la página; se observa en vez de escuchar cada evento de scroll. */
+  private readonly finPagina = viewChild.required<ElementRef<HTMLElement>>('finPagina');
 
   constructor(protected cart: CartService) {
     document.title = `${EMPRESA.nombre} — Carta`;
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', THEME_COLOR);
+
+    const destroyRef = inject(DestroyRef);
+    afterNextRender(() => {
+      // El margen inferior hace que "intersecte" cuando faltan menos de 200px para el final.
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          const hayScroll = document.documentElement.scrollHeight > window.innerHeight + 200;
+          this.mostrarVolverArriba.set(hayScroll && entry.isIntersecting);
+        },
+        { rootMargin: '0px 0px 200px 0px' },
+      );
+      observer.observe(this.finPagina().nativeElement);
+      destroyRef.onDestroy(() => observer.disconnect());
+    });
   }
 
   volverArriba(): void {

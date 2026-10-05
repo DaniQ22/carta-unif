@@ -1,4 +1,4 @@
-import { Component, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { EMPRESA } from '../../data/empresa.config';
 
@@ -7,6 +7,7 @@ import { EMPRESA } from '../../data/empresa.config';
   imports: [],
   templateUrl: './site-header.html',
   styleUrl: './site-header.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SiteHeader {
   protected readonly empresa = EMPRESA;

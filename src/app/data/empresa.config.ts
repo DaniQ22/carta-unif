@@ -15,9 +15,8 @@ export const EMPRESA = {
 
   /**
    * "Cloud name" de tu cuenta Cloudinary (plan free), para servir fotos de
-   * platos sin subirlas al repo — ver `utils/cloudinary.ts` y el README,
-   * sección "Fotos de los platos". Déjalo vacío ('') si sigues usando
-   * `public/img/`.
+   * platos sin subirlas al repo — ver `utils/cloudinary.ts` y el README.
+   * Todas las fotos van en Cloudinary; en `public/img/` solo queda el logo.
    */
   cloudinaryCloudName: 'voidkkxe',
 
@@ -41,13 +40,13 @@ export const EMPRESA = {
 /**
  * Cocinas que preparan el pedido. El menú y el carrito son uno solo, pero
  * el pedido se envía por WhatsApp al número de la cocina responsable:
- * - Si el pedido incluye algún plato de `arroces`, va a Caribe Wok.
+ * - Si el pedido incluye algún plato de `arroces`, va a Pamer Wook.
  * - Si no (solo comidas rápidas, asados, adiciones y/o bebidas), va a Pamer.
  */
 export const COCINAS: Record<CocinaId, CocinaConfig> = {
   arroces: {
     id: 'arroces',
-    nombre: 'Caribe Wok',
+    nombre: 'Pamer Wook',
     whatsapp: '573024533723',
   },
   'comidas-rapidas': {

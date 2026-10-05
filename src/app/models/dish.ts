@@ -72,7 +72,7 @@ export interface CartItem {
   nota?: string;
   /**
    * Cocina que prepara este ítem. Define a qué WhatsApp se envía el pedido:
-   * si el carrito tiene algún ítem de `'arroces'`, el pedido va a Caribe Wok;
+   * si el carrito tiene algún ítem de `'arroces'`, el pedido va a Pamer Wook;
    * si no, va a Pamer. Las adiciones y bebidas no la llevan (no cambian el
    * destino del pedido).
    */

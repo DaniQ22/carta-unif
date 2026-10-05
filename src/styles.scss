@@ -1,4 +1,4 @@
-/* ===== Carta unificada: Caribe Wok + Pamer ===== */
+/* ===== Carta unificada: Pamer Wook ===== */
 /* Tokens --rm-* compartidos por toda la app (un solo tema para todo el menú). */
 
 :root {
@@ -39,12 +39,21 @@ body {
   font-family: var(--rm-fuente);
   color: var(--rm-blanco);
   background-color: var(--rm-negro);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+/* Brillos de fondo en una capa fija propia: `background-attachment: fixed`
+   obliga a repintar toda la pantalla en cada scroll (sobre todo en móvil). */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background-image:
     radial-gradient(900px 500px at 100% -10%, rgba(var(--rm-naranja-rgb), 0.12), transparent 60%),
     radial-gradient(700px 500px at -10% 110%, rgba(var(--rm-rojo-rgb), 0.1), transparent 60%);
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 /*

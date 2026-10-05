@@ -1,4 +1,12 @@
-import { Component, computed, effect, inject, linkedSignal, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  linkedSignal,
+  signal,
+} from '@angular/core';
 import { DishOpcion, DishVariante } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
 import { DishDetailService } from '../../services/dish-detail.service';
@@ -12,6 +20,7 @@ import { cocinaDeCategoria } from '../../utils/cocina';
   imports: [PrecioPipe],
   templateUrl: './dish-detail.html',
   styleUrl: './dish-detail.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DishDetail {
   private readonly detail = inject(DishDetailService);

@@ -2,12 +2,17 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Caribe Wok & Pamer — Carta digital</title>
+  <title>Pamer Wook — Carta digital</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Carta digital con arroces al wok, comidas rápidas, asados y bebidas. Arma tu pedido y envíalo por WhatsApp.">
   <meta name="theme-color" content="#0d0d0f">
-  <link rel="icon" type="image/jpeg" href="img/logo-pamer.jpg">
+  <link rel="icon" type="image/jpeg" href="img/logo-nuevo.jpg">
+  <!-- Las fotos de los platos vienen de Cloudinary: abrir la conexión antes de que Angular arranque. -->
+  <link rel="preconnect" href="https://res.cloudinary.com">
+  <link rel="dns-prefetch" href="https://res.cloudinary.com">
+  <!-- El logo del hero es lo primero grande que se pinta (LCP): pedirlo sin esperar al JS. -->
+  <link rel="preload" as="image" href="img/logo-nuevo.jpg" fetchpriority="high">
 </head>
 <body>
   <app-root></app-root>

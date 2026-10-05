@@ -1,4 +1,13 @@
-import { Component, computed, effect, inject, input, output, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../services/cart.service';
 import { ScrollLockService } from '../../services/scroll-lock.service';
@@ -9,6 +18,7 @@ import { PrecioPipe } from '../../pipes/precio-pipe';
   imports: [FormsModule, PrecioPipe],
   templateUrl: './cart-drawer.html',
   styleUrl: './cart-drawer.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDrawer {
   readonly abierto = input(false);
