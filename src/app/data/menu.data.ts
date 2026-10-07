@@ -117,6 +117,22 @@ export const PLATOS: Dish[] = [
     ingredientes: ['Arroz', 'Pollo', 'Lomo de cerdo', 'Chorizo', 'Carne desmechada', 'Maíz', 'Cebollín chino', 'Vegetales', 'Salsas de la casa'],
   },
   {
+    // Receta de `nuevo item.jpeg` (Arroz Caribe Wok). El total del Medio venía
+    // tapado en la imagen: se usó SUB $12.000 x 2.5 = $30.000.
+    id: 'arr-de-la-casa-caribe',
+    categoria: 'arroces',
+    nombre: 'Arroz de la Casa',
+    descripcion: 'Arroz con pollo, chorizo, lomito, plátano maduro y queso.',
+    precio: 30000,
+    variantes: [
+      { id: 'familiar', nombre: 'Familiar', precio: 85000 },
+      { id: 'entero', nombre: 'Entero', precio: 45000 },
+      { id: 'medio', nombre: 'Medio', precio: 30000 },
+    ],
+    etiquetas: ['De la casa'],
+    ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Plátano', 'Queso', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
+  },
+  {
     id: 'arr-mixto',
     categoria: 'arroces',
     nombre: 'Arroz Mixto',
@@ -517,18 +533,6 @@ export const PLATOS: Dish[] = [
 
   // ---------- NO ESTÁN EN precios/precios.txt ----------
   // TODO: confirmar si siguen en la carta; conservan su precio anterior.
-
-  {
-    id: 'cr-picada',
-    categoria: 'comidas-rapidas',
-    nombre: 'Picada Pamer (para compartir)',
-    descripcion: 'Carne, pollo, chorizo, costilla, chicharrón, papa y maduro. 2–3 personas.',
-    precio: 45000,
-    imagen: cloudinaryUrl('picada'),
-    etiquetas: ['Para compartir'],
-    ingredientes: ['Carne de res', 'Pollo', 'Chorizo', 'Costilla de cerdo', 'Chicharrón', 'Papa criolla', 'Maduro frito'],
-  },
-
   // ======================================================
   // ASADOS (van a la cocina de Pamer — ver `utils/cocina.ts`)
   // ======================================================
@@ -559,43 +563,19 @@ export const PLATOS: Dish[] = [
     etiquetas: ['A la parrilla', 'Con carne'],
     ingredientes: ['Churrasco de res', 'Papa criolla asada', 'Ensalada fresca', 'Chimichurri'],
   },
-  {
-    id: 'asa-pechuga',
-    categoria: 'asados',
-    nombre: 'Pechuga a la Plancha',
-    descripcion: 'Pechuga de pollo marinada y asada, con arroz y ensalada.',
-    precio: 19000,
-    etiquetas: ['A la parrilla', 'Con pollo'],
-    ingredientes: ['Pechuga de pollo', 'Arroz blanco', 'Ensalada fresca', 'Salsa de la casa'],
-  },
+
+
   {
     id: 'asa-costillas',
     categoria: 'asados',
     nombre: 'Costillas BBQ',
-    descripcion: 'Costillas de cerdo ahumadas, bañadas en salsa BBQ, con papa criolla.',
+    descripcion: 'Costillas de cerdo a la parrilla, bañadas en salsa de la casa, con papa a la francesa.',
     precio: 28000,
     etiquetas: ['A la parrilla', 'Con carne'],
-    ingredientes: ['Costillas de cerdo', 'Salsa BBQ', 'Papa criolla', 'Ensalada fresca'],
+    ingredientes: ['Costillas de 500 g a la parrilla', 'Salsa de la casa', 'Papa a la francesa', 'Ensalada fresca'],
   },
-  {
-    id: 'asa-chuleta',
-    categoria: 'asados',
-    nombre: 'Chuleta Ahumada',
-    descripcion: 'Chuleta de cerdo a la parrilla, con papa a la francesa y ensalada.',
-    precio: 24000,
-    etiquetas: ['A la parrilla', 'Con carne'],
-    ingredientes: ['Chuleta de cerdo', 'Papa a la francesa', 'Ensalada fresca'],
-  },
-  {
-    id: 'asa-mixto',
-    categoria: 'asados',
-    nombre: 'Mixto de Asados (para compartir)',
-    descripcion: 'Churrasco, pechuga, chorizo y costilla a la parrilla. 2–3 personas.',
-    precio: 48000,
-    destacado: true,
-    etiquetas: ['A la parrilla', 'Para compartir'],
-    ingredientes: ['Churrasco', 'Pechuga de pollo', 'Chorizo', 'Costilla de cerdo', 'Papa criolla', 'Ensalada fresca'],
-  },
+ 
+
 ];
 
 /** Adiciones — mismas proteínas/papas para todo el menú. */
