@@ -106,8 +106,6 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz de la Casa',
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
-    imagen: cloudinaryUrl('Crispy_Golden_Bites_with_Scallions.png'),
-    imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 50000 },
@@ -121,7 +119,9 @@ export const PLATOS: Dish[] = [
     // tapado en la imagen: se usó SUB $12.000 x 2.5 = $30.000.
     id: 'arr-de-la-casa-caribe',
     categoria: 'arroces',
-    nombre: 'Arroz de la Casa',
+    nombre: 'Arroz de la sabana',
+    imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
+
     descripcion: 'Arroz con pollo, chorizo, lomito, plátano maduro y queso.',
     precio: 30000,
     variantes: [
@@ -574,7 +574,7 @@ export const PLATOS: Dish[] = [
     etiquetas: ['A la parrilla', 'Con carne'],
     ingredientes: ['Costillas de 500 g a la parrilla', 'Salsa de la casa', 'Papa a la francesa', 'Ensalada fresca'],
   },
- 
+
 
 ];
 
