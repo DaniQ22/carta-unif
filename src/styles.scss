@@ -1,23 +1,27 @@
 /* ===== Carta unificada: Pamer Wook ===== */
-/* Tokens --rm-* compartidos por toda la app (un solo tema para todo el menú). */
+/* Tokens --rm-* compartidos por toda la app (un solo tema para todo el menú).
+   Paleta tomada del logo Pamer Wok: amarillo, naranja y rojo fuego sobre café tostado. */
 
 :root {
-  --rm-negro: #0b0b10;
+  --rm-negro: #1a0f0a;
   /** Mismo tono que --rm-negro, en "r, g, b" para usar con rgba(). */
-  --rm-negro-rgb: 11, 11, 16;
-  --rm-carbon: #18181f;
-  --rm-carbon-2: #202028;
-  --rm-borde: #34343f;
+  --rm-negro-rgb: 26, 15, 10;
+  --rm-carbon: #26170f;
+  --rm-carbon-2: #311e13;
+  --rm-borde: #4a3022;
   --rm-blanco: #f4f1ea;
   --rm-gris: #a5a2a0;
-  --rm-naranja: #ff7a18;
-  --rm-naranja-2: #ff9d3c;
+  --rm-amarillo: #ffd000;
+  --rm-amarillo-rgb: 255, 208, 0;
+  --rm-naranja: #ff7a00;
+  /** Acento para precios y textos destacados: el dorado de las letras "Pamer". */
+  --rm-naranja-2: #ffc21a;
   /** Mismo tono que --rm-naranja, en "r, g, b" para usar con rgba(). */
-  --rm-naranja-rgb: 255, 122, 24;
-  --rm-rojo: #e23a1e;
-  --rm-rojo-rgb: 226, 58, 30;
+  --rm-naranja-rgb: 255, 122, 0;
+  --rm-rojo: #ee3a0c;
+  --rm-rojo-rgb: 238, 58, 12;
   --rm-verde-wa: #25d366;
-  --rm-fuego: linear-gradient(135deg, #e23a1e 0%, #ff7a18 55%, #ffb703 100%);
+  --rm-fuego: linear-gradient(135deg, #ee3a0c 0%, #ff7a00 50%, #ffd000 100%);
   --rm-radio: 14px;
   --rm-sombra: 0 18px 40px -18px rgba(0, 0, 0, 0.75);
   --rm-fuente: 'Segoe UI', system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
@@ -52,7 +56,7 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(900px 500px at 100% -10%, rgba(var(--rm-naranja-rgb), 0.12), transparent 60%),
+    radial-gradient(900px 500px at 100% -10%, rgba(var(--rm-amarillo-rgb), 0.1), transparent 60%),
     radial-gradient(700px 500px at -10% 110%, rgba(var(--rm-rojo-rgb), 0.1), transparent 60%);
 }
 

@@ -17,7 +17,7 @@ import { EMPRESA } from './data/empresa.config';
 import { CartService } from './services/cart.service';
 import { PrecioPipe } from './pipes/precio-pipe';
 
-const THEME_COLOR = '#0d0d0f';
+const THEME_COLOR = '#1a0f0a';
 
 @Component({
   selector: 'app-root',

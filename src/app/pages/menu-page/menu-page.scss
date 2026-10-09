@@ -72,9 +72,9 @@
   }
 }
 
-/* Logo dentro de una placa de vidrio. El fondo negro del logo se "funde"
-   con `mix-blend-mode: screen`, así solo quedan las letras y el fuego
-   flotando sobre el vidrio; el brillo diagonal da el reflejo. */
+/* Logo dentro de una placa de vidrio. El logo es PNG/WebP con fondo
+   transparente, así las letras y el wok flotan sobre el vidrio; el brillo
+   diagonal da el reflejo. */
 .rm-menu-hero__logo {
   position: relative;
   overflow: hidden;
@@ -99,8 +99,7 @@
     width: 100%;
     height: auto;
     aspect-ratio: 2 / 1;
-    mix-blend-mode: screen;
-    filter: drop-shadow(0 6px 18px rgba(var(--rm-naranja-rgb), 0.35));
+    filter: drop-shadow(0 6px 18px rgba(var(--rm-amarillo-rgb), 0.3));
   }
 
   &::after {
