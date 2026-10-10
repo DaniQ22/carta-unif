@@ -42,6 +42,8 @@ export const EMPRESA = {
  * el pedido se envía por WhatsApp al número de la cocina responsable:
  * - Si el pedido incluye algún plato de `arroces`, va a Pamer Wook.
  * - Si no (solo comidas rápidas, asados, adiciones y/o bebidas), va a Pamer.
+ * Por ahora ambas cocinas usan el mismo número, así que todos los pedidos
+ * llegan al WhatsApp de Pamer Wook.
  */
 export const COCINAS: Record<CocinaId, CocinaConfig> = {
   arroces: {
