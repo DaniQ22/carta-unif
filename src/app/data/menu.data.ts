@@ -78,6 +78,18 @@ const OPCIONES_COMBO: DishOpcionGrupo[] = [
   },
 ];
 
+/** Acompañante de los desgranados: el cliente elige papas o bollo. No cambia el precio. */
+const OPCIONES_DESGRANADO: DishOpcionGrupo[] = [
+  {
+    id: 'acompanante',
+    nombre: 'Acompañante',
+    opciones: [
+      { id: 'papas-francesa', nombre: 'Papas a la francesa' },
+      { id: 'bollo', nombre: 'Bollo' },
+    ],
+  },
+];
+
 export const PLATOS: Dish[] = [
   // ======================================================
   // ARROCES (Pamer Wook)
@@ -106,6 +118,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz de la Casa',
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
+    imagenes: [cloudinaryUrl('Loaded_Pulled_Beef_Corn_Tray.png')],
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000 },
       { id: 'entero', nombre: 'Entero', precio: 50000 },
@@ -249,6 +262,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Combo Arroz Montañero',
     descripcion: 'Porción individual de arroz montañero + proteína y bebida personal a elección.',
     precio: 23000,
+    imagen: cloudinaryUrl('Crispy_Pork_Crackling_Rice_Bowl.png'),
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
     ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Vegetales'],
@@ -292,19 +306,21 @@ export const PLATOS: Dish[] = [
     id: 'cr-desgranado-pollo',
     categoria: 'comidas-rapidas',
     nombre: 'Desgranado de Pollo',
-    descripcion: 'Pollo a la parrilla, papas a la francesa, maíz tierno, queso costeño y papa ripio.',
+    descripcion: 'Pollo a la parrilla, papas a la francesa o bollo, maíz tierno, queso costeño y papa ripio.',
     precio: 27000,
     etiquetas: ['Desgranados'],
-    ingredientes: ['Pollo a la parrilla (200 g)', 'Papa a la francesa', 'Lechuga fresca', 'Maíz tierno', 'Queso costeño', 'Papa ripio', 'Salsas'],
+    opciones: OPCIONES_DESGRANADO,
+    ingredientes: ['Pollo a la parrilla (200 g)', 'Papas a la francesa o bollo', 'Lechuga fresca', 'Maíz tierno', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
   {
     id: 'cr-desgranado-mixto',
     categoria: 'comidas-rapidas',
     nombre: 'Desgranado Mixto',
-    descripcion: 'Pechuga de pollo y lomo fino de cerdo, papas, maíz tierno, queso costeño y papa ripio.',
+    descripcion: 'Pechuga de pollo y lomo fino de cerdo, papas a la francesa o bollo, maíz tierno, queso costeño y papa ripio.',
     precio: 27000,
     etiquetas: ['Desgranados'],
-    ingredientes: ['Pechuga de pollo', 'Lomo fino de cerdo', 'Papa a la francesa', 'Lechuga', 'Maíz tierno', 'Queso costeño', 'Papa ripio', 'Salsas'],
+    opciones: OPCIONES_DESGRANADO,
+    ingredientes: ['Pechuga de pollo', 'Lomo fino de cerdo', 'Papas a la francesa o bollo', 'Lechuga', 'Maíz tierno', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
   {
     id: 'cr-desgranado',
@@ -315,6 +331,7 @@ export const PLATOS: Dish[] = [
     imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_06_10_10_PM'),
     destacado: true,
     etiquetas: ['Desgranados'],
+    opciones: OPCIONES_DESGRANADO,
     ingredientes: [
       'Pechuga de pollo',
       'Lomo de cerdo',
