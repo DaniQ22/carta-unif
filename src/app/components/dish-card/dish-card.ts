@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, computed, inject, input, signal } from '@angular/core';
-import { Dish, DishVariante } from '../../models/dish';
+import { Dish, DishOpcion, DishOpcionGrupo, DishVariante } from '../../models/dish';
 import { CartService } from '../../services/cart.service';
 import { DishDetailService } from '../../services/dish-detail.service';
 import { PrecioPipe } from '../../pipes/precio-pipe';
@@ -31,11 +31,27 @@ export class DishCard {
     return encontrada ?? variantes.find((v) => v.precio === this.dish().precio) ?? variantes[0];
   });
 
-  /** Id efectivo para el carrito: distingue el mismo plato en distintos tamaños. */
-  protected readonly idCarrito = computed(() => {
-    const variante = this.varianteActiva();
-    return variante ? `${this.dish().id}__${variante.id}` : this.dish().id;
+  /**
+   * Grupo de elección que se muestra en la propia tarjeta (desgranados: papas
+   * o bollo). Solo cuando el plato tiene un único grupo; con más (combos) se
+   * elige desde el detalle.
+   */
+  protected readonly grupoEnTarjeta = computed<DishOpcionGrupo | null>(() => {
+    const opciones = this.dish().opciones;
+    return opciones?.length === 1 ? opciones[0] : null;
   });
+
+  /** Id de la opción elegida en la tarjeta. */
+  protected readonly eleccion = signal<string | null>(null);
+
+  protected readonly opcionElegida = computed<DishOpcion | null>(
+    () => this.grupoEnTarjeta()?.opciones.find((o) => o.id === this.eleccion()) ?? null,
+  );
+
+  /** Id efectivo para el carrito: distingue el mismo plato por tamaño y opción (igual que el detalle). */
+  protected readonly idCarrito = computed(() =>
+    [this.dish().id, this.varianteActiva()?.id, this.opcionElegida()?.id].filter(Boolean).join('__'),
+  );
 
   protected readonly srcset = computed(() => {
     const imagen = this.dish().imagen;
@@ -44,8 +60,11 @@ export class DishCard {
 
   protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish().precio);
 
-  /** Platos con elecciones obligatorias (combos): se agregan desde el detalle. */
-  protected readonly tieneOpciones = computed(() => !!this.dish().opciones?.length);
+  /** Platos con varias elecciones obligatorias (combos): se agregan desde el detalle. */
+  protected readonly tieneOpciones = computed(() => !!this.dish().opciones?.length && !this.grupoEnTarjeta());
+
+  /** Falta escoger la opción de la tarjeta antes de poder agregar. */
+  protected readonly faltaElegir = computed(() => !!this.grupoEnTarjeta() && !this.opcionElegida());
 
   protected readonly cantidad = computed(() => {
     if (!this.tieneOpciones()) return this.cart.cantidadDe(this.idCarrito());
@@ -63,12 +82,17 @@ export class DishCard {
     this.tamano.set(id);
   }
 
+  elegirOpcion(id: string): void {
+    this.eleccion.set(id);
+  }
+
   agregar(): void {
+    if (this.faltaElegir()) return;
     const dish = this.dish();
-    const variante = this.varianteActiva();
+    const detalle = [this.varianteActiva()?.nombre, this.opcionElegida()?.nombre].filter(Boolean).join(', ');
     this.cart.agregar({
       id: this.idCarrito(),
-      nombre: variante ? `${dish.nombre} (${variante.nombre})` : dish.nombre,
+      nombre: detalle ? `${dish.nombre} (${detalle})` : dish.nombre,
       precio: this.precioMostrado(),
       cocina: cocinaDeCategoria(dish.categoria),
     });

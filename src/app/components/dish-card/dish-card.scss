@@ -171,6 +171,64 @@
   }
 }
 
+/* Elección obligatoria en la tarjeta (desgranados: papas o bollo). */
+.rm-dish__eleccion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.55rem;
+  border: 1px solid var(--rm-borde);
+  border-radius: 12px;
+  background: var(--rm-carbon-2);
+  transition: border-color 0.2s;
+
+  &.is-pendiente {
+    border-color: var(--rm-naranja-2);
+  }
+}
+
+.rm-dish__eleccion-titulo {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rm-naranja-2);
+}
+
+.rm-dish__eleccion-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.rm-dish__opcion {
+  flex: 1 1 auto;
+  border: 1px solid var(--rm-borde);
+  border-radius: 999px;
+  background: var(--rm-negro);
+  color: var(--rm-blanco);
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+  padding: 0.45rem 0.6rem;
+  text-align: center;
+
+  &:hover {
+    border-color: var(--rm-naranja-2);
+  }
+
+  &.is-active {
+    color: #1a0d05;
+    border-color: transparent;
+    background-image: var(--rm-fuego);
+  }
+}
+
+.rm-dish__add:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .rm-dish__foot {
   display: flex;
   align-items: center;
@@ -278,6 +336,15 @@
   .rm-dish__tamano {
     font-size: 0.62rem;
     padding: 0.35rem 0.15rem;
+  }
+
+  .rm-dish__eleccion {
+    padding: 0.45rem;
+  }
+
+  .rm-dish__opcion {
+    font-size: 0.68rem;
+    padding: 0.4rem 0.35rem;
   }
 
   /* Precio arriba y botón a todo el ancho: no caben lado a lado. */

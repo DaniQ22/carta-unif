@@ -62,10 +62,32 @@
       </div>
     }
 
+    @if (grupoEnTarjeta(); as grupo) {
+      <div class="rm-dish__eleccion" [class.is-pendiente]="faltaElegir()" role="radiogroup" [attr.aria-label]="'Elige tu ' + grupo.nombre.toLowerCase()">
+        <span class="rm-dish__eleccion-titulo">Elige tu {{ grupo.nombre.toLowerCase() }}</span>
+        <div class="rm-dish__eleccion-lista">
+          @for (o of grupo.opciones; track o.id) {
+            <button
+              type="button"
+              role="radio"
+              class="rm-dish__opcion"
+              [class.is-active]="opcionElegida()?.id === o.id"
+              [attr.aria-checked]="opcionElegida()?.id === o.id"
+              (click)="elegirOpcion(o.id)"
+            >
+              {{ o.nombre }}
+            </button>
+          }
+        </div>
+      </div>
+    }
+
     <div class="rm-dish__foot">
       <span class="rm-dish__price">{{ precioMostrado() | precio }}</span>
 
-      @if (tieneOpciones()) {
+      @if (faltaElegir()) {
+        <button type="button" class="rm-btn rm-dish__add" disabled>Elige arriba</button>
+      } @else if (tieneOpciones()) {
         <button type="button" class="rm-btn rm-dish__add" (click)="verDetalle()">
           {{ cantidad() > 0 ? 'Elegir otro (' + cantidad() + ')' : 'Elegir' }}
         </button>
