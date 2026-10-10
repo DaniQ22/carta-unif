@@ -52,6 +52,6 @@ export const COCINAS: Record<CocinaId, CocinaConfig> = {
   'comidas-rapidas': {
     id: 'comidas-rapidas',
     nombre: 'Pamer',
-    whatsapp: '573024533735',
+    whatsapp: '573024533723',
   },
 };
