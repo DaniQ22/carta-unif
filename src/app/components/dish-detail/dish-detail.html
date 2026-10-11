@@ -99,6 +99,10 @@
             </div>
           }
 
+          @if (personas(); as n) {
+            <p class="rm-sheet__personas">Para {{ n }} {{ n === 1 ? 'persona' : 'personas' }}</p>
+          }
+
           @for (grupo of d.opciones ?? []; track grupo.id) {
             <div class="rm-sheet__opciones">
               <h3>Elige tu {{ grupo.nombre.toLowerCase() }}</h3>

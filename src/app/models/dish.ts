@@ -16,6 +16,8 @@ export interface DishVariante {
   id: string;
   nombre: string;
   precio: number;
+  /** Cuántas personas comen con este tamaño (ej: Familiar → 7). */
+  personas?: number;
 }
 
 /** Una opción dentro de un grupo de elección (ej: 'Pollo' dentro de 'Proteína'). */
@@ -41,6 +43,8 @@ export interface Dish {
   descripcion?: string;
   /** Precio a mostrar cuando no hay `variantes`, o precio por defecto (la primera variante) si las hay. */
   precio: number;
+  /** Cuántas personas come el plato (si no tiene `variantes`, o la variante no lo indica). */
+  personas?: number;
   /** Foto principal: la que se ve en la tarjeta y abre la galería del detalle. */
   imagen?: string;
   /** Fotos adicionales (otros ángulos) que se suman a `imagen` en la galería del detalle. */

@@ -96,6 +96,7 @@ export class DishDetail {
   });
 
   protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish()?.precio ?? 0);
+  protected readonly personas = computed(() => this.varianteActiva()?.personas ?? this.dish()?.personas);
 
   protected readonly cantidad = computed(() => (this.dish() ? this.cart.cantidadDe(this.idCarrito()) : 0));
 

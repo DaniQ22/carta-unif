@@ -62,6 +62,10 @@
       </div>
     }
 
+    @if (personas(); as n) {
+      <span class="rm-dish__personas">Para {{ n }} {{ n === 1 ? 'persona' : 'personas' }}</span>
+    }
+
     @if (grupoEnTarjeta(); as grupo) {
       <div class="rm-dish__eleccion" [class.is-pendiente]="faltaElegir()" role="radiogroup" [attr.aria-label]="'Elige tu ' + grupo.nombre.toLowerCase()">
         <span class="rm-dish__eleccion-titulo">Elige tu {{ grupo.nombre.toLowerCase() }}</span>

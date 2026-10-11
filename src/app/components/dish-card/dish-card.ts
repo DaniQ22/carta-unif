@@ -59,6 +59,7 @@ export class DishCard {
   });
 
   protected readonly precioMostrado = computed(() => this.varianteActiva()?.precio ?? this.dish().precio);
+  protected readonly personas = computed(() => this.varianteActiva()?.personas ?? this.dish().personas);
 
   /** Platos con varias elecciones obligatorias (combos): se agregan desde el detalle. */
   protected readonly tieneOpciones = computed(() => !!this.dish().opciones?.length && !this.grupoEnTarjeta());
