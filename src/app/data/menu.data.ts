@@ -222,19 +222,7 @@ export const PLATOS: Dish[] = [
     etiquetas: ['Especialidades'],
     ingredientes: ['Pechuga de pollo', 'Salsa de naranja', 'Panko', 'Ajonjolí'],
   },
-  {
-    id: 'wok-alitas-bbq',
-    categoria: 'arroces',
-    nombre: 'Alitas en Salsa BBQ',
-    descripcion: 'Alitas de pollo en salsa BBQ con ajonjolí y papas a la francesa.',
-    precio: 25000,
-    variantes: [
-      { id: 'entero', nombre: 'Entero', precio: 46000 },
-      { id: 'medio', nombre: 'Medio', precio: 25000 },
-    ],
-    etiquetas: ['Especialidades'],
-    ingredientes: ['Alitas de pollo', 'Salsa BBQ', 'Ajonjolí', 'Papa a la francesa'],
-  },
+
   {
     id: 'wok-costillas-bbq',
     categoria: 'arroces',
