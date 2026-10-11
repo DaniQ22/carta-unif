@@ -497,7 +497,7 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-perro-pm',
     categoria: 'comidas-rapidas',
-    nombre: 'Perro Hispanoamericano',
+    nombre: 'Perro Italoamericano',
     descripcion: 'Pan artesanal, salchicha americana, jamón, tocineta, mozzarella y papa ripio.',
     precio: 22000,
     imagen: cloudinaryUrl('hot-dog'),
