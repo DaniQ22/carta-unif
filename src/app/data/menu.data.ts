@@ -102,7 +102,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz Montañero',
     descripcion: 'Arroz con pollo, chorizo, lomito, chicharrón y maíz tierno.',
     precio: 30000,
-    imagen: cloudinaryUrl('Gemini_Generated_Image_6qdig6qdig6qdig6.jpg'),
+    imagen: cloudinaryUrl('Crispy_Pork_Crackling_Rice_Bowl.png'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
@@ -118,6 +118,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz de la Casa',
     descripcion: 'Arroz con pollo, lomo de cerdo, chorizo, carne desmechada y maíz.',
     precio: 30000,
+    imagen: cloudinaryUrl('Loaded_Pulled_Beef_Corn_Tray.png'),
     imagenes: [cloudinaryUrl('Loaded_Pulled_Beef_Corn_Tray.png')],
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
@@ -133,6 +134,7 @@ export const PLATOS: Dish[] = [
     id: 'arr-de-la-casa-caribe',
     categoria: 'arroces',
     nombre: 'Arroz de la sabana',
+    imagen: cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png'),
     imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
 
     descripcion: 'Arroz con pollo, chorizo, lomito, plátano maduro y queso.',
