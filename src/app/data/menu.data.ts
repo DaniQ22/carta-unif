@@ -182,7 +182,6 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz Chino de Pollo y Camarón',
     descripcion: 'Al wok con pollo, camarón, raíz china y huevo.',
     precio: 30000,
-    imagen: cloudinaryUrl('Gemini_Generated_Image_yeppjiyeppjiyepp.jpg'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
@@ -197,7 +196,6 @@ export const PLATOS: Dish[] = [
     nombre: 'Arroz Chino Mixto',
     descripcion: 'Al wok con pollo, lomito, jamón, raíz china y huevo.',
     precio: 30000,
-    imagen: cloudinaryUrl('ChatGPT_Image_28_sept_2026_10_28_29.png'),
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
@@ -214,7 +212,6 @@ export const PLATOS: Dish[] = [
     nombre: 'Pollo a la Naranja',
     descripcion: 'Pechuga apanada en panko, bañada en salsa de naranja y ajonjolí.',
     precio: 30000,
-    imagen: cloudinaryUrl('Gemini_Generated_Image_eekzpdeekzpdeekz.jpg'),
     variantes: [
       { id: 'entero', nombre: 'Entero', precio: 48000 },
       { id: 'medio', nombre: 'Medio', precio: 30000 },
@@ -252,7 +249,6 @@ export const PLATOS: Dish[] = [
     descripcion: 'Porción individual de arroz montañero + proteína y bebida personal a elección.',
     precio: 23000,
     personas: 1,
-    imagen: cloudinaryUrl('Crispy_Pork_Crackling_Rice_Bowl.png'),
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
     ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Vegetales'],
