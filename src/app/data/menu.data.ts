@@ -422,6 +422,24 @@ export const PLATOS: Dish[] = [
       'Salsa',
     ],
   },
+  {
+    id: 'cr-hamburguesa-costena',
+    categoria: 'comidas-rapidas',
+    nombre: 'Hamburguesa Costeña',
+    descripcion: 'Carne de res en pan brioche con queso costeño, platanito maduro, butifarra y vegetales frescos. Con papas a la francesa.',
+    precio: 21000,
+    etiquetas: ['Hamburguesas'],
+    ingredientes: [
+      'Pan brioche',
+      'Carne de res',
+      'Queso costeño',
+      'Platanito maduro',
+      'Butifarra',
+      'Vegetales frescos',
+      'Salsa de la casa',
+      'Papas a la francesa',
+    ],
+  },
 
   // ---------- SÁNDWICHES ----------
   {
