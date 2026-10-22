@@ -90,6 +90,18 @@ const OPCIONES_DESGRANADO: DishOpcionGrupo[] = [
   },
 ];
 
+/** Acompañante de las picadas: el cliente elige patacón o papas. No cambia el precio. */
+const OPCIONES_PICADA: DishOpcionGrupo[] = [
+  {
+    id: 'acompanante',
+    nombre: 'Acompañante',
+    opciones: [
+      { id: 'patacon', nombre: 'Patacón' },
+      { id: 'papas-francesa', nombre: 'Papas a la francesa' },
+    ],
+  },
+];
+
 export const PLATOS: Dish[] = [
   // ======================================================
   // ARROCES (Pamer Wook)
@@ -527,6 +539,24 @@ export const PLATOS: Dish[] = [
     etiquetas: ['Patacones'],
     ingredientes: ['Patacón', 'Pollo desmenuzado', 'Carne desmenuzada', 'Chorizo', 'Hogao', 'Queso mozzarella', 'Papa ripio', 'Salsa'],
   },
+  {
+    id: 'cr-patacon-chorizo',
+    categoria: 'comidas-rapidas',
+    nombre: 'Patacón con Chorizo',
+    descripcion: 'Patacón con chorizo, queso costeño, salsa de la casa y papa ripio.',
+    precio: 18000,
+    etiquetas: ['Patacones'],
+    ingredientes: ['Plátano', 'Chorizo', 'Queso costeño', 'Salsa de la casa', 'Papa ripio'],
+  },
+  {
+    id: 'cr-patacon-clasico',
+    categoria: 'comidas-rapidas',
+    nombre: 'Patacón Clásico',
+    descripcion: 'Patacón con jamón, queso costeño, salsa de la casa y papa ripio.',
+    precio: 13000,
+    etiquetas: ['Patacones'],
+    ingredientes: ['Patacón', 'Jamón', 'Queso costeño', 'Salsa de la casa', 'Papa ripio'],
+  },
 
   // ---------- ALITAS ----------
   {
@@ -538,6 +568,46 @@ export const PLATOS: Dish[] = [
     imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_05_34_38_PM'),
     etiquetas: ['Pollo'],
     ingredientes: ['Alitas de pollo', 'Papa a la francesa', 'Salsa de la casa', 'BBQ tradicional, miel mostaza, BBQ corozo o BBQ de tamarindo'],
+  },
+
+  // ---------- PICADAS (con patacón o papas a elección) ----------
+  {
+    id: 'cr-picada-pollo',
+    categoria: 'comidas-rapidas',
+    nombre: 'Picada de Pollo',
+    descripcion: 'Pollo con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
+    precio: 22000,
+    etiquetas: ['Picadas'],
+    opciones: OPCIONES_PICADA,
+    ingredientes: ['Pollo', 'Vegetales', 'Patacón o papa a la francesa', 'Salsa de la casa'],
+  },
+  {
+    id: 'cr-picada-mixta',
+    categoria: 'comidas-rapidas',
+    nombre: 'Picada Mixta',
+    descripcion: 'Pollo y lomo fino de cerdo con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
+    precio: 23000,
+    etiquetas: ['Picadas'],
+    opciones: OPCIONES_PICADA,
+    ingredientes: ['Pollo', 'Lomo fino de cerdo', 'Vegetales', 'Patacón o papa a la francesa', 'Salsa de la casa'],
+  },
+  {
+    id: 'cr-picada-de-la-casa',
+    categoria: 'comidas-rapidas',
+    nombre: 'Picada de la Casa',
+    descripcion: 'Pollo, lomo fino de cerdo, chorizo y butifarra con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
+    precio: 25000,
+    etiquetas: ['Picadas'],
+    opciones: OPCIONES_PICADA,
+    ingredientes: [
+      'Pollo',
+      'Lomo fino de cerdo',
+      'Chorizo',
+      'Butifarra',
+      'Vegetales',
+      'Patacón o papa a la francesa',
+      'Salsa de la casa',
+    ],
   },
 
   // ---------- NO ESTÁN EN precios/precios.txt ----------
