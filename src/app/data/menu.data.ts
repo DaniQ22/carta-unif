@@ -159,7 +159,7 @@ export const PLATOS: Dish[] = [
     categoria: 'arroces',
     nombre: 'Arroz de la sabana',
     imagen: cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png'),
-    imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
+    imagenes: [cloudinaryUrl('IMG-20261021-WA0051')],
 
     descripcion: 'Arroz con pollo, chorizo, lomito, butifarra, plátano maduro y queso.',
     precio: 30000,
