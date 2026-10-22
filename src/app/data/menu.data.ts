@@ -102,6 +102,18 @@ const OPCIONES_PICADA: DishOpcionGrupo[] = [
   },
 ];
 
+/** Salsa de las alitas: el cliente elige una. No cambia el precio. */
+const OPCIONES_ALITAS: DishOpcionGrupo[] = [
+  {
+    id: 'salsa',
+    nombre: 'Salsa',
+    opciones: [
+      { id: 'bbq-corozo', nombre: 'BBQ de corozo' },
+      { id: 'salsa-casa', nombre: 'Salsa de la casa' },
+    ],
+  },
+];
+
 export const PLATOS: Dish[] = [
   // ======================================================
   // ARROCES (Pamer Wook)
@@ -112,7 +124,7 @@ export const PLATOS: Dish[] = [
     id: 'arr-montanero',
     categoria: 'arroces',
     nombre: 'Arroz Montañero',
-    descripcion: 'Arroz con pollo, chorizo, lomito, chicharrón y maíz tierno.',
+    descripcion: 'Arroz con pollo, chorizo, lomito, chicharrón, maíz tierno y plátano.',
     precio: 30000,
     imagen: cloudinaryUrl('Crispy_Pork_Crackling_Rice_Bowl.png'),
     variantes: [
@@ -121,7 +133,7 @@ export const PLATOS: Dish[] = [
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
     destacado: true,
-    etiquetas: ['De la casa'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Chicharrón', 'Maíz', 'Plátano', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
   },
   {
@@ -137,7 +149,7 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 50000, personas: 4 },
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
-    etiquetas: ['De la casa'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Lomo de cerdo', 'Chorizo', 'Carne desmechada', 'Maíz', 'Cebollín chino', 'Vegetales', 'Salsas de la casa'],
   },
   {
@@ -149,15 +161,15 @@ export const PLATOS: Dish[] = [
     imagen: cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png'),
     imagenes: [cloudinaryUrl('Arroz_frito_dorado_en_caja_para_llevar.png')],
 
-    descripcion: 'Arroz con pollo, chorizo, lomito, plátano maduro y queso.',
+    descripcion: 'Arroz con pollo, chorizo, lomito, butifarra, plátano maduro y queso.',
     precio: 30000,
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
-    etiquetas: ['De la casa'],
-    ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Plátano', 'Queso', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
+    etiquetas: ['Arroces'],
+    ingredientes: ['Arroz', 'Pollo', 'Chorizo', 'Lomito', 'Butifarra', 'Plátano maduro', 'Queso', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
   },
   {
     id: 'arr-mixto',
@@ -170,7 +182,7 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 49000, personas: 4 },
       { id: 'medio', nombre: 'Medio', precio: 29000, personas: 2 },
     ],
-    etiquetas: ['De la casa'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Cebollín', 'Vegetales', 'Salsas de la casa'],
   },
 
@@ -179,7 +191,7 @@ export const PLATOS: Dish[] = [
     id: 'arr-chino-especial',
     categoria: 'arroces',
     nombre: 'Arroz Chino Especial',
-    descripcion: 'Al wok con pollo, cerdo, jamón, camarón, raíz china y huevo.',
+    descripcion: 'Al wok con pollo, lomito, jamón, camarón, raíz china y huevo.',
     precio: 30000,
     variantes: [
       { id: 'familiar', nombre: 'Familiar', precio: 90000, personas: 7 },
@@ -187,7 +199,7 @@ export const PLATOS: Dish[] = [
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
     destacado: true,
-    etiquetas: ['Chinos', 'Con camarón'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Jamón', 'Lomito', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
   {
@@ -201,7 +213,7 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
-    etiquetas: ['Chinos', 'Con camarón'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
   {
@@ -215,7 +227,7 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
       { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
     ],
-    etiquetas: ['Chinos'],
+    etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
 
@@ -230,31 +242,22 @@ export const PLATOS: Dish[] = [
       { id: 'entero', nombre: 'Entero', precio: 48000 },
       { id: 'medio', nombre: 'Medio', precio: 30000 },
     ],
-    etiquetas: ['Especialidades'],
+    etiquetas: ['Platos fuertes'],
     ingredientes: ['Pechuga de pollo', 'Salsa de naranja', 'Panko', 'Ajonjolí'],
   },
 
-  {
-    id: 'wok-costillas-bbq',
-    categoria: 'arroces',
-    nombre: 'Costillas en Salsa BBQ',
-    descripcion: 'Costillas en salsa BBQ con ajonjolí, papas a la francesa y ensalada.',
-    precio: 44000,
-    etiquetas: ['Especialidades'],
-    ingredientes: ['Costilla (500 g)', 'Salsa BBQ', 'Ajonjolí', 'Papa a la francesa', 'Ensalada'],
-  },
 
   // ---------- COMBOS (arroz individual + proteína y bebida a elección) ----------
   {
     id: 'combo-caribe',
     categoria: 'arroces',
-    nombre: 'Combo Arroz Caribe',
-    descripcion: 'Porción individual de arroz caribe + proteína y bebida personal a elección.',
+    nombre: 'Combo Arroz de la Sabana',
+    descripcion: 'Porción individual de arroz de la sabana + proteína y bebida personal a elección.',
     precio: 23000,
     personas: 1,
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz caribe', 'Chorizo', 'Lomito', 'Pollo', 'Plátano maduro', 'Queso', 'Vegetales'],
+    ingredientes: ['Arroz de la sabana', 'Chorizo', 'Lomito', 'Pollo', 'Butifarra', 'Plátano maduro', 'Queso', 'Vegetales'],
   },
   {
     id: 'combo-montanero',
@@ -265,7 +268,7 @@ export const PLATOS: Dish[] = [
     personas: 1,
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Vegetales'],
+    ingredientes: ['Arroz montañero', 'Chorizo', 'Lomito', 'Pollo', 'Chicharrón', 'Maíz', 'Plátano', 'Vegetales'],
   },
   {
     id: 'combo-mixto',
@@ -285,9 +288,9 @@ export const PLATOS: Dish[] = [
     descripcion: 'Porción individual de arroz chino especial + proteína y bebida personal a elección.',
     precio: 23000,
     personas: 1,
-    etiquetas: ['Combos', 'Con camarón'],
+    etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Jamón', 'Raíz china', 'Cebollín'],
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo'],
   },
   {
     id: 'combo-chino-mixto',
@@ -298,7 +301,7 @@ export const PLATOS: Dish[] = [
     personas: 1,
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Jamón', 'Raíz china', 'Cebollín'],
+    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo'],
   },
 
   // ======================================================
@@ -331,7 +334,7 @@ export const PLATOS: Dish[] = [
     id: 'cr-desgranado',
     categoria: 'comidas-rapidas',
     nombre: 'Desgranado de la Casa',
-    descripcion: 'Pollo, lomo de cerdo, chorizo, butifarra y costilla BBQ, con maíz, queso costeño y gratinado.',
+    descripcion: 'Pollo, lomo de cerdo, chorizo, butifarra y costilla BBQ, papas a la francesa o bollo, maíz tierno, queso costeño gratinado y papa ripio.',
     precio: 29000,
     personas: 1,
     imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_06_10_10_PM'),
@@ -344,6 +347,7 @@ export const PLATOS: Dish[] = [
       'Chorizo',
       'Butifarra',
       'Costilla BBQ',
+      'Papas a la francesa o bollo',
       'Lechuga fresca',
       'Maíz tierno',
       'Queso costeño',
@@ -357,7 +361,7 @@ export const PLATOS: Dish[] = [
     categoria: 'comidas-rapidas',
     nombre: 'Plato Suizo',
     descripcion: 'Pechuga de pollo, salchicha suiza, papas a la francesa, queso costeño y papa ripio.',
-    precio: 29000,
+    precio: 26000,
     etiquetas: ['Desgranados'],
     ingredientes: ['Pechuga de pollo', 'Salchicha suiza', 'Papa a la francesa', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
@@ -366,11 +370,11 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-salchipapa',
     categoria: 'comidas-rapidas',
-    nombre: 'Salchipapa',
+    nombre: 'Salchipapa Clásica',
     descripcion: 'Papa a la francesa, salchicha, lechuga, queso costeño, papa ripio y salsas.',
-    precio: 18000,
+    precio: 16000,
     imagen: cloudinaryUrl('salchipapa'),
-    etiquetas: ['Salchipapas'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Salchicha', 'Papa a la francesa', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
   {
@@ -379,7 +383,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Choripapa',
     descripcion: 'Papa a la francesa con chorizo, lechuga, queso costeño, papa ripio y salsas.',
     precio: 21000,
-    etiquetas: ['Salchipapas'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Chorizo', 'Papa a la francesa', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsas'],
   },
 
@@ -392,16 +396,16 @@ export const PLATOS: Dish[] = [
     precio: 18500,
     imagen: cloudinaryUrl('hamburguesa-clasica'),
     destacado: true,
-    etiquetas: ['Hamburguesas'],
+    etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: ['Pan brioche', 'Carne de res (130 g)', 'Queso cheddar', 'Tocineta crujiente', 'Vegetales', 'Salsa'],
   },
   {
     id: 'cr-chori-burguer',
     categoria: 'comidas-rapidas',
     nombre: 'Hamburguesa Callejera',
-    descripcion: 'Carne de res y chorizo a la parrilla, cheddar, mozzarella y cebolla caramelizada.',
-    precio: 25500,
-    etiquetas: ['Hamburguesas'],
+    descripcion: 'Carne de res y chorizo a la parrilla, cheddar, mozzarella, cebolla caramelizada, lechuga y papa ripio.',
+    precio: 23000,
+    etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: [
       'Pan brioche',
       'Carne de res (130 g)',
@@ -420,7 +424,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Hamburguesa Costeña',
     descripcion: 'Carne de res en pan brioche con queso costeño, platanito maduro, butifarra y vegetales frescos. Con papas a la francesa.',
     precio: 21000,
-    etiquetas: ['Hamburguesas'],
+    etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: [
       'Pan brioche',
       'Carne de res',
@@ -438,16 +442,15 @@ export const PLATOS: Dish[] = [
     id: 'cr-sandwich-pollo-tocineta',
     categoria: 'comidas-rapidas',
     nombre: 'Sándwich de Pollo y Tocineta',
-    descripcion: 'Pan artesanal, pechuga, tocineta, mozzarella y manzana caramelizada, con papas.',
-    precio: 25500,
-    etiquetas: ['Sándwiches'],
+    descripcion: 'Pan artesanal, pechuga, tocineta, mozzarella y pepinillo, con papas a la francesa.',
+    precio: 23000,
+    etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: [
       'Pan artesanal',
       'Pechuga de pollo',
       'Tocineta',
-      'Cebolla grillé',
       'Queso mozzarella',
-      'Manzana caramelizada',
+      'Pepinillo',
       'Salsas',
       'Papa a la francesa',
     ],
@@ -456,19 +459,19 @@ export const PLATOS: Dish[] = [
     id: 'cr-sandwich-lomo-cerdo',
     categoria: 'comidas-rapidas',
     nombre: 'Sándwich de Lomo de Cerdo',
-    descripcion: 'Pan artesanal, lomo de cerdo, jamón, manzana verde y mozzarella, con papas.',
+    descripcion: 'Pan artesanal, lomo de cerdo, jamón, crunch de cebolla y mozzarella, con papas a la francesa.',
     precio: 27000,
-    etiquetas: ['Sándwiches'],
-    ingredientes: ['Pan artesanal', 'Lomo de cerdo', 'Jamón', 'Manzana verde', 'Queso mozzarella', 'Salsas', 'Papa a la francesa'],
+    etiquetas: ['Hamburguesas y sándwiches'],
+    ingredientes: ['Pan artesanal', 'Lomo de cerdo', 'Jamón', 'Crunch de cebolla', 'Queso mozzarella', 'Salsas', 'Papa a la francesa'],
   },
   {
     id: 'cr-sandwich-lomo-res',
     categoria: 'comidas-rapidas',
-    nombre: 'Sándwich de Lomo de Res',
-    descripcion: 'Pan artesanal con lomo de res, queso mozzarella y salsas, con papas a la francesa.',
-    precio: 29000,
-    etiquetas: ['Sándwiches'],
-    ingredientes: ['Pan artesanal', 'Lomo de res', 'Queso mozzarella', 'Salsas', 'Papa a la francesa'],
+    nombre: 'Sándwich Especial de la Casa',
+    descripcion: 'Pan artesanal con pechuga de pollo, vegetales salteados, mozzarella y salsas, con papas a la francesa.',
+    precio: 23000,
+    etiquetas: ['Hamburguesas y sándwiches'],
+    ingredientes: ['Pan artesanal', 'Pechuga de pollo', 'Vegetales salteados', 'Queso mozzarella', 'Salsas', 'Papa a la francesa'],
   },
 
   // ---------- PERROS ----------
@@ -478,7 +481,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Perro Clásico',
     descripcion: 'Pan artesanal, salchicha long, lechuga, queso costeño, papa ripio y salsa.',
     precio: 13500,
-    etiquetas: ['Perros'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Pan artesanal', 'Salchicha long', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsa'],
   },
   {
@@ -487,7 +490,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Perro Suizo',
     descripcion: 'Pan artesanal, salchicha suiza, mozzarella, tocineta, lechuga y papa ripio.',
     precio: 23500,
-    etiquetas: ['Perros'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Pan artesanal', 'Salchicha suiza', 'Lechuga', 'Queso mozzarella', 'Tocineta', 'Papa ripio', 'Salsa'],
   },
   {
@@ -498,7 +501,7 @@ export const PLATOS: Dish[] = [
     precio: 22000,
     imagen: cloudinaryUrl('hot-dog'),
     destacado: true,
-    etiquetas: ['Perros'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Pan artesanal', 'Salchicha americana', 'Jamón', 'Tocineta', 'Queso mozzarella', 'Lechuga', 'Papa ripio', 'Salsa'],
   },
   {
@@ -507,7 +510,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Chori Perro',
     descripcion: 'Pan artesanal con chorizo, chimichurri, mozzarella, lechuga y papa ripio.',
     precio: 23000,
-    etiquetas: ['Perros'],
+    etiquetas: ['Perros y salchipapas'],
     ingredientes: ['Pan artesanal', 'Chorizo', 'Lechuga', 'Chimichurri', 'Queso mozzarella', 'Papa ripio', 'Salsa'],
   },
 
@@ -546,7 +549,7 @@ export const PLATOS: Dish[] = [
     descripcion: 'Patacón con chorizo, queso costeño, salsa de la casa y papa ripio.',
     precio: 18000,
     etiquetas: ['Patacones'],
-    ingredientes: ['Plátano', 'Chorizo', 'Queso costeño', 'Salsa de la casa', 'Papa ripio'],
+    ingredientes: ['Patacón', 'Chorizo', 'Queso costeño', 'Salsa de la casa', 'Papa ripio'],
   },
   {
     id: 'cr-patacon-clasico',
@@ -562,12 +565,13 @@ export const PLATOS: Dish[] = [
   {
     id: 'cr-alitas',
     categoria: 'comidas-rapidas',
-    nombre: 'Alitas',
-    descripcion: 'Alitas de pollo con papas a la francesa. Salsa: BBQ, miel mostaza, corozo o tamarindo.',
+    nombre: 'Alitas (500 g)',
+    descripcion: '500 g de alitas de pollo con papas a la francesa, en salsa BBQ de corozo o salsa de la casa.',
     precio: 29500,
     imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_05_34_38_PM'),
-    etiquetas: ['Pollo'],
-    ingredientes: ['Alitas de pollo', 'Papa a la francesa', 'Salsa de la casa', 'BBQ tradicional, miel mostaza, BBQ corozo o BBQ de tamarindo'],
+    etiquetas: ['Picadas y alitas'],
+    opciones: OPCIONES_ALITAS,
+    ingredientes: ['Alitas de pollo (500 g)', 'Papa a la francesa', 'Salsa BBQ de corozo o salsa de la casa'],
   },
 
   // ---------- PICADAS (con patacón o papas a elección) ----------
@@ -577,7 +581,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Picada de Pollo',
     descripcion: 'Pollo con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
     precio: 22000,
-    etiquetas: ['Picadas'],
+    etiquetas: ['Picadas y alitas'],
     opciones: OPCIONES_PICADA,
     ingredientes: ['Pollo', 'Vegetales', 'Patacón o papa a la francesa', 'Salsa de la casa'],
   },
@@ -587,7 +591,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Picada Mixta',
     descripcion: 'Pollo y lomo fino de cerdo con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
     precio: 23000,
-    etiquetas: ['Picadas'],
+    etiquetas: ['Picadas y alitas'],
     opciones: OPCIONES_PICADA,
     ingredientes: ['Pollo', 'Lomo fino de cerdo', 'Vegetales', 'Patacón o papa a la francesa', 'Salsa de la casa'],
   },
@@ -597,7 +601,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Picada de la Casa',
     descripcion: 'Pollo, lomo fino de cerdo, chorizo y butifarra con vegetales y salsa de la casa. Con patacón o papas a la francesa.',
     precio: 25000,
-    etiquetas: ['Picadas'],
+    etiquetas: ['Picadas y alitas'],
     opciones: OPCIONES_PICADA,
     ingredientes: [
       'Pollo',
@@ -621,7 +625,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Punta de Anca de Cerdo',
     descripcion: 'Punta de anca de cerdo (360 g) a la parrilla, con ensalada y patacones o papas a la francesa.',
     precio: 31000,
-    etiquetas: ['A la parrilla', 'Con carne'],
+    etiquetas: ['Platos fuertes'],
     ingredientes: ['Punta de anca de cerdo (360 g)', 'Ensalada', 'Patacones o papas a la francesa'],
   },
   {
@@ -630,7 +634,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Pechuga de Pollo a la Parrilla',
     descripcion: 'Pechuga de pollo (350 g) a la parrilla, con ensalada, chimichurri y patacones o papas a la francesa.',
     precio: 29500,
-    etiquetas: ['A la parrilla', 'Con pollo'],
+    etiquetas: ['Platos fuertes'],
     ingredientes: ['Pechuga de pollo (350 g)', 'Ensalada', 'Chimichurri', 'Patacones o papas a la francesa'],
   },
   {
@@ -639,20 +643,11 @@ export const PLATOS: Dish[] = [
     nombre: 'Churrasco a la Parrilla',
     descripcion: 'Corte de res asado al carbón, con papa criolla, ensalada y chimichurri.',
     precio: 32000,
-    etiquetas: ['A la parrilla', 'Con carne'],
+    etiquetas: ['Platos fuertes'],
     ingredientes: ['Churrasco de res', 'Papa criolla asada', 'Ensalada fresca', 'Chimichurri'],
   },
 
 
-  {
-    id: 'asa-costillas',
-    categoria: 'asados',
-    nombre: 'Costillas BBQ',
-    descripcion: 'Costillas de cerdo a la parrilla, bañadas en salsa de la casa, con papa a la francesa.',
-    precio: 28000,
-    etiquetas: ['A la parrilla', 'Con carne'],
-    ingredientes: ['Costillas de 500 g a la parrilla', 'Salsa de la casa', 'Papa a la francesa', 'Ensalada fresca'],
-  },
 
 
 ];
@@ -664,7 +659,6 @@ export const ADICIONES: ExtraItem[] = [
   { id: 'ad-costilla', grupo: 'adiciones', nombre: 'Costilla', precio: 10000 },
   { id: 'ad-camaron', grupo: 'adiciones', nombre: 'Camarón', precio: 10000 },
   { id: 'ad-platano', grupo: 'adiciones', nombre: 'Plátano', precio: 5000 },
-  { id: 'ad-papa-casco', grupo: 'adiciones', nombre: 'Papa casco', precio: 7000 },
   { id: 'ad-papa-francesa', grupo: 'adiciones', nombre: 'Papa a la francesa', precio: 6000 },
   { id: 'ad-queso-costeno', grupo: 'adiciones', nombre: 'Queso costeño', precio: 5000 },
   { id: 'ad-queso-mozzarella', grupo: 'adiciones', nombre: 'Queso mozzarella', precio: 5000 },
