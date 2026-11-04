@@ -425,6 +425,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Hamburguesa Costeña',
     descripcion: 'Carne de res en pan brioche con queso costeño, platanito maduro, butifarra y vegetales frescos. Con papas a la francesa.',
     precio: 21000,
+    imagen: cloudinaryUrl('WhatsApp_Image_2026-10-30_at_8.24.19_PM.jpg'),
     etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: [
       'Pan brioche',
@@ -483,7 +484,7 @@ export const PLATOS: Dish[] = [
     descripcion: 'Pan artesanal, salchicha long, lechuga, queso costeño, papa ripio y salsa.',
     precio: 13500,
     etiquetas: ['Perros y salchipapas'],
-    imagen: cloudinaryUrl('WhatsApp_Image_2026-10-30_at_8.24.19_PM.jpg'),
+    imagen: cloudinaryUrl('WhatsApp_Image_2026-10-31_at_8.07.18_AM_1.jpg'),
     ingredientes: ['Pan artesanal', 'Salchicha long', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsa'],
   },
   {
