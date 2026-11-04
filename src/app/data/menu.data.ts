@@ -405,6 +405,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Hamburguesa Callejera',
     descripcion: 'Carne de res y chorizo a la parrilla, cheddar, mozzarella, cebolla caramelizada, lechuga y papa ripio.',
     precio: 23000,
+    imagen: cloudinaryUrl('WhatsApp_Image_2026-11-04_at_6.25.20_PM.jpg'),
     etiquetas: ['Hamburguesas y sándwiches'],
     ingredientes: [
       'Pan brioche',
@@ -482,6 +483,7 @@ export const PLATOS: Dish[] = [
     descripcion: 'Pan artesanal, salchicha long, lechuga, queso costeño, papa ripio y salsa.',
     precio: 13500,
     etiquetas: ['Perros y salchipapas'],
+    imagen: cloudinaryUrl('WhatsApp_Image_2026-10-30_at_8.24.19_PM.jpg'),
     ingredientes: ['Pan artesanal', 'Salchicha long', 'Lechuga', 'Queso costeño', 'Papa ripio', 'Salsa'],
   },
   {
