@@ -94,6 +94,11 @@
     height: 100%;
     object-fit: cover;
   }
+
+  /* Fotos completas, sin recortar (el video sigue llenando el recuadro). */
+  img {
+    object-fit: contain;
+  }
 }
 
 /* Galería deslizable (swipe en móvil); cada foto ocupa todo el ancho. */
