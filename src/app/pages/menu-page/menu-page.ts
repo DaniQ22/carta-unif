@@ -64,14 +64,20 @@ export class MenuPage {
   protected readonly chip = signal<string | null>(null); // null = Todos
   protected readonly orden = signal<Orden>('reco');
 
-  /** Chips disponibles = etiquetas presentes en toda la carta. */
+  /** Chips disponibles = etiquetas presentes en toda la carta, en el orden de la carta. */
   protected readonly chips = computed(() => {
     const set = new Set<string>();
     for (const p of [...this.arroces, ...this.comidasRapidas, ...this.asados]) {
       (p.etiquetas ?? []).forEach((e) => set.add(e));
     }
-    return [...set].sort((a, b) => a.localeCompare(b, 'es'));
+    return [...set];
   });
+
+  /** Posición del grupo de producto (primera etiqueta) en la carta, para no mezclar productos. */
+  private grupo(p: Dish): number {
+    const i = this.chips().indexOf(p.etiquetas?.[0] ?? '');
+    return i === -1 ? Number.MAX_SAFE_INTEGER : i;
+  }
 
   protected readonly arrocesFiltrados = computed(() => this.filtrarPlatos(this.arroces));
   protected readonly comidasRapidasFiltradas = computed(() => this.filtrarPlatos(this.comidasRapidas));
@@ -98,7 +104,8 @@ export class MenuPage {
       if (orden === 'precio-asc') return a.precio - b.precio;
       if (orden === 'precio-desc') return b.precio - a.precio;
       if (orden === 'nombre') return a.nombre.localeCompare(b.nombre, 'es');
-      return (b.destacado ? 1 : 0) - (a.destacado ? 1 : 0);
+      // Recomendado: agrupado por producto (orden de la carta) y, dentro de cada grupo, destacados primero.
+      return this.grupo(a) - this.grupo(b) || (b.destacado ? 1 : 0) - (a.destacado ? 1 : 0);
     });
     return filtrada;
   }
