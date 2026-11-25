@@ -527,7 +527,7 @@ export const PLATOS: Dish[] = [
     nombre: 'Alitas (500 g)',
     descripcion: '500 g de alitas de pollo con papas a la francesa, en salsa BBQ de corozo o salsa de la casa.',
     precio: 29500,
-    imagen: cloudinaryUrl('ChatGPT_Image_Sep_18_2026_05_34_38_PM'),
+    imagen: cloudinaryUrl('WhatsApp_Image_2026-11-25_at_4.14.24_PM.jpg'),
     etiquetas: ['Picadas y alitas'],
     opciones: OPCIONES_ALITAS,
     ingredientes: ['Alitas de pollo (500 g)', 'Papa a la francesa', 'Salsa BBQ de corozo o salsa de la casa'],
