@@ -202,34 +202,6 @@ export const PLATOS: Dish[] = [
     etiquetas: ['Arroces'],
     ingredientes: ['Arroz', 'Pollo', 'Jamón', 'Lomito', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
   },
-  {
-    id: 'arr-chino-pollo-camaron',
-    categoria: 'arroces',
-    nombre: 'Arroz Chino de Pollo y Camarón',
-    descripcion: 'Al wok con pollo, camarón, raíz china y huevo.',
-    precio: 30000,
-    variantes: [
-      { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
-      { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
-      { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
-    ],
-    etiquetas: ['Arroces'],
-    ingredientes: ['Arroz', 'Pollo', 'Camarón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
-  },
-  {
-    id: 'arr-chino-mixto',
-    categoria: 'arroces',
-    nombre: 'Arroz Chino Mixto',
-    descripcion: 'Al wok con pollo, lomito, jamón, raíz china y huevo.',
-    precio: 30000,
-    variantes: [
-      { id: 'familiar', nombre: 'Familiar', precio: 85000, personas: 7 },
-      { id: 'entero', nombre: 'Entero', precio: 45000, personas: 4 },
-      { id: 'medio', nombre: 'Medio', precio: 30000, personas: 2 },
-    ],
-    etiquetas: ['Arroces'],
-    ingredientes: ['Arroz', 'Pollo', 'Lomito', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo', 'Salsas de la casa'],
-  },
 
   // ---------- ESPECIALIDADES DEL WOK ----------
   {
@@ -291,17 +263,6 @@ export const PLATOS: Dish[] = [
     etiquetas: ['Combos'],
     opciones: OPCIONES_COMBO,
     ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Camarón', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo'],
-  },
-  {
-    id: 'combo-chino-mixto',
-    categoria: 'arroces',
-    nombre: 'Combo Arroz Chino Mixto',
-    descripcion: 'Porción individual de arroz chino mixto + proteína y bebida personal a elección.',
-    precio: 23000,
-    personas: 1,
-    etiquetas: ['Combos'],
-    opciones: OPCIONES_COMBO,
-    ingredientes: ['Arroz', 'Lomito', 'Pollo', 'Jamón', 'Raíz china', 'Cebollín', 'Huevo'],
   },
 
   // ======================================================
@@ -457,15 +418,6 @@ export const PLATOS: Dish[] = [
       'Salsas',
       'Papa a la francesa',
     ],
-  },
-  {
-    id: 'cr-sandwich-lomo-cerdo',
-    categoria: 'comidas-rapidas',
-    nombre: 'Sándwich de Lomo de Cerdo',
-    descripcion: 'Pan artesanal, lomo de cerdo, jamón, crunch de cebolla y mozzarella, con papas a la francesa.',
-    precio: 27000,
-    etiquetas: ['Hamburguesas y sándwiches'],
-    ingredientes: ['Pan artesanal', 'Lomo de cerdo', 'Jamón', 'Crunch de cebolla', 'Queso mozzarella', 'Salsas', 'Papa a la francesa'],
   },
   {
     id: 'cr-sandwich-lomo-res',
